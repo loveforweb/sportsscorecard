@@ -1,0 +1,34 @@
+{{#if typescript}}
+import * as React from 'react';
+{{else}}
+import React from 'react';
+import { {{name}}Wrapper } from './{{name}}Style'
+{{/if}}
+{{#if proptypes}}
+  import PropTypes from 'prop-types';
+{{/if}}
+{{#if typescript}}
+
+{{#if export}}export {{/if}}type {{ name }}Props = {
+  //
+};
+{{/if}}
+
+{{#if export }}export {{/if}}const {{ name }}{{#if typescript}}: React.FC<
+  {{~#if proptypes~}} {{ name ~}} Props {{~else~}} any {{~/if}}> {{~/if}} = () => {
+  return (
+    <{{name}}Wrapper>{{name}}</{{name}}Wrapper>
+  );
+};
+
+{{#if proptypes~}}
+{{ name }}.propTypes = {
+  //
+};
+{{#unless export}}
+
+{{/unless}}
+{{/if}}
+{{#unless export }}
+export default {{ name }};
+{{/unless}}

@@ -1,0 +1,15 @@
+import {{#if typescript }}* as {{/if}}React from 'react';
+import renderWithRouter from '../../testUtils';
+import {{#if export~}} { {{ name }} } {{else~}} {{name}} {{~/if}} from './
+{{~#if uppercase~}}
+  {{~name}}
+{{~else~}}
+  {{~nameLowerCase}}
+{{~/if}}';
+
+describe('{{ name }}', () => {
+  test('renders {{name}}', () => {
+    const { getByText } = renderWithRouter(<{{ name }} />);
+    expect(getByText('Hello World')).toBeInTheDocument();
+  });
+});
