@@ -2,7 +2,7 @@
 import * as React from 'react';
 {{else}}
 import React from 'react';
-import './{{nameLowerCase}}.scss'
+import './{{name}}.scss'
 {{/if}}
 {{#if proptypes}}
   import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ import './{{nameLowerCase}}.scss'
 {{#if export }}export {{/if}}const {{ name }}{{#if typescript}}: React.FC<
   {{~#if proptypes~}} {{ name ~}} Props {{~else~}} any {{~/if}}> {{~/if}} = () => {
   return (
-    <div className="component {{nameLowerCase}}">{{name}}</div>
+    <div className="component {{name}}">{{name}}</div>
   );
 };
 

@@ -1,0 +1,152 @@
+@import '../../styles/mixins';
+
+.fixture-block {
+    display: flex;
+    flex-direction: column;
+    background: #2b2b2b;
+    color: white;
+    padding: 1.2rem;
+    border: 0.1rem solid var(--tundora);
+    height: 100%;
+    justify-content: space-between;
+    
+    .fixture-block-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .game-details {
+        display: grid;
+        grid-template-columns: 1fr 4rem 1fr;
+    }
+
+    .team {
+        display: flex;
+        flex-direction: column;
+
+        &.team--home {
+            .team-badge {
+                order: 1;
+            }
+        }
+
+        &.team--away {
+            .team-score {
+                margin-left: auto;
+            }
+        }
+    }
+
+    .team-badge {
+        margin: 0 1.2rem;
+    }
+
+    .team-score {
+        width: calc(100% - 5rem);
+    }
+    
+    .team-identity {
+        font-size: 2.2rem;
+        display: flex;
+        flex-direction: row;
+        font-weight: 300;
+        margin-bottom: 1.2rem;
+    }
+
+    .game-splitter {
+        margin: 0 1.2rem;
+        font-size: 2rem;
+        font-weight: 500;
+        margin-top: 0.4rem;
+    }
+
+    .game-ko-data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &.fixture-block--row {
+        .game-details {
+            grid-template-rows: 1fr;
+            grid-template-columns: none;
+            width: 100%;
+            grid-row-gap: 1rem;
+        }
+
+        .team {
+            display: grid;
+            grid-template-columns: 1fr 10rem;
+        }
+
+        .team-identity {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .team {
+            &.team--home {
+                .team-badge {
+                    order: 0;
+                }
+
+                .team-score {
+                    margin-left: auto;
+                }
+            }
+        }
+
+        .team-name {
+            text-align: left;
+        }
+
+        .team-score {
+            display: inline;
+            // margin-top: 0;
+            // align-items: center;
+        }
+
+        .game-splitter {
+            display: none;
+        }
+
+        .game-ko-data {
+            border-top: 0.1rem solid var(--tundora);
+            padding-top: 1rem;
+            margin-top: 2rem;
+            width: 100%;
+
+            .game-date-time {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+@include md {
+    .fixture-block {
+        &.fixture-block--row {
+            .game-ko-data {
+                flex-direction: row;
+                margin: 2rem 6.5rem 0;
+                justify-content: center;
+                border-top: 0.1rem solid var(--tundora);
+                padding-top: 1rem;
+        
+                .game-date-time {
+                    flex-direction: row;
+                    margin: 0 1.2rem 0 0;
+                    padding-right: 1.2rem;
+                    border-right: 0.1rem solid var(--tundora);
+                }
+        
+                .game-time {
+                    margin-right: 1.2rem;
+                }
+            }
+        }
+    }
+}
