@@ -2,7 +2,7 @@
 import * as React from 'react';
 {{else}}
 import React from 'react';
-import { {{name}}Wrapper } from './{{name}}Style'
+import './{{nameLowerCase}}.scss'
 {{/if}}
 {{#if proptypes}}
   import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ import { {{name}}Wrapper } from './{{name}}Style'
 {{#if export }}export {{/if}}const {{ name }}{{#if typescript}}: React.FC<
   {{~#if proptypes~}} {{ name ~}} Props {{~else~}} any {{~/if}}> {{~/if}} = () => {
   return (
-    <{{name}}Wrapper>{{name}}</{{name}}Wrapper>
+    <div className="component {{nameLowerCase}}">{{name}}</div>
   );
 };
 

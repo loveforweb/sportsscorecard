@@ -1,9 +1,11 @@
-import { FooterWrapper } from './FooterStyle';
+import './Footer.scss';
+
 import React from 'react';
+
 // import PropTypes from 'prop-types';
 
 const Footer = () => {
-  return <FooterWrapper>Footer</FooterWrapper>;
+  return <div className="component footer">Footer</div>;
 };
 
 // Footer.propTypes = {
