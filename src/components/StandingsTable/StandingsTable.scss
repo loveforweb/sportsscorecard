@@ -1,0 +1,108 @@
+@import '../../styles/mixins';
+
+$sideHeadingWidth: 11rem;
+
+.standings-table-header {
+    padding: 1.2rem;
+    font-size: 1.8rem;
+    background: #555555;
+    border: .1rem solid var(--tundora);
+}
+
+.standings-table {
+  position: relative;
+  margin-bottom: 2rem;
+
+  .scroller {
+    margin-left: $sideHeadingWidth;
+    overflow-x: scroll;
+    overflow-y: visible;
+    padding-bottom: .5rem;
+    width: calc(100% - #{$sideHeadingWidth});
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+    border-bottom: .1rem solid var(--tundora);
+    min-width: 45rem;
+    justify-content: center;
+    align-items: center;
+
+    &:first-of-type {
+      border-top: .1rem solid var(--tundora);
+      border-bottom: .3rem solid var(--tundora);
+      font-weight: 700;
+
+      .table-cell {
+        padding: 1rem;
+        &.table-cell--sticky {
+          border-top: .1rem solid var(--tundora);
+          border-bottom: .3rem solid  var(--tundora);
+          padding: 1rem;
+        }
+      }
+  }
+
+  .table-cell {
+    border-right: .1rem solid var(--tundora);
+    text-align: center;
+    padding: 1.4rem 1rem;
+
+      &:first-of-type {
+        position: absolute;
+        left: 0;
+        width: $sideHeadingWidth;
+        text-align: left;
+        border-bottom: .1rem solid var(--tundora);
+        border-left: .1rem solid var(--tundora);
+        margin-top: -.1rem;
+      }
+
+      &.table-cell--sticky {
+        padding: .7rem 1rem .8rem;
+      }
+    }
+  }
+
+  .table-cell--span-2 {
+    grid-column: 1 / span 2;
+  }
+
+  .team {
+    display: flex;
+    flex-direction: row;
+    align-items: center;;
+  }
+
+  .team-badge {
+    margin-right: .5rem;
+    width: 3rem;
+  }
+
+  .team-name {
+    text-align: left;
+  }
+}
+
+@include md {
+  $sideHeadingWidth: 24rem;
+  .standings-table {
+    position: relative;
+    margin-bottom: 4rem;
+  
+    .scroller {
+      margin-left: $sideHeadingWidth;
+      width: calc(100% - #{$sideHeadingWidth});
+    }
+  
+    .table-row {
+      .table-cell {
+        &:first-of-type {
+          width: $sideHeadingWidth;
+        }
+      }
+    }
+  }
+}
+
