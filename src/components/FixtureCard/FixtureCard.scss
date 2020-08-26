@@ -20,21 +20,26 @@
     .game-details {
         display: grid;
         grid-template-columns: 1fr 4rem 1fr;
+        align-items: flex-start;
     }
 
     .team {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        align-items: flex-start;
 
-        &.team--home {
+        &.team--away {
             .team-badge {
                 order: 1;
             }
         }
 
-        &.team--away {
+        &.team--home {
             .team-score {
                 margin-left: auto;
+            }
+            .team-identity {
+                flex-direction: column-reverse;
             }
         }
     }
@@ -45,14 +50,14 @@
 
     .team-score {
         width: calc(100% - 5rem);
+        margin-top: -2px;
     }
     
     .team-identity {
         font-size: 2.2rem;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         font-weight: 300;
-        margin-bottom: 1.2rem;
         align-items: center;
     }
 
@@ -60,7 +65,6 @@
         margin: 0 1.2rem;
         font-size: 2rem;
         font-weight: 500;
-        margin-top: 0.4rem;
     }
 
     .game-ko-data {
@@ -68,83 +72,98 @@
         flex-direction: column;
     }
 
-    &.fixture-block--row {
-        .game-details {
-            grid-template-rows: 1fr;
-            grid-template-columns: none;
-            width: 100%;
-            grid-row-gap: 1rem;
-        }
+    // &.fixture-block--row {
+    //     .game-details {
+    //         grid-template-rows: 1fr;
+    //         grid-template-columns: none;
+    //         width: 100%;
+    //         grid-row-gap: 1rem;
+    //     }
 
-        .team {
-            display: grid;
-            grid-template-columns: 1fr 10rem;
-        }
+    //     .team {
+    //         display: grid;
+    //         grid-template-columns: 1fr 10rem;
+    //     }
 
-        .team-identity {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            align-items: center;
-            margin-bottom: 0;
-        }
+    //     .team-identity {
+    //         display: grid;
+    //         grid-template-columns: auto 1fr;
+    //         align-items: center;
+    //         margin-bottom: 0;
+    //     }
 
-        .team {
-            &.team--home {
-                .team-badge {
-                    order: 0;
-                }
+    //     .team {
+    //         &.team--away {
+    //             .team-badge {
+    //                 order: 0;
+    //             }
 
-                .team-score {
-                    margin-left: auto;
-                }
-            }
-        }
+    //             .team-score {
+    //                 margin-left: auto;
+    //             }
+    //         }
+    //     }
 
-        .team-name {
-            text-align: left;
-        }
+    //     .team-name {
+    //         text-align: left;
+    //     }
 
-        .team-score {
-            display: inline;
-        }
+    //     .team-score {
+    //         display: inline;
+    //     }
 
-        .game-splitter {
-            display: none;
-        }
+    //     .game-splitter {
+    //         display: none;
+    //     }
 
-        .game-ko-data {
-            border-top: 0.1rem solid var(--tundora);
-            padding-top: 1rem;
-            margin-top: 2rem;
-            width: 100%;
+    //     .game-ko-data {
+    //         border-top: 0.1rem solid var(--tundora);
+    //         padding-top: 1rem;
+    //         margin-top: 2rem;
+    //         width: 100%;
 
-            .game-date-time {
-                margin-top: 0;
-            }
-        }
-    }
+    //         .game-date-time {
+    //             margin-top: 0;
+    //         }
+    //     }
+    // }
 }
 
 @include md {
     .fixture-block {
-        &.fixture-block--row {
-            .game-ko-data {
-                flex-direction: row;
-                margin: 2rem 6.5rem 0;
-                justify-content: center;
-                border-top: 0.1rem solid var(--tundora);
-                padding-top: 1rem;
-        
-                .game-date-time {
+        .team {
+            align-items: center;
+
+            &.team--home {
+                .team-identity {
                     flex-direction: row;
-                    margin: 0 1.2rem 0 0;
-                    padding-right: 1.2rem;
-                    border-right: 0.1rem solid var(--tundora);
                 }
-        
-                .game-time {
-                    margin-right: 1.2rem;
-                }
+            }
+        }
+
+        .team-identity {
+            flex-direction: row;
+        }
+
+        .game-details {
+            align-items: center;
+        }
+
+        .game-ko-data {
+            flex-direction: row;
+            margin: 2rem 6.5rem 0;
+            justify-content: center;
+            border-top: 0.1rem solid var(--tundora);
+            padding-top: 1rem;
+    
+            .game-date-time {
+                flex-direction: row;
+                margin: 0 1.2rem 0 0;
+                border-right: 0.1rem solid var(--tundora);
+            }
+    
+            .game-time {
+                margin-right: 1.2rem;
             }
         }
     }

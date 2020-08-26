@@ -7,8 +7,9 @@ const Stadium = ({ name, city }) => {
   return (
     <div className="component stadium">
       Stadium:
-      <span className="stadium-name"> {name}</span>,
-      <span className="stadium-location">{city}</span>
+      <span className="stadium-name">
+        {name}, {city}
+      </span>
     </div>
   );
 };
