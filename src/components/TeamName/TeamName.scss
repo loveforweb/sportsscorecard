@@ -6,16 +6,14 @@
     text-align: center;
     flex: 1 1 auto;
 
-    .team-name-city,
-    .team-name-name {
+    .team-name-full {
         display: none;
     }
 }
 
 @include md {
     .team-name {
-        .team-name-city,
-        .team-name-name {
+        .team-name-full {
             display: inline-block;
         }
 

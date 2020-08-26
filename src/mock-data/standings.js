@@ -8370,27 +8370,6 @@ const AFCWest = filterTeams('AFC West');
 
 export const standingsData = [
   {
-    conference: 'National Football Conference',
-    tables: [
-      {
-        division: 'NFC North',
-        teams: NFCNorth,
-      },
-      {
-        division: 'NFC East',
-        teams: NFCEast,
-      },
-      {
-        division: 'NFC South',
-        teams: NFCSouth,
-      },
-      {
-        division: 'NFC West',
-        teams: NFCWest,
-      },
-    ],
-  },
-  {
     conference: 'American Football Conference',
     tables: [
       {
@@ -8408,6 +8387,27 @@ export const standingsData = [
       {
         division: 'AFC West',
         teams: AFCWest,
+      },
+    ],
+  },
+  {
+    conference: 'National Football Conference',
+    tables: [
+      {
+        division: 'NFC North',
+        teams: NFCNorth,
+      },
+      {
+        division: 'NFC East',
+        teams: NFCEast,
+      },
+      {
+        division: 'NFC South',
+        teams: NFCSouth,
+      },
+      {
+        division: 'NFC West',
+        teams: NFCWest,
       },
     ],
   },
