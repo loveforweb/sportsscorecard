@@ -1,6 +1,12 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+
 const Stats = () => {
-  return <h1>Stats</h1>;
+  return (
+    <Container>
+      <h1>Stats</h1>
+    </Container>
+  );
 };
 
 export default Stats;

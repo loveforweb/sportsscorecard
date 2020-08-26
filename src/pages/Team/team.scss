@@ -1,0 +1,17 @@
+.team-page {
+    .header-banner {
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .team-badge {
+            width: 12rem;
+            margin-right: 1.2rem;
+        }
+
+        .team-name {
+            font-size: 6rem;
+        }
+    }
+}

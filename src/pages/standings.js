@@ -1,10 +1,11 @@
 import React from 'react';
 import StandingsTable from '../components/StandingsTable';
 import { data } from '../mock-data/standings';
+import Container from 'react-bootstrap/Container';
 
 const Standings = () => {
   return (
-    <>
+    <Container>
       <h1>Standings</h1>
       {data.map((conf, i) => {
         return (
@@ -16,7 +17,7 @@ const Standings = () => {
           </div>
         );
       })}
-    </>
+    </Container>
   );
 };
 

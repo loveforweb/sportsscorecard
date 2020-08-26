@@ -2,6 +2,7 @@ import { API_STALE_TIMEOUT, GET_FIXTURES } from '../api/api-calls';
 
 import Col from 'react-bootstrap/Col';
 import FixtureCard from '../components/FixtureCard/FixtureCard';
+import Container from 'react-bootstrap/Container';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import { data } from '../mock-data/season-fixtures';
@@ -27,7 +28,7 @@ const Fixtures = () => {
   // console.log(data);
 
   return (
-    <>
+    <Container>
       <h1>Fixtures</h1>
       {data.map((arrayData, i) => {
         return (
@@ -45,7 +46,7 @@ const Fixtures = () => {
           </Row>
         );
       })}
-    </>
+    </Container>
   );
 };
 

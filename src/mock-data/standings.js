@@ -8415,12 +8415,11 @@ export const data = [
 
 export const teamNames = data.map((confData) => {
   const conferenceData = confData.tables.map((table) => {
-    return table.teams.map(({ team }) => {
+    return table.teams.map((item) => {
       return {
-        city: team.city,
-        name: team.name,
-        abbreviation: team.abbreviation,
-        officialLogoImageSrc: team.officialLogoImageSrc,
+        ...item,
+        city: item.team.city,
+        id: item.team.id,
       };
     });
   });
@@ -8439,7 +8438,9 @@ export const teamNames = data.map((confData) => {
   });
 
   return {
-    conference: confData.conference,
+    conference: confData.conference.includes('National')
+      ? 'NFC Teams'
+      : 'AFC Teams',
     teams: sortedByName,
   };
 });
