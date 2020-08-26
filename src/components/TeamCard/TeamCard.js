@@ -33,10 +33,7 @@ const TeamCard = ({ team }) => {
 };
 
 TeamCard.propTypes = {
-  city: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  abbr: PropTypes.string.isRequired,
-  badge: PropTypes.string.isRequired,
+  team: PropTypes.shape({}).isRequired,
 };
 
 export default TeamCard;

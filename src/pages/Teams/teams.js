@@ -17,7 +17,7 @@ const Teams = () => {
             <Col xs={12} md={6} className="conference-group" key={`${i}-conf`}>
               <div className="teams-heading">{conf.conference}</div>
               {conf.teams.map((team) => {
-                return <TeamCard {...team} id={team.id} />;
+                return <TeamCard {...team} key={team.id} />;
               })}
             </Col>
           );
