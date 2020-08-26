@@ -27,15 +27,22 @@ const Results = () => {
   return (
     <>
       <h1>Results</h1>
-      <Row>
-        {data.map((gameData) => {
-          return (
-            <Col xs={12} className="mb3" key={gameData.schedule.id}>
-              <FixtureCard gameData={gameData} />
+      {data.map((arrayData, i) => {
+        return (
+          <Row key={`${i}-row`}>
+            <Col xs={12}>
+              <h2>{arrayData.date}</h2>
             </Col>
-          );
-        })}
-      </Row>
+            {arrayData.games.map((gameData) => {
+              return (
+                <Col xs={12} className="mb3" key={gameData.schedule.id}>
+                  <FixtureCard gameData={gameData} isFixture />
+                </Col>
+              );
+            })}
+          </Row>
+        );
+      })}
     </>
   );
 };

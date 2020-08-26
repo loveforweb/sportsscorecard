@@ -33,7 +33,7 @@ const Fixtures = () => {
         return (
           <Row key={`${i}-row`}>
             <Col xs={12}>
-              <h1>{arrayData.date}</h1>
+              <h2>{arrayData.date}</h2>
             </Col>
             {arrayData.games.map((gameData) => {
               return (
