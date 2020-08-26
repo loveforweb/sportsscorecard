@@ -104,7 +104,8 @@ const StandingsTable = ({ division, teams }) => {
 };
 
 StandingsTable.propTypes = {
-  //
+  division: PropTypes.string.isRequired,
+  teams: PropTypes.array.isRequired,
 };
 
 export default StandingsTable;

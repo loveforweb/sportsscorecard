@@ -1,7 +1,7 @@
 import './Navigation.scss';
 
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React from 'react';
 
 const Navigation = () => {
@@ -38,8 +38,8 @@ const Navigation = () => {
   );
 };
 
-Navigation.propTypes = {
-  //
-};
+// Navigation.propTypes = {
+//
+// };
 
 export default Navigation;

@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Teams from './pages/Teams/teams';
