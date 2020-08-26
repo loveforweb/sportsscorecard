@@ -7,7 +7,7 @@ const GameDateTime = ({ time }) => {
   return (
     <div className="component game-date-time">
       <span className="game-time">
-        Time: <time dateTime={time}>{time}</time>
+        Time: <time dateTime={time}>{time} GMT</time>
       </span>
     </div>
   );

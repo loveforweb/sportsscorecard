@@ -72,61 +72,6 @@
         flex-direction: column;
     }
 
-    // &.fixture-block--row {
-    //     .game-details {
-    //         grid-template-rows: 1fr;
-    //         grid-template-columns: none;
-    //         width: 100%;
-    //         grid-row-gap: 1rem;
-    //     }
-
-    //     .team {
-    //         display: grid;
-    //         grid-template-columns: 1fr 10rem;
-    //     }
-
-    //     .team-identity {
-    //         display: grid;
-    //         grid-template-columns: auto 1fr;
-    //         align-items: center;
-    //         margin-bottom: 0;
-    //     }
-
-    //     .team {
-    //         &.team--away {
-    //             .team-badge {
-    //                 order: 0;
-    //             }
-
-    //             .team-score {
-    //                 margin-left: auto;
-    //             }
-    //         }
-    //     }
-
-    //     .team-name {
-    //         text-align: left;
-    //     }
-
-    //     .team-score {
-    //         display: inline;
-    //     }
-
-    //     .game-splitter {
-    //         display: none;
-    //     }
-
-    //     .game-ko-data {
-    //         border-top: 0.1rem solid var(--tundora);
-    //         padding-top: 1rem;
-    //         margin-top: 2rem;
-    //         width: 100%;
-
-    //         .game-date-time {
-    //             margin-top: 0;
-    //         }
-    //     }
-    // }
 }
 
 @include md {
@@ -151,10 +96,11 @@
 
         .game-ko-data {
             flex-direction: row;
-            margin: 2rem 6.5rem 0;
+            margin: 2rem 0 0;
             justify-content: center;
             border-top: 0.1rem solid var(--tundora);
             padding-top: 1rem;
+            width: 100%;
     
             .game-date-time {
                 flex-direction: row;

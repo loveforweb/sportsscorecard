@@ -14,13 +14,13 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/standings" activeClassName="selected">
-            Standings
+          <NavLink to="/results" activeClassName="selected">
+            Results
           </NavLink>
         </li>
         <li>
-          <NavLink to="/results" activeClassName="selected">
-            Results
+          <NavLink to="/standings" activeClassName="selected">
+            Standings
           </NavLink>
         </li>
         <li>

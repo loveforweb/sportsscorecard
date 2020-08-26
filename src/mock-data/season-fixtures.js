@@ -1500,7 +1500,16 @@ const {
   references: { teamReferences, venueReferences },
 } = seasonFixtures;
 
-export const scheduledData = games.map((game) => {
+const setDate = (date) => {
+  return new Date(date).toLocaleDateString('en-GB', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+
+const setTeamData = games.map((game) => {
   const awayId = game.schedule.awayTeam.id;
   const homeId = game.schedule.homeTeam.id;
   const venueId = game.schedule.venue.id;
@@ -1537,27 +1546,18 @@ export const scheduledData = games.map((game) => {
   };
 });
 
-const setDate = (date) => {
-  return new Date(date).toLocaleDateString('en-GB', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-};
-
-const getDates = scheduledData.map((preDataGame) => {
+const getDates = setTeamData.map((preDataGame) => {
   return setDate(preDataGame.schedule.startTime);
 });
 
 const theDates = [...new Set(getDates)];
 
 export const data = theDates.map((date) => {
-  const a = scheduledData.filter((item) => {
+  const filteredGameDates = setTeamData.filter((item) => {
     return setDate(item.schedule.startTime) === date;
   });
 
-  const gamesByTime = a.sort((a, b) => {
+  const gamesByTime = filteredGameDates.sort((a, b) => {
     return new Date(a.schedule.startTime) - new Date(b.schedule.startTime);
   });
 
