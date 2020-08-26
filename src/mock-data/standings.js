@@ -1,4 +1,4 @@
-const teamData = {
+const standingsData = {
   lastUpdatedOn: '2020-08-17T13:25:55.565Z',
   teams: [
     {
@@ -8352,7 +8352,7 @@ const teamData = {
 };
 
 const filterTeams = (param) => {
-  return teamData.teams
+  return standingsData.teams
     .filter((item) => {
       return item.divisionRank.divisionName === param;
     })
@@ -8368,7 +8368,7 @@ const AFCEast = filterTeams('AFC East');
 const AFCSouth = filterTeams('AFC South');
 const AFCWest = filterTeams('AFC West');
 
-export const standingsData = [
+export const data = [
   {
     conference: 'American Football Conference',
     tables: [
@@ -8412,3 +8412,34 @@ export const standingsData = [
     ],
   },
 ];
+
+export const teamNames = data.map((confData) => {
+  const conferenceData = confData.tables.map((table) => {
+    return table.teams.map(({ team }) => {
+      return {
+        city: team.city,
+        name: team.name,
+        abbreviation: team.abbreviation,
+        officialLogoImageSrc: team.officialLogoImageSrc,
+      };
+    });
+  });
+
+  const sortedByName = [].concat(...conferenceData).sort((a, b) => {
+    const cityA = a.city.toLowerCase();
+    const cityB = b.city.toLowerCase();
+
+    if (cityA < cityB) {
+      return -1;
+    }
+    if (cityA > cityB) {
+      return 1;
+    }
+    return 0;
+  });
+
+  return {
+    conference: confData.conference,
+    teams: sortedByName,
+  };
+});

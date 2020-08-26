@@ -151,10 +151,11 @@
 
         .game-ko-data {
             flex-direction: row;
-            margin: 2rem 6.5rem 0;
+            margin: 2rem 0 0;
             justify-content: center;
             border-top: 0.1rem solid var(--tundora);
             padding-top: 1rem;
+            width: 100%;
     
             .game-date-time {
                 flex-direction: row;

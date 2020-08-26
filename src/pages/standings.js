@@ -1,12 +1,12 @@
 import React from 'react';
 import StandingsTable from '../components/StandingsTable';
-import { standingsData } from '../mock-data/standings';
+import { data } from '../mock-data/standings';
 
 const Standings = () => {
   return (
     <>
       <h1>Standings</h1>
-      {standingsData.map((conf, i) => {
+      {data.map((conf, i) => {
         return (
           <div className="conference-group" key={`${i}-conf`}>
             <div className="standings-table-header">{conf.conference}</div>

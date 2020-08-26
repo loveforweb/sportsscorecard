@@ -6,7 +6,9 @@ import React from 'react';
 const TeamName = ({ city, name, abbreviation }) => {
   return (
     <div className="team-name">
-      <span className="team-name-full">{name}</span>
+      <span className="team-name-full">
+        {city} {name}
+      </span>
       <span className="team-name-abbr" aria-hidden="true">
         {abbreviation}
       </span>
@@ -16,7 +18,7 @@ const TeamName = ({ city, name, abbreviation }) => {
 
 TeamName.propTypes = {
   name: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
+  city: PropTypes.string,
   abbreviation: PropTypes.string.isRequired,
 };
 

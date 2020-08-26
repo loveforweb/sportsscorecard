@@ -21,7 +21,7 @@ const FixtureCard = ({ gameData, variantClass, isFixture }) => {
                 badge={gameData.schedule.awayTeam.officialLogoImageSrc}
               />
               <TeamName
-                city={gameData.schedule.awayTeam.city}
+                // city={gameData.schedule.awayTeam.city}
                 name={gameData.schedule.awayTeam.name}
                 abbreviation={gameData.schedule.awayTeam.abbreviation}
               />
@@ -42,7 +42,7 @@ const FixtureCard = ({ gameData, variantClass, isFixture }) => {
                 badge={gameData.schedule.homeTeam.officialLogoImageSrc}
               />
               <TeamName
-                city={gameData.schedule.homeTeam.city}
+                // city={gameData.schedule.homeTeam.city}
                 name={gameData.schedule.homeTeam.name}
                 abbreviation={gameData.schedule.homeTeam.abbreviation}
               />

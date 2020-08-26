@@ -24,6 +24,11 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/teams" activeClassName="selected">
+            Teams
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/stats" activeClassName="selected">
             Stats
           </NavLink>
