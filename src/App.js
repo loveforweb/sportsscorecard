@@ -4,7 +4,8 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Teams from './pages/teams';
+import Teams from './pages/Teams/teams';
+import Team from './pages/Team/team';
 
 const About = React.lazy(() => import('./pages/about'));
 const Fixtures = React.lazy(() => import('./pages/fixtures'));
@@ -17,19 +18,18 @@ function App() {
   return (
     <Router>
       <Header />
-      <Container>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/fixtures" component={Fixtures} />
-            <Route exact path="/standings" component={Standings} />
-            <Route exact path="/results" component={Results} />
-            <Route exact path="/teams" component={Teams} />
-            <Route exact path="/stats" component={Stats} />
-          </Switch>
-        </Suspense>
-      </Container>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/fixtures" component={Fixtures} />
+          <Route exact path="/standings" component={Standings} />
+          <Route exact path="/results" component={Results} />
+          <Route exact path="/teams" component={Teams} />
+          <Route exact path="/stats" component={Stats} />
+          <Route exact path="/team/:abbr" component={Team} />
+        </Switch>
+      </Suspense>
       <Footer />
     </Router>
   );
