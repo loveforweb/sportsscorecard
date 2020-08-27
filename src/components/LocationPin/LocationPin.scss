@@ -1,0 +1,27 @@
+.location-pin {
+    display: block;
+    text-align: center;
+    position: relative;
+    bottom: 90px;
+    margin-left: 0;
+    
+    .pin-text {
+        transform: translateX(-40%);
+        width: 150px;
+        border-radius: 5px;
+        padding: 6px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid;
+    }
+
+    .pin {
+        height: 40px;
+        width: 40px;
+        margin: 0 auto;
+
+        svg {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}

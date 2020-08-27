@@ -1,5 +1,6 @@
 import axios from 'axios';
-const API_URL = 'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl';
+const API_URL =
+  'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl/2019-regular';
 export const API_STALE_TIMEOUT = 3600000;
 
 const access_token = btoa(
@@ -14,7 +15,15 @@ const headers = {
 
 export const GET_FIXTURES = async () => {
   const { data } = await axios.get(
-    `${API_URL}/2019-regular/date/20190929/games.json`,
+    `${API_URL}/date/20190929/games.json`,
+    headers
+  );
+  return data;
+};
+
+export const GET_VENUE = async (q, obj) => {
+  const { data } = await axios.get(
+    `${API_URL}/venues.json?team=${obj.id}`,
     headers
   );
   return data;

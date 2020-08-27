@@ -3,9 +3,11 @@ import './TeamName.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const TeamName = ({ city, name, abbreviation }) => {
+const TeamName = ({ city, name, abbreviation, showAbbrOnly }) => {
   return (
-    <div className="team-name">
+    <div
+      className={`team-name ${showAbbrOnly ? 'team-name--abbr-only' : null}`}
+    >
       <span className="team-name-full">
         {city} {name}
       </span>

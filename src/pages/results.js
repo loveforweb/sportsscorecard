@@ -27,12 +27,12 @@ const Results = () => {
 
   return (
     <Container>
-      <h1>Results</h1>
+      <h2>Results</h2>
       {data.map((arrayData, i) => {
         return (
           <Row key={`${i}-row`}>
             <Col xs={12}>
-              <h2>{arrayData.date}</h2>
+              <h3>{arrayData.date}</h3>
             </Col>
             {arrayData.games.map((gameData) => {
               return (

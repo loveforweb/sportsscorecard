@@ -1,17 +1,64 @@
+@import '../../styles/mixins';
+
 .team-page {
     .header-banner {
+        margin-bottom: 4rem;
+        padding: 1rem 0;
+
+        .team-name {
+            margin: 0;
+        }
+
         .container {
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .team-badge {
             width: 12rem;
             margin-right: 1.2rem;
+            margin-left: -6rem;
+        }
+
+        .team-details {
+            display: flex;
+            align-items: center;
         }
 
         .team-name {
             font-size: 6rem;
+        }
+
+        .simple-stats {
+            flex: 1 1 100%;
+            text-align: center;
+        }
+    }
+
+    h2 {
+        margin-bottom: 2rem;
+    }
+
+    .fixture-block {
+        margin-bottom: 2rem;
+        height: auto;
+    }
+
+    .stadium-capacity {
+        margin-bottom: 2rem;
+    }
+}
+
+@include md {
+    .team-page {
+        .header-banner {
+            .team-badge {
+                width: 12rem;
+                margin-right: 1.2rem;
+                margin-left: -12rem;
+            }
         }
     }
 }

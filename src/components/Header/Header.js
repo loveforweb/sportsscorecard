@@ -13,10 +13,10 @@ const Header = () => {
     <header className="component header">
       <Container>
         <Row>
-          <Col md={2} className="d-flex align-items-center">
-            Header
+          <Col md={4} className="d-flex align-items-center">
+            <h1 className="site-heading">Sports Score Card</h1>
           </Col>
-          <Col md={{ span: 9, offset: 1 }}>
+          <Col md={{ span: 7, offset: 1 }}>
             <Navigation />
           </Col>
         </Row>

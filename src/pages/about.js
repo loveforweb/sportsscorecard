@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 const About = () => {
   return (
     <Container>
-      <h1>About</h1>
+      <h2>About</h2>
     </Container>
   );
 };

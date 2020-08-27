@@ -1,4 +1,4 @@
-const gameData = {
+const data = {
   lastUpdatedOn: '2020-08-26T09:23:02.372Z',
   games: [
     {
@@ -1380,9 +1380,9 @@ const gameData = {
 const {
   games,
   references: { teamReferences, venueReferences },
-} = gameData;
+} = data;
 
-export const data = games.map((game) => {
+export const teamFixtures = games.map((game) => {
   const awayId = game.schedule.awayTeam.id;
   const homeId = game.schedule.homeTeam.id;
   const venueId = game.schedule.venue.id;

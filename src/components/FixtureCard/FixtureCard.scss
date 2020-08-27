@@ -70,6 +70,8 @@
     .game-ko-data {
         display: flex;
         flex-direction: column;
+        border-top: 0.1rem solid var(--tundora);
+        margin: 1rem 0 0;
     }
 
 }
@@ -97,9 +99,8 @@
         .game-ko-data {
             flex-direction: row;
             margin: 2rem 0 0;
-            justify-content: center;
-            border-top: 0.1rem solid var(--tundora);
             padding-top: 1rem;
+            justify-content: center;
             width: 100%;
     
             .game-date-time {

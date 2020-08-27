@@ -1,4 +1,4 @@
-const seasonFixtures = {
+const data = {
   lastUpdatedOn: '2020-08-26T09:23:02.372Z',
   games: [
     {
@@ -1498,13 +1498,13 @@ const seasonFixtures = {
 const {
   games,
   references: { teamReferences, venueReferences },
-} = seasonFixtures;
+} = data;
 
 const setDate = (date) => {
   return new Date(date).toLocaleDateString('en-GB', {
-    weekday: 'long',
+    weekday: 'short',
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   });
 };
@@ -1552,7 +1552,7 @@ const getDates = setTeamData.map((preDataGame) => {
 
 const theDates = [...new Set(getDates)];
 
-export const data = theDates.map((date) => {
+export const seasonFixtures = theDates.map((date) => {
   const filteredGameDates = setTeamData.filter((item) => {
     return setDate(item.schedule.startTime) === date;
   });

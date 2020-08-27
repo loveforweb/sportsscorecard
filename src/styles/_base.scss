@@ -28,7 +28,7 @@ body {
 }
 
 main {
-    margin-top: 4rem;
+    min-height: 30rem;
 }
 
 a {
@@ -41,6 +41,17 @@ a {
 
 p {
     font-size: 1.4rem;
+}
+
+h2 {
+    font-size: 3rem;
+    border-bottom: .1rem solid #585858;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;;
+}
+
+h3 {
+    font-size: 1.8rem;
 }
 
 .sr-only {

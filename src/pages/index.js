@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 const Home = () => {
   return (
     <Container>
-      <h1>Homepage</h1>
+      <h2>Homepage</h2>
     </Container>
   );
 };

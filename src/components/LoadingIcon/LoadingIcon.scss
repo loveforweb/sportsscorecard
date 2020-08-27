@@ -1,0 +1,13 @@
+.loading-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    height: 100%;
+    min-height: 50vh;
+
+    span {
+        margin-bottom: 2rem;
+    }
+}

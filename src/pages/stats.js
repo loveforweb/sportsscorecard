@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 const Stats = () => {
   return (
     <Container>
-      <h1>Stats</h1>
+      <h2>Stats</h2>
     </Container>
   );
 };

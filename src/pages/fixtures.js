@@ -5,7 +5,7 @@ import FixtureCard from '../components/FixtureCard/FixtureCard';
 import Container from 'react-bootstrap/Container';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
-import { data } from '../mock-data/season-fixtures';
+import { seasonFixtures } from '../mock-data/season-fixtures';
 import { useQuery } from 'react-query';
 
 const Fixtures = () => {
@@ -29,14 +29,14 @@ const Fixtures = () => {
 
   return (
     <Container>
-      <h1>Fixtures</h1>
-      {data.map((arrayData, i) => {
+      <h2>Fixtures</h2>
+      {seasonFixtures.map((fixtureData, i) => {
         return (
           <Row key={`${i}-row`}>
             <Col xs={12}>
-              <h2>{arrayData.date}</h2>
+              <h3>{fixtureData.date}</h3>
             </Col>
-            {arrayData.games.map((gameData) => {
+            {fixtureData.games.map((gameData) => {
               return (
                 <Col xs={12} className="mb3" key={gameData.schedule.id}>
                   <FixtureCard gameData={gameData} isFixture />

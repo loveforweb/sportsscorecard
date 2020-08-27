@@ -1,11 +1,46 @@
-.navigation {
-    ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
+
+@import '../../styles/mixins';
+
+.mobile-nav-toggle {
+    position: absolute;
+    top: -4.5rem;
+    right: 1.5rem;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 3.2rem;
+    height: 4rem;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    position: absolute;
+    background: black;
+    width: 100%;
+    left: 0;
+    z-index: 1;
+    
+    &.is--open {
+        max-height: 1000px;
+        height: auto;
     }
-    li {
+}
+.navigation {
+    .navigation-list {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 12px 0;
+    }
+    .navigation-list-item {
         list-style: none;
+        padding: 12px;
 
         a {
             text-decoration: none;
@@ -35,6 +70,25 @@
                     width: calc(100% - 2.4rem);
                 }
             }
+        }
+    }
+}
+
+@include md {
+    .mobile-nav-toggle {
+        display: none;
+    }
+    .navigation-container {
+        display: block;
+        position: relative;
+        max-height: none;
+        background: none;
+    }
+
+    .navigation {
+        .navigation-list {
+            flex-direction: row;
+            justify-content: space-evenly;
         }
     }
 }

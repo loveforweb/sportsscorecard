@@ -20,5 +20,15 @@
         .team-name-abbr {
             display: none;
         }
+
+        &.team-name--abbr-only {
+            .team-name-full {
+                display: none;
+            }
+
+            .team-name-abbr {
+                display: inline-block;
+            }
+        }
     }
 }

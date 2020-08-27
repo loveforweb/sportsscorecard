@@ -8,7 +8,7 @@ import TeamBadge from '../TeamBadge';
 import TeamName from '../TeamName';
 import TeamScore from '../TeamScore';
 
-const FixtureCard = ({ gameData, variantClass, isFixture }) => {
+const FixtureCard = ({ gameData, isFixture, showDate, showAbbr }) => {
   const driveSummary = false;
 
   return (
@@ -24,6 +24,7 @@ const FixtureCard = ({ gameData, variantClass, isFixture }) => {
                 // city={gameData.schedule.awayTeam.city}
                 name={gameData.schedule.awayTeam.name}
                 abbreviation={gameData.schedule.awayTeam.abbreviation}
+                showAbbrOnly={showAbbr || false}
               />
             </div>
             {gameData.score.homeScoreTotal ? (
@@ -45,6 +46,7 @@ const FixtureCard = ({ gameData, variantClass, isFixture }) => {
                 // city={gameData.schedule.homeTeam.city}
                 name={gameData.schedule.homeTeam.name}
                 abbreviation={gameData.schedule.homeTeam.abbreviation}
+                showAbbrOnly={showAbbr || false}
               />
             </div>
           </div>
@@ -62,6 +64,19 @@ const FixtureCard = ({ gameData, variantClass, isFixture }) => {
                   minute: '2-digit',
                 }
               )}
+              date={
+                showDate
+                  ? new Date(gameData.schedule.startTime).toLocaleDateString(
+                      'en-GB',
+                      {
+                        weekday: 'short',
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      }
+                    )
+                  : null
+              }
             />
           ) : null}
           <Stadium
