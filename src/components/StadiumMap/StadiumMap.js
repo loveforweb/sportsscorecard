@@ -13,7 +13,7 @@ const StadiumMap = ({ geoLocation, stadiumName, color }) => {
   return (
     <div className="component stadium-map">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyDTgE5edxQOQrUw26za1ahkjHILrnmeETs' }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_API_DEV_GMAPI }}
         defaultCenter={location}
         defaultZoom={15}
       >
