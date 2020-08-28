@@ -8,7 +8,13 @@ import TeamBadge from '../TeamBadge';
 import TeamName from '../TeamName';
 import TeamScore from '../TeamScore';
 
-const FixtureCard = ({ gameData, isFixture, showDate, showAbbr }) => {
+const FixtureCard = ({
+  gameData,
+  isFixture,
+  showDate,
+  showAbbr,
+  showDateOnly,
+}) => {
   const driveSummary = false;
 
   return (
@@ -55,6 +61,20 @@ const FixtureCard = ({ gameData, isFixture, showDate, showAbbr }) => {
 
       <div className="fixture-block-row">
         <div className="game-ko-data">
+          {showDateOnly ? (
+            <GameDateTime
+              date={new Date(gameData.schedule.startTime).toLocaleDateString(
+                'en-GB',
+                {
+                  weekday: 'short',
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                }
+              )}
+              isFixture={isFixture}
+            />
+          ) : null}
           {isFixture ? (
             <GameDateTime
               time={new Date(gameData.schedule.startTime).toLocaleTimeString(
@@ -77,6 +97,7 @@ const FixtureCard = ({ gameData, isFixture, showDate, showAbbr }) => {
                     )
                   : null
               }
+              isFixture={isFixture}
             />
           ) : null}
           <Stadium

@@ -60,5 +60,25 @@
                 margin-left: -12rem;
             }
         }
+
+        .tab-pane {
+            padding-top: 3rem;
+        }
+
+        .fixture-block {
+            .game-ko-data {
+                flex-direction: column;
+                align-items: center;
+
+                .game-date-time {
+                    margin-right: 0;
+                    border-right: none;
+                }
+
+                .game-time {
+                    margin-right: 0;
+                }
+            }
+        }
     }
 }
