@@ -133,7 +133,9 @@ const Team = ({ location }) => {
               <Col xs={12}>
                 <h2>Division Standings</h2>
                 {divisionTable.map((table, i) => {
-                  return <StandingsTable {...table} key={`${i}-key`} />;
+                  return (
+                    <StandingsTable {...table} key={`${i}-key`} teamId={id} />
+                  );
                 })}
               </Col>
             </Row>
@@ -145,11 +147,11 @@ const Team = ({ location }) => {
                 {venueData ? (
                   <>
                     <h2>Stadium</h2>
-                    <StadiumMap
+                    {/* <StadiumMap
                       geoLocation={venueData.venues[0].venue.geoCoordinates}
                       color={team.teamColoursHex[0]}
                       stadiumName={`${venueData.venues[0].venue.name}, ${venueData.venues[0].venue.city}`}
-                    />
+                    /> */}
                     <address>
                       Stadium: {venueData.venues[0].venue.name},{' '}
                       {venueData.venues[0].venue.city}.<br />

@@ -5,9 +5,14 @@ import React from 'react';
 import TeamBadge from '../TeamBadge';
 import TeamName from '../TeamName';
 
-const StandingsTable = ({ division, teams }) => {
+const StandingsTable = ({ division, teams, teamId }) => {
   return (
-    <div className="component standings-table" role="table">
+    <div
+      className={`component standings-table ${
+        teamId ? 'standings-table--individual' : ''
+      }`}
+      role="table"
+    >
       <div className="scroller">
         <div className="table-row table-row--heading" role="row">
           <div
@@ -60,7 +65,13 @@ const StandingsTable = ({ division, teams }) => {
         </div>
         {teams.map(({ team, stats }) => {
           return (
-            <div className="table-row" role="row" key={team.id}>
+            <div
+              className={`table-row ${
+                team.id === teamId ? 'highlight-row' : ''
+              }`}
+              role="row"
+              key={team.id}
+            >
               <div className="table-cell table-cell--sticky" role="rowheader">
                 <div className="team">
                   <TeamBadge badge={team.officialLogoImageSrc} />

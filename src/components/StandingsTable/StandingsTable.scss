@@ -13,6 +13,22 @@ $sideHeadingWidth: 11rem;
   position: relative;
   margin-bottom: 2rem;
 
+  &.standings-table--individual {
+    .table-row {
+      &:not(.highlight-row):not(.table-row--heading) {
+        opacity: 0.5;
+      }
+
+      &.highlight-row {
+        background: #222222;
+
+        .table-cell--sticky {
+          background: #222222;
+        }
+      }
+    }
+  }
+
   .scroller {
     margin-left: $sideHeadingWidth;
     overflow-x: scroll;
@@ -24,30 +40,32 @@ $sideHeadingWidth: 11rem;
   .table-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-    border-bottom: .1rem solid var(--tundora);
     min-width: 45rem;
     justify-content: center;
     align-items: center;
 
     &:first-of-type {
-      border-top: .1rem solid var(--tundora);
       border-bottom: .3rem solid var(--tundora);
       font-weight: 700;
 
       .table-cell {
         padding: 1rem;
+        border-bottom: 0;
+        border-top: .1rem solid var(--tundora);
+        
         &.table-cell--sticky {
           border-top: .1rem solid var(--tundora);
           border-bottom: .3rem solid  var(--tundora);
           padding: 1rem;
         }
       }
-  }
+    }
 
-  .table-cell {
-    border-right: .1rem solid var(--tundora);
-    text-align: center;
-    padding: 1rem;
+    .table-cell {
+      border-right: .1rem solid var(--tundora);
+      border-bottom: 0.1rem solid var(--tundora);
+      text-align: center;
+      padding: 1rem;
 
       &:first-of-type {
         position: absolute;
@@ -56,11 +74,10 @@ $sideHeadingWidth: 11rem;
         text-align: left;
         border-bottom: .1rem solid var(--tundora);
         border-left: .1rem solid var(--tundora);
-        margin-top: -.1rem;
       }
 
       &.table-cell--sticky {
-        padding: .7rem 1rem .8rem;
+        padding: .7rem 1rem;
       }
     }
   }
