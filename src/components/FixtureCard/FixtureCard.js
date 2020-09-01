@@ -129,11 +129,11 @@ const FixtureCard = ({
 
 FixtureCard.propTypes = {
   gameData: PropTypes.shape({}).isRequired,
-  isFixture: PropTypes.string,
-  showAbbr: PropTypes.string,
-  showDateOnly: PropTypes.string,
-  showTimeOnly: PropTypes.string,
-  showDateAndTime: PropTypes.string,
+  isFixture: PropTypes.bool,
+  showAbbr: PropTypes.bool,
+  showDateOnly: PropTypes.bool,
+  showTimeOnly: PropTypes.bool,
+  showDateAndTime: PropTypes.bool,
 };
 
 export default FixtureCard;

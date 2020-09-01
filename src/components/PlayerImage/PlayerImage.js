@@ -9,6 +9,7 @@ const PlayerImage = ({ imageSrc, firstName, lastname }) => {
       <img
         src={imageSrc ? imageSrc : '/assets/images/person-sil.png'}
         alt={`${firstName} ${lastname}`}
+        loading="lazy"
       />
     </div>
   );

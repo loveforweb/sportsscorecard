@@ -62,35 +62,67 @@ const standingsData = [
   },
 ];
 
-const teamNames = standingsData.map((confData) => {
-  const conferenceData = confData.tables.map((table) => {
-    return table.teams.map((item) => {
-      return {
-        ...item,
-        id: item.team.id,
-      };
+const filteredConference = (conf) => {
+  return data.teams
+    .filter((team) => {
+      return team.conferenceRank.conferenceName === conf;
+    })
+    .sort((a, b) => {
+      const cityA = a.team.city.toLowerCase();
+      const cityB = b.team.city.toLowerCase();
+
+      if (cityA < cityB) {
+        return -1;
+      }
+      if (cityA > cityB) {
+        return 1;
+      }
+      return 0;
     });
-  });
+};
 
-  const sortedByName = [].concat(...conferenceData).sort((a, b) => {
-    const cityA = a.team.city.toLowerCase();
-    const cityB = b.team.city.toLowerCase();
+const teamNames = [
+  {
+    conference: 'AFC',
+    teams: filteredConference('AFC'),
+  },
+  {
+    conference: 'NFC',
+    teams: filteredConference('NFC'),
+  },
+];
 
-    if (cityA < cityB) {
-      return -1;
-    }
-    if (cityA > cityB) {
-      return 1;
-    }
-    return 0;
-  });
+// const teamNames = standingsData.map((confData) => {
+//   const conferenceData = confData.tables.map((table) => {
+//     return table.teams.map((item) => {
+//       return {
+//         ...item,
+//         id: item.team.id,
+//       };
+//     });
+//   });
 
-  return {
-    conference: confData.conference.includes('National')
-      ? 'NFC Teams'
-      : 'AFC Teams',
-    teams: sortedByName,
-  };
-});
+//   const sortedByName = [].concat(...conferenceData).sort((a, b) => {
+//     const cityA = a.team.city.toLowerCase();
+//     const cityB = b.team.city.toLowerCase();
+
+//     if (cityA < cityB) {
+//       return -1;
+//     }
+//     if (cityA > cityB) {
+//       return 1;
+//     }
+//     return 0;
+//   });
+
+//   return {
+//     conference: confData.conference.includes('National')
+//       ? 'NFC Teams'
+//       : 'AFC Teams',
+//     teams: sortedByName,
+//   };
+// });
+
+// const teamNames = [];
 
 export { standingsData, teamNames };

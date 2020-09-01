@@ -1,6 +1,5 @@
 import axios from 'axios';
-const API_URL =
-  'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl/2020-regular';
+const API_URL = 'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl';
 export const API_STALE_TIMEOUT = 3600000;
 
 const access_token = btoa(
@@ -13,17 +12,37 @@ const headers = {
   },
 };
 
+// FIXTURES BY WEEK
 export const GET_FIXTURES = async (q, obj) => {
   const { data } = await axios.get(
-    `${API_URL}/week/${obj.weekSelection}/games.json`,
+    `${API_URL}/2020-regular/week/${obj.weekSelection}/games.json`,
     headers
   );
   return data;
 };
 
+// FIXTURES FOR TEAM WITH LIMIT
+export const GET_TEAM_FIXTURES = async (q, obj) => {
+  const { data } = await axios.get(
+    `${API_URL}/2020-regular/games.json?team=${obj.teamId}&limit=3`,
+    headers
+  );
+  return data;
+};
+
+//VENUES
 export const GET_VENUE = async (q, obj) => {
   const { data } = await axios.get(
-    `${API_URL}/venues.json?team=${obj.id}`,
+    `${API_URL}/2019-regular/venues.json?team=${obj.id}`,
+    headers
+  );
+  return data;
+};
+
+// STANDINGS
+export const GET_STANDINGS = async (q, obj) => {
+  const { data } = await axios.get(
+    `${API_URL}/2019-regular/standings.json`,
     headers
   );
   return data;

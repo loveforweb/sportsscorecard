@@ -1,13 +1,18 @@
 import './team.scss';
 
-import { API_STALE_TIMEOUT, GET_VENUE } from '../../api/api-calls';
+import {
+  API_STALE_TIMEOUT,
+  GET_STANDINGS,
+  GET_TEAM_FIXTURES,
+  GET_VENUE,
+} from '../../api/api-calls';
+import React, { useReducer, useState } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import FixtureCard from '../../components/FixtureCard';
 import LoadingIcon from '../../components/LoadingIcon';
 import PlayerCard from '../../components/PlayerCard';
-import React from 'react';
 import Row from 'react-bootstrap/Row';
 import SocialMedia from '../../components/SocialMedia';
 import StadiumMap from '../../components/StadiumMap';
@@ -17,11 +22,14 @@ import Tabs from 'react-bootstrap/Tabs';
 import TeamBadge from '../../components/TeamBadge';
 import TeamName from '../../components/TeamName';
 import TeamStats from '../../components/TeamStats';
+import fixturesReducer from '../../reducers/fixtures-reducer';
 import playersData from '../../mock-data/players';
-import { standingsData } from '../../mock-data/standings';
+import standingsReducer from '../../reducers/standings-reducer';
+// import { standingsData } from '../../mock-data/standings';
 import { teamFixtures } from '../../mock-data/team-fixtures';
-import { teamNames } from '../../mock-data/standings';
+// import { teamNames } from '../../mock-data/standings';
 import { teamResults } from '../../mock-data/team-results';
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { withRouter } from 'react-router-dom';
 
@@ -38,16 +46,33 @@ const rankSup = (rank) => {
 
 const Team = ({ location }) => {
   const { id } = location.state;
+  const [stateS, dispatchS] = useReducer(standingsReducer, []);
+  const [stateF, dispatchF] = useReducer(fixturesReducer, []);
+  const [pageLoading, setPageLoading] = useState(true);
 
-  const filterTeams = teamNames.map((conf) => {
-    return conf.teams.filter((theTeam) => {
-      return theTeam.team.id === id;
-    });
+  // const filterTeams = teamNames.map((conf) => {
+  //   return conf.teams.filter((theTeam) => {
+  //     return theTeam.team.id === id;
+  //   });
+  // });
+
+  const {
+    isLoading: isLoadingS,
+    data: standingsData,
+    error: errorS,
+  } = useQuery('standings', GET_STANDINGS, {
+    staleTime: API_STALE_TIMEOUT,
   });
 
-  const { team, stats, divisionRank } = [].concat(...filterTeams)[0];
+  const { isLoading: isLoadingF, data: fixturesData, error: errorF } = useQuery(
+    ['fixtures', { teamId: id }],
+    GET_TEAM_FIXTURES,
+    {
+      staleTime: API_STALE_TIMEOUT,
+    }
+  );
 
-  const { isLoading, data: venueData, error } = useQuery(
+  const { isLoading: isLoadingV, data: venueData, error: errorV } = useQuery(
     ['venues', { id }],
     GET_VENUE,
     {
@@ -55,13 +80,65 @@ const Team = ({ location }) => {
     }
   );
 
-  const tableResults = standingsData.map((conf) => {
-    return conf.tables.filter((table) => {
-      return table.division === divisionRank.divisionName;
-    });
+  useEffect(() => {
+    if (standingsData) {
+      dispatchS({
+        type: 'CONF',
+        payload: {
+          id: id,
+          teams: standingsData.teams,
+        },
+      });
+      setPageLoading(false);
+    }
+  }, [standingsData, id]);
+
+  useEffect(() => {
+    if (fixturesData) {
+      dispatchF({
+        type: 'TEAM_FIXTURE',
+        payload: {
+          id: id,
+          fixtures: fixturesData,
+        },
+      });
+      // setPageLoading(false);
+    }
+  }, [fixturesData, id]);
+
+  // const tableResults = standingsData.map((conf) => {
+  //   return conf.tables.filter((table) => {
+  //     return table.division === divisionRank.divisionName;
+  //   });
+  // });
+
+  // const divisionTable = [].concat(...tableResults);
+
+  if (isLoadingS || isLoadingF) {
+    return <LoadingIcon />;
+  }
+
+  if (errorS) {
+    return <div>Error loading Standing</div>;
+  }
+
+  if (errorF) {
+    return <div>Error loading Fixtures</div>;
+  }
+
+  if (stateS?.length === 0) {
+    return <div>No standings data</div>;
+  }
+
+  if (stateF?.length === 0) {
+    return <div>No fixtures data</div>;
+  }
+
+  const teamData = stateS[0].teams.filter((item) => {
+    return item.team.id === id;
   });
 
-  const divisionTable = [].concat(...tableResults);
+  const { team, divisionRank, stats } = teamData[0];
 
   return (
     <div className="team-page">
@@ -97,42 +174,46 @@ const Team = ({ location }) => {
             <Row>
               <Col xs={12} md={6}>
                 <h2>Upcoming fixtures</h2>
-                {teamFixtures.map((fixture, i) => {
-                  if (i < 3) {
-                    return (
-                      <FixtureCard
-                        gameData={fixture}
-                        isFixture
-                        showDateAndTime
-                        key={i}
-                        showAbbr
-                      />
-                    );
-                  }
-                  return false;
-                })}
+                {stateF.unplayedGames.length
+                  ? stateF.unplayedGames.map((fixture, i) => {
+                      if (i < 3) {
+                        return (
+                          <FixtureCard
+                            gameData={fixture}
+                            isFixture
+                            showDateAndTime
+                            key={i}
+                            showAbbr
+                          />
+                        );
+                      }
+                      return false;
+                    })
+                  : 'No Upcoming Games'}
               </Col>
               <Col xs={12} md={6}>
                 <h2>Last 3 Results</h2>
-                {teamResults.map((result, i) => {
-                  if (i < 3) {
-                    return (
-                      <FixtureCard
-                        gameData={result}
-                        key={i}
-                        showAbbr
-                        showDateOnly
-                      />
-                    );
-                  }
-                  return false;
-                })}
+                {stateF.completedGames.length
+                  ? stateF.completedGames.map((fixture, i) => {
+                      if (i < 3) {
+                        return (
+                          <FixtureCard
+                            gameData={fixture}
+                            key={i}
+                            showAbbr
+                            showDateOnly
+                          />
+                        );
+                      }
+                      return false;
+                    })
+                  : 'No results just yet'}
               </Col>
             </Row>
             <Row>
               <Col xs={12}>
                 <h2>Division Standings</h2>
-                {divisionTable.map((table, i) => {
+                {stateS.map((table, i) => {
                   return (
                     <StandingsTable {...table} key={`${i}-key`} teamId={id} />
                   );
@@ -140,18 +221,18 @@ const Team = ({ location }) => {
               </Col>
             </Row>
             <Row>
-              <Col xs={12} md={6}>
-                {error ? <div>Unable to load</div> : null}
-                {isLoading ? <LoadingIcon /> : null}
+              {/* <Col xs={12} md={6}>
+                {errorV? <div>Unable to load</div> : null}
+                {isLoadingV ? <LoadingIcon /> : null}
 
                 {venueData ? (
                   <>
                     <h2>Stadium</h2>
-                    {/* <StadiumMap
+                    <StadiumMap
                       geoLocation={venueData.venues[0].venue.geoCoordinates}
                       color={team.teamColoursHex[0]}
                       stadiumName={`${venueData.venues[0].venue.name}, ${venueData.venues[0].venue.city}`}
-                    /> */}
+                    />
                     <address>
                       Stadium: {venueData.venues[0].venue.name},{' '}
                       {venueData.venues[0].venue.city}.<br />
@@ -165,10 +246,10 @@ const Team = ({ location }) => {
                     </div>
                   </>
                 ) : null}
-              </Col>
+              </Col> */}
               <Col xs={12} md={6}>
                 <h2>Social Media</h2>
-                <SocialMedia socialAccounts={team.socialMediaAccounts} />
+                {/* <SocialMedia socialAccounts={team.socialMediaAccounts} /> */}
               </Col>
             </Row>
           </Tab>
@@ -177,32 +258,32 @@ const Team = ({ location }) => {
               <Col xs={12}>
                 <h2>Offense</h2>
               </Col>
-              {playersData?.offense?.map((details) => {
+              {/* {playersData?.offense?.map((details) => {
                 return (
                   <Col xs={12} md={6} lg={4} key={details.player.id}>
                     <PlayerCard playerDetails={details} />
                   </Col>
                 );
-              })}
+              })} */}
             </Row>
             <Row>
               <Col xs={12}>
                 <h2>Defense</h2>
               </Col>
-              {playersData?.defense?.map((details) => {
+              {/* {playersData?.defense?.map((details) => {
                 return (
                   <Col xs={12} md={6} lg={4} key={details.player.id}>
                     <PlayerCard playerDetails={details} />
                   </Col>
                 );
-              })}
+              })} */}
             </Row>
           </Tab>
           <Tab eventKey="stats" title="Stats">
             <Row>
               <Col xs={12}>
                 <h2>Stats</h2>
-                <TeamStats stats={stats} />
+                {/* <TeamStats stats={stats} /> */}
               </Col>
             </Row>
           </Tab>

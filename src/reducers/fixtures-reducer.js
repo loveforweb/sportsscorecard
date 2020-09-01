@@ -77,6 +77,64 @@ function fixturesReducer(state, action) {
 
       return [...finalData];
     }
+
+    case 'TEAM_FIXTURE': {
+      const {
+        games,
+        references: { teamReferences, venueReferences },
+      } = action.payload.fixtures;
+
+      const filteredGame = games.map((game) => {
+        const awayId = game.schedule.awayTeam.id;
+        const homeId = game.schedule.homeTeam.id;
+        const venueId = game.schedule.venue.id;
+
+        const awayTeamRef = teamReferences.filter((item) => {
+          return item.id === awayId;
+        });
+
+        const homeTeamRef = teamReferences.filter((item) => {
+          return item.id === homeId;
+        });
+
+        const gameVenue = venueReferences.filter((item) => {
+          return item.id === venueId;
+        });
+
+        return {
+          ...game,
+          schedule: {
+            ...game.schedule,
+            awayTeam: {
+              ...game.schedule.awayTeam,
+              ...awayTeamRef[0],
+            },
+            homeTeam: {
+              ...game.schedule.homeTeam,
+              ...homeTeamRef[0],
+            },
+            venue: {
+              ...game.schedule.venue,
+              ...gameVenue[0],
+            },
+          },
+        };
+      });
+
+      const completedGames = filteredGame.filter((item) => {
+        return item.schedule.playedStatus === 'COMPLETED';
+      });
+
+      const unplayedGames = filteredGame.filter((item) => {
+        return item.schedule.playedStatus === 'UNPLAYED';
+      });
+
+      return {
+        completedGames: completedGames,
+        unplayedGames: unplayedGames,
+      };
+    }
+
     default:
       return state;
   }

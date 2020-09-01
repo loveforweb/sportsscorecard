@@ -19,7 +19,7 @@ const PlayerStat = ({ title, value, ariaLabelTitle }) => {
 
 PlayerStat.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ariaLabelTitle: PropTypes.string.isRequired,
 };
 
