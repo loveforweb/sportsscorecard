@@ -9,9 +9,10 @@ const GameDateTime = ({ time, date, isFixture }) => {
       <span className="game-time">
         {time ? (
           <>
-            Time: <time dateTime={time}>{time} GMT</time> -
+            KO: <time dateTime={time}>{time} GMT</time>
           </>
         ) : null}
+        {time && date && ` - `}
         {!isFixture ? 'Played: ' : null}
         {date ? <time dateTime={date}>{date}</time> : null}
       </span>
@@ -21,6 +22,8 @@ const GameDateTime = ({ time, date, isFixture }) => {
 
 GameDateTime.propTypes = {
   time: PropTypes.string,
+  date: PropTypes.string,
+  isFixture: PropTypes.bool,
 };
 
 export default GameDateTime;

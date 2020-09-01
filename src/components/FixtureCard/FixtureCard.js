@@ -11,9 +11,10 @@ import TeamScore from '../TeamScore';
 const FixtureCard = ({
   gameData,
   isFixture,
-  showDate,
   showAbbr,
   showDateOnly,
+  showTimeOnly,
+  showDateAndTime,
 }) => {
   const driveSummary = false;
 
@@ -75,7 +76,8 @@ const FixtureCard = ({
               isFixture={isFixture}
             />
           ) : null}
-          {isFixture ? (
+
+          {showTimeOnly ? (
             <GameDateTime
               time={new Date(gameData.schedule.startTime).toLocaleTimeString(
                 'en-GB',
@@ -84,19 +86,28 @@ const FixtureCard = ({
                   minute: '2-digit',
                 }
               )}
-              date={
-                showDate
-                  ? new Date(gameData.schedule.startTime).toLocaleDateString(
-                      'en-GB',
-                      {
-                        weekday: 'short',
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                      }
-                    )
-                  : null
-              }
+              isFixture={isFixture}
+            />
+          ) : null}
+
+          {showDateAndTime ? (
+            <GameDateTime
+              time={new Date(gameData.schedule.startTime).toLocaleTimeString(
+                'en-GB',
+                {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }
+              )}
+              date={new Date(gameData.schedule.startTime).toLocaleDateString(
+                'en-GB',
+                {
+                  weekday: 'short',
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                }
+              )}
               isFixture={isFixture}
             />
           ) : null}
@@ -118,6 +129,11 @@ const FixtureCard = ({
 
 FixtureCard.propTypes = {
   gameData: PropTypes.shape({}).isRequired,
+  isFixture: PropTypes.string,
+  showAbbr: PropTypes.string,
+  showDateOnly: PropTypes.string,
+  showTimeOnly: PropTypes.string,
+  showDateAndTime: PropTypes.string,
 };
 
 export default FixtureCard;

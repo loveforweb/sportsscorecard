@@ -48,7 +48,7 @@ const Team = ({ location }) => {
   const { team, stats, divisionRank } = [].concat(...filterTeams)[0];
 
   const { isLoading, data: venueData, error } = useQuery(
-    ['todos', { id }],
+    ['venues', { id }],
     GET_VENUE,
     {
       staleTime: API_STALE_TIMEOUT,
@@ -103,7 +103,7 @@ const Team = ({ location }) => {
                       <FixtureCard
                         gameData={fixture}
                         isFixture
-                        showDate
+                        showDateAndTime
                         key={i}
                         showAbbr
                       />

@@ -1,8 +1,8 @@
 import { API_STALE_TIMEOUT, GET_FIXTURES } from '../api/api-calls';
 
 import Col from 'react-bootstrap/Col';
-import FixtureCard from '../components/FixtureCard/FixtureCard';
 import Container from 'react-bootstrap/Container';
+import FixtureCard from '../components/FixtureCard/FixtureCard';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import { data } from '../mock-data/season-results';
@@ -37,7 +37,7 @@ const Results = () => {
             {arrayData.games.map((gameData) => {
               return (
                 <Col xs={12} className="mb3" key={gameData.schedule.id}>
-                  <FixtureCard gameData={gameData} isFixture />
+                  <FixtureCard gameData={gameData} />
                 </Col>
               );
             })}

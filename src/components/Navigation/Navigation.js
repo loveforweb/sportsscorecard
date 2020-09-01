@@ -1,8 +1,9 @@
 import './Navigation.scss';
-import { MdMenu } from 'react-icons/md';
 
-import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
+
+import { MdMenu } from 'react-icons/md';
+import { NavLink } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,13 +27,13 @@ const Navigation = () => {
         <nav className="component navigation" id="menu">
           <ul className="navigation-list">
             <li className="navigation-list-item">
-              <NavLink to="/fixtures" activeClassName="selected">
-                Fixtures
+              <NavLink to="/schedule" activeClassName="selected">
+                Schedule
               </NavLink>
             </li>
             <li className="navigation-list-item">
               <NavLink to="/results" activeClassName="selected">
-                Results
+                Results(X)
               </NavLink>
             </li>
             <li className="navigation-list-item">

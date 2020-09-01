@@ -3,12 +3,12 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Teams from './pages/Teams/teams';
-import Team from './pages/Team/team';
 import LoadingIcon from './components/LoadingIcon/LoadingIcon';
+import Team from './pages/Team/team';
+import Teams from './pages/Teams/teams';
 
 const About = React.lazy(() => import('./pages/about'));
-const Fixtures = React.lazy(() => import('./pages/fixtures'));
+const Schedule = React.lazy(() => import('./pages/Schedule/schedule'));
 const Home = React.lazy(() => import('./pages'));
 const Standings = React.lazy(() => import('./pages/standings'));
 const Stats = React.lazy(() => import('./pages/stats'));
@@ -23,7 +23,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
-            <Route exact path="/fixtures" component={Fixtures} />
+            <Route exact path="/Schedule" component={Schedule} />
             <Route exact path="/standings" component={Standings} />
             <Route exact path="/results" component={Results} />
             <Route exact path="/teams" component={Teams} />

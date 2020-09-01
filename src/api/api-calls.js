@@ -1,6 +1,6 @@
 import axios from 'axios';
 const API_URL =
-  'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl/2019-regular';
+  'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl/2020-regular';
 export const API_STALE_TIMEOUT = 3600000;
 
 const access_token = btoa(
@@ -13,9 +13,9 @@ const headers = {
   },
 };
 
-export const GET_FIXTURES = async () => {
+export const GET_FIXTURES = async (q, obj) => {
   const { data } = await axios.get(
-    `${API_URL}/date/20190929/games.json`,
+    `${API_URL}/week/${obj.weekSelection}/games.json`,
     headers
   );
   return data;

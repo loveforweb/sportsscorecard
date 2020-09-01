@@ -3,6 +3,7 @@
 
 :root {
     --tundora: #424242;
+    --scorpion: #585858;
     --midnight-blue: #001e62;
 }
 
@@ -45,7 +46,7 @@ p {
 
 h2 {
     font-size: 3rem;
-    border-bottom: .1rem solid #585858;
+    border-bottom: .1rem solid var(--scorpion);
     padding-bottom: 1rem;
     margin-bottom: 2rem;;
 }
