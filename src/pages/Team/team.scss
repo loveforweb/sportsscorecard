@@ -7,6 +7,12 @@
 
         .team-name {
             margin: 0;
+            border-bottom: none;
+            font-size: 6rem;
+        }
+
+        .team-city {
+            display: none;
         }
 
         .container {
@@ -25,10 +31,6 @@
         .team-details {
             display: flex;
             align-items: center;
-        }
-
-        .team-name {
-            font-size: 6rem;
         }
 
         .simple-stats {
@@ -62,7 +64,12 @@
             .loading-icon {
                 min-height: auto;
             }
+
+            .team-city {
+                display: inline-block;
+            }
         }
+
 
         .tab-pane {
             padding-top: 3rem;

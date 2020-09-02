@@ -1,23 +1,16 @@
 @import '../../styles/mixins';
 
-.fixture-block {
-    display: flex;
-    flex-direction: column;
-    background: #2b2b2b;
-    color: white;
-    padding: 1.2rem;
-    border: 0.1rem solid var(--tundora);
-    height: 100%;
-    justify-content: space-between;
-    
-    .fixture-block-row {
+.game-header {
+    .container {
+        height: 14rem;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        position: relative;
     }
 
-    .game-details {
+    .game-header-info {
         display: grid;
         grid-template-columns: 1fr 4rem 1fr;
         align-items: flex-start;
@@ -27,10 +20,11 @@
         display: flex;
         flex-direction: row;
         align-items: flex-start;
+        background-color: none!important;
 
         &.team--away {
             justify-content: flex-end;
-            
+
             .team-badge {
                 order: 1;
             }
@@ -43,20 +37,13 @@
         }
     }
 
-    .team-badge {
-        margin: 0 1.2rem;
+    .team-name {
+        font-size: 3rem;
+        margin-top: -.3rem;
     }
 
-    .team-score {
-        margin-top: -2px;
-    }
-    
-    .team-identity {
-        font-size: 2.2rem;
-        display: flex;
-        flex-direction: column;
-        font-weight: 300;
-        align-items: center;
+    .team-city {
+        display: none
     }
 
     .game-splitter {
@@ -65,17 +52,31 @@
         font-weight: 500;
     }
 
-    .game-ko-data {
+    .team-identity {
+        font-size: 2.2rem;
         display: flex;
         flex-direction: column;
-        border-top: 0.1rem solid var(--tundora);
-        margin: 1rem 0 0;
+        font-weight: 300;
+        align-items: center;
     }
 
+    .team-score {
+        width: calc(100% - 5rem);
+        margin-top: -2px;
+        font-weight: 500;
+    }
+
+    .team-badge {
+        margin: 0 1.2rem;
+    }
 }
 
 @include md {
-    .fixture-block {
+    .game-header {
+        .game-header-info {
+            align-items: center;
+        }
+
         .team {
             align-items: center;
 
@@ -86,30 +87,32 @@
             }
         }
 
+        .team-name {
+            font-size: 4rem;
+            margin-top: 0;
+            font-weight: 500;
+        }
+
+        .team-city {
+            display: block;
+            font-size: 18px;
+            margin-bottom: -14px;
+            opacity: .5;
+            text-align: left;
+        }
+
         .team-identity {
             flex-direction: row;
         }
 
-        .game-details {
-            align-items: center;
+        .team-score {
+            width: auto;
+            margin: 0 2rem;
+            font-size: 5rem;
         }
 
-        .game-ko-data {
-            flex-direction: row;
-            margin: 2rem 0 0;
-            padding-top: 1rem;
-            justify-content: center;
-            width: 100%;
-    
-            .game-date-time {
-                flex-direction: row;
-                margin: 0 1.2rem 0 0;
-                border-right: 0.1rem solid var(--tundora);
-            }
-    
-            .game-time {
-                margin-right: 1.2rem;
-            }
+        .team-badge {
+            width: 8rem;
         }
     }
 }

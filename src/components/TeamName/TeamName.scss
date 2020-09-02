@@ -6,27 +6,27 @@
     text-align: center;
     flex: 1 1 auto;
 
-    .team-name-full {
+    .team-nickname {
         display: none;
     }
 }
 
 @include md {
     .team-name {
-        .team-name-full {
+        .team-nickname {
             display: inline-block;
         }
 
-        .team-name-abbr {
+        .team-abbr {
             display: none;
         }
 
         &.team-name--abbr-only {
-            .team-name-full {
+            .team-nickname {
                 display: none;
             }
 
-            .team-name-abbr {
+            .team-abbr {
                 display: inline-block;
             }
         }

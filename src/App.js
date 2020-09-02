@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Footer from './components/Footer';
+import GameDetails from './pages/GameDetails/game-details';
 import Header from './components/Header';
 import LoadingIcon from './components/LoadingIcon/LoadingIcon';
 import Team from './pages/Team/team';
@@ -27,6 +28,7 @@ function App() {
             <Route exact path="/teams" component={Teams} />
             <Route exact path="/stats" component={Stats} />
             <Route exact path="/team/:abbr" component={Team} />
+            <Route exact path="/game-details" component={GameDetails} />
           </Switch>
         </Suspense>
       </main>

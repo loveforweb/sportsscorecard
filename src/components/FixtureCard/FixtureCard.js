@@ -1,6 +1,7 @@
 import './FixtureCard.scss';
 
 import GameDateTime from '../GameDateTime';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Stadium from '../Stadium';
@@ -117,10 +118,11 @@ const FixtureCard = ({
           />
         </div>
       </div>
-      {driveSummary ? (
+      {gameData.schedule.playedStatus === 'COMPLETED' ? (
         <div className="fixture-block-row">
-          <h2>Drive summary</h2>
-          <div className="accordion"></div>
+          <p>
+            <Link to="/game-details">Read game details</Link>
+          </p>
         </div>
       ) : null}
     </div>
