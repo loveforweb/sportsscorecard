@@ -37,5 +37,4 @@ const playersData = {
   offense: filterOffense,
   defense: filterDefense,
 };
-
 export default playersData;

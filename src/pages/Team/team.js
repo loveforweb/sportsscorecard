@@ -2,6 +2,7 @@ import './team.scss';
 
 import {
   API_STALE_TIMEOUT,
+  GET_PLAYERS,
   GET_STANDINGS,
   GET_TEAM_FIXTURES,
   GET_VENUE,
@@ -23,12 +24,8 @@ import TeamBadge from '../../components/TeamBadge';
 import TeamName from '../../components/TeamName';
 import TeamStats from '../../components/TeamStats';
 import fixturesReducer from '../../reducers/fixtures-reducer';
-import playersData from '../../mock-data/players';
+import playersReducer from '../../reducers/players-reducer';
 import standingsReducer from '../../reducers/standings-reducer';
-// import { standingsData } from '../../mock-data/standings';
-import { teamFixtures } from '../../mock-data/team-fixtures';
-// import { teamNames } from '../../mock-data/standings';
-import { teamResults } from '../../mock-data/team-results';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { withRouter } from 'react-router-dom';
@@ -44,98 +41,103 @@ const rankSup = (rank) => {
   }
 };
 
-const Team = ({ location }) => {
-  const { id } = location.state;
-  const [stateS, dispatchS] = useReducer(standingsReducer, []);
-  const [stateF, dispatchF] = useReducer(fixturesReducer, []);
-  const [pageLoading, setPageLoading] = useState(true);
-
-  // const filterTeams = teamNames.map((conf) => {
-  //   return conf.teams.filter((theTeam) => {
-  //     return theTeam.team.id === id;
-  //   });
-  // });
+const Team = ({ match, location }) => {
+  const { abbr } = match.params;
+  const [stateStandings, dispatchStandings] = useReducer(standingsReducer, {
+    division: 'AFC North',
+    teams: [],
+  });
+  const [stateFixtures, dispatchFixtures] = useReducer(fixturesReducer, {
+    completedGames: [],
+    unplayedGames: [],
+  });
+  const [statePlayers, dispatchPlayers] = useReducer(playersReducer, {
+    offense: [],
+    defense: [],
+  });
 
   const {
-    isLoading: isLoadingS,
+    isLoading: isLoadingStandings,
     data: standingsData,
-    error: errorS,
+    error: errorStandings,
   } = useQuery('standings', GET_STANDINGS, {
     staleTime: API_STALE_TIMEOUT,
   });
 
-  const { isLoading: isLoadingF, data: fixturesData, error: errorF } = useQuery(
-    ['fixtures', { teamId: id }],
-    GET_TEAM_FIXTURES,
-    {
-      staleTime: API_STALE_TIMEOUT,
-    }
-  );
+  const {
+    isLoading: isLoadingFixtures,
+    data: fixturesData,
+    error: errorFixtures,
+  } = useQuery(['fixtures', { team: abbr }], GET_TEAM_FIXTURES, {
+    staleTime: API_STALE_TIMEOUT,
+  });
 
-  const { isLoading: isLoadingV, data: venueData, error: errorV } = useQuery(
-    ['venues', { id }],
-    GET_VENUE,
-    {
-      staleTime: API_STALE_TIMEOUT,
-    }
-  );
+  const {
+    isLoading: isLoadingVenue,
+    data: venueData,
+    error: errorVenue,
+  } = useQuery(['venues', { team: abbr }], GET_VENUE, {
+    staleTime: API_STALE_TIMEOUT,
+  });
+
+  const {
+    isLoading: isLoadingPlayers,
+    data: playersData,
+    error: errorPlayers,
+  } = useQuery(['players', { team: abbr }], GET_PLAYERS, {
+    staleTime: API_STALE_TIMEOUT,
+  });
 
   useEffect(() => {
     if (standingsData) {
-      dispatchS({
+      dispatchStandings({
         type: 'CONF',
         payload: {
-          id: id,
+          id: abbr,
           teams: standingsData.teams,
         },
       });
-      setPageLoading(false);
     }
-  }, [standingsData, id]);
+  }, [standingsData, abbr]);
 
   useEffect(() => {
     if (fixturesData) {
-      dispatchF({
+      dispatchFixtures({
         type: 'TEAM_FIXTURE',
         payload: {
-          id: id,
+          id: abbr,
           fixtures: fixturesData,
         },
       });
-      // setPageLoading(false);
     }
-  }, [fixturesData, id]);
+  }, [fixturesData, abbr]);
 
-  // const tableResults = standingsData.map((conf) => {
-  //   return conf.tables.filter((table) => {
-  //     return table.division === divisionRank.divisionName;
-  //   });
-  // });
+  useEffect(() => {
+    if (playersData) {
+      dispatchPlayers({
+        type: 'TEAM',
+        payload: {
+          id: abbr,
+          players: playersData.players,
+        },
+      });
+    }
+  }, [playersData, abbr]);
 
-  // const divisionTable = [].concat(...tableResults);
-
-  if (isLoadingS || isLoadingF) {
+  if (isLoadingStandings) {
     return <LoadingIcon />;
   }
 
-  if (errorS) {
+  if (errorStandings) {
     return <div>Error loading Standing</div>;
   }
 
-  if (errorF) {
-    return <div>Error loading Fixtures</div>;
-  }
-
-  if (stateS?.length === 0) {
+  if (stateStandings.teams.length === 0) {
     return <div>No standings data</div>;
   }
 
-  if (stateF?.length === 0) {
-    return <div>No fixtures data</div>;
-  }
-
-  const teamData = stateS[0].teams.filter((item) => {
-    return item.team.id === id;
+  const teamData = stateStandings.teams.filter((item) => {
+    return item.team.abbreviation === abbr;
   });
 
   const { team, divisionRank, stats } = teamData[0];
@@ -174,8 +176,12 @@ const Team = ({ location }) => {
             <Row>
               <Col xs={12} md={6}>
                 <h2>Upcoming fixtures</h2>
-                {stateF.unplayedGames.length
-                  ? stateF.unplayedGames.map((fixture, i) => {
+                {errorFixtures ? (
+                  <div>Unable to load upcoming fixtures</div>
+                ) : null}
+                {isLoadingFixtures ? <LoadingIcon /> : null}
+                {stateFixtures.unplayedGames.length > 0
+                  ? stateFixtures.unplayedGames.map((fixture, i) => {
                       if (i < 3) {
                         return (
                           <FixtureCard
@@ -193,8 +199,12 @@ const Team = ({ location }) => {
               </Col>
               <Col xs={12} md={6}>
                 <h2>Last 3 Results</h2>
-                {stateF.completedGames.length
-                  ? stateF.completedGames.map((fixture, i) => {
+                {errorFixtures ? (
+                  <div>Unable to load last 3 results</div>
+                ) : null}
+                {isLoadingFixtures ? <LoadingIcon /> : null}
+                {stateFixtures.completedGames.length > 0
+                  ? stateFixtures.completedGames.map((fixture, i) => {
                       if (i < 3) {
                         return (
                           <FixtureCard
@@ -213,17 +223,15 @@ const Team = ({ location }) => {
             <Row>
               <Col xs={12}>
                 <h2>Division Standings</h2>
-                {stateS.map((table, i) => {
-                  return (
-                    <StandingsTable {...table} key={`${i}-key`} teamId={id} />
-                  );
-                })}
+                {stateStandings.teams.length ? (
+                  <StandingsTable {...stateStandings} teamId={abbr} />
+                ) : null}
               </Col>
             </Row>
             <Row>
-              {/* <Col xs={12} md={6}>
-                {errorV? <div>Unable to load</div> : null}
-                {isLoadingV ? <LoadingIcon /> : null}
+              <Col xs={12} md={6}>
+                {errorVenue ? <div>Unable to load</div> : null}
+                {isLoadingVenue ? <LoadingIcon /> : null}
 
                 {venueData ? (
                   <>
@@ -246,10 +254,10 @@ const Team = ({ location }) => {
                     </div>
                   </>
                 ) : null}
-              </Col> */}
+              </Col>
               <Col xs={12} md={6}>
                 <h2>Social Media</h2>
-                {/* <SocialMedia socialAccounts={team.socialMediaAccounts} /> */}
+                <SocialMedia socialAccounts={team.socialMediaAccounts} />
               </Col>
             </Row>
           </Tab>
@@ -258,32 +266,34 @@ const Team = ({ location }) => {
               <Col xs={12}>
                 <h2>Offense</h2>
               </Col>
-              {/* {playersData?.offense?.map((details) => {
+              {errorPlayers ? <div>Unable to load</div> : null}
+              {isLoadingPlayers ? <LoadingIcon /> : null}
+              {statePlayers.offense?.map((details) => {
                 return (
                   <Col xs={12} md={6} lg={4} key={details.player.id}>
                     <PlayerCard playerDetails={details} />
                   </Col>
                 );
-              })} */}
+              })}
             </Row>
             <Row>
               <Col xs={12}>
                 <h2>Defense</h2>
               </Col>
-              {/* {playersData?.defense?.map((details) => {
+              {statePlayers.defense?.map((details) => {
                 return (
                   <Col xs={12} md={6} lg={4} key={details.player.id}>
                     <PlayerCard playerDetails={details} />
                   </Col>
                 );
-              })} */}
+              })}
             </Row>
           </Tab>
           <Tab eventKey="stats" title="Stats">
             <Row>
               <Col xs={12}>
                 <h2>Stats</h2>
-                {/* <TeamStats stats={stats} /> */}
+                <TeamStats stats={stats} />
               </Col>
             </Row>
           </Tab>

@@ -67,7 +67,7 @@ const StandingsTable = ({ division, teams, teamId }) => {
           return (
             <div
               className={`table-row ${
-                team.id === teamId ? 'highlight-row' : ''
+                team.abbreviation === teamId ? 'highlight-row' : ''
               }`}
               role="row"
               key={team.id}

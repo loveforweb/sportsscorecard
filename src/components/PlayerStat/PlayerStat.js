@@ -11,7 +11,7 @@ const PlayerStat = ({ title, value, ariaLabelTitle }) => {
       </span>
       <span className="stat-value">
         {value ? value : '--'}
-        {title === 'Weight' ? <span className="unit">lbs</span> : null}
+        {title === 'Weight' && value ? <span className="unit">lbs</span> : null}
       </span>
     </div>
   );

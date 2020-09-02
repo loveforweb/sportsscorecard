@@ -68,7 +68,7 @@ function standingsReducer(state, action) {
 
     case 'CONF': {
       const teamData = action.payload.teams.filter((item) => {
-        return item.team.id === action.payload.id;
+        return item.team.abbreviation === action.payload.id;
       });
 
       const filteredTeams = action.payload.teams
@@ -82,31 +82,15 @@ function standingsReducer(state, action) {
 
       const { team, stats, divisionRank } = teamData[0];
 
-      return [
-        {
-          division: 'AFC North',
-          basicInfo: {
-            city: team.city,
-            name: team.name,
-            abbreviation: team.abbreviation,
-          },
-          standingsInfo: {
-            dRank: divisionRank.rank,
-            dName: divisionRank.divisionName,
-          },
-          stats: {
-            wins: stats.standings.wins,
-            losses: stats.standings.losses,
-            ties: stats.standings.ties,
-          },
-          teams: filteredTeams,
-        },
-      ];
+      return {
+        division: 'AFC North',
+        teams: filteredTeams,
+      };
     }
 
     case 'TEAM': {
       const team = action.payload.teams.filter((item) => {
-        return item.team.id === action.payload.id;
+        return item.team.abbreviation === action.payload.id;
       });
 
       return team;

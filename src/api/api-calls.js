@@ -13,36 +13,45 @@ const headers = {
 };
 
 // FIXTURES BY WEEK
-export const GET_FIXTURES = async (q, obj) => {
+export const GET_FIXTURES = async (q, params) => {
   const { data } = await axios.get(
-    `${API_URL}/2020-regular/week/${obj.weekSelection}/games.json`,
+    `${API_URL}/2020-regular/week/${params.weekSelection}/games.json`,
     headers
   );
   return data;
 };
 
 // FIXTURES FOR TEAM WITH LIMIT
-export const GET_TEAM_FIXTURES = async (q, obj) => {
+export const GET_TEAM_FIXTURES = async (q, params) => {
   const { data } = await axios.get(
-    `${API_URL}/2020-regular/games.json?team=${obj.teamId}&limit=3`,
+    `${API_URL}/2020-regular/games.json?team=${params.team}&limit=3`,
     headers
   );
   return data;
 };
 
-//VENUES
-export const GET_VENUE = async (q, obj) => {
+// VENUES
+export const GET_VENUE = async (q, params) => {
   const { data } = await axios.get(
-    `${API_URL}/2019-regular/venues.json?team=${obj.id}`,
+    `${API_URL}/2019-regular/venues.json?team=${params.team}`,
     headers
   );
   return data;
 };
 
 // STANDINGS
-export const GET_STANDINGS = async (q, obj) => {
+export const GET_STANDINGS = async (q, params) => {
   const { data } = await axios.get(
     `${API_URL}/2019-regular/standings.json`,
+    headers
+  );
+  return data;
+};
+
+// PLAYERS
+export const GET_PLAYERS = async (q, params) => {
+  const { data } = await axios.get(
+    `${API_URL}/players.json?team=${params.team}`,
     headers
   );
   return data;
