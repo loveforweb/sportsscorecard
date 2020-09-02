@@ -7,7 +7,7 @@ import {
   GET_TEAM_FIXTURES,
   GET_VENUE,
 } from '../../api/api-calls';
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -26,7 +26,6 @@ import TeamStats from '../../components/TeamStats';
 import fixturesReducer from '../../reducers/fixtures-reducer';
 import playersReducer from '../../reducers/players-reducer';
 import standingsReducer from '../../reducers/standings-reducer';
-import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { withRouter } from 'react-router-dom';
 
