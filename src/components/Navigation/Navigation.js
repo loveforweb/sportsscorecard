@@ -32,11 +32,6 @@ const Navigation = () => {
               </NavLink>
             </li>
             <li className="navigation-list-item">
-              <NavLink to="/results" activeClassName="selected">
-                Results(X)
-              </NavLink>
-            </li>
-            <li className="navigation-list-item">
               <NavLink to="/standings" activeClassName="selected">
                 Standings
               </NavLink>

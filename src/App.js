@@ -25,7 +25,6 @@ function App() {
             <Route exact path="/about" component={About} />
             <Route exact path="/Schedule" component={Schedule} />
             <Route exact path="/standings" component={Standings} />
-            <Route exact path="/results" component={Results} />
             <Route exact path="/teams" component={Teams} />
             <Route exact path="/stats" component={Stats} />
             <Route exact path="/team/:abbr" component={Team} />
