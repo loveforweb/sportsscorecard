@@ -150,13 +150,13 @@ const Team = ({ match, location }) => {
             {errorStandings ? <div>Error loading Standings</div> : null}
             {isLoadingStandings ? <LoadingIcon /> : null}
             {stateTeam.length > 0 ? (
-              <h1 className="team-name">
+              <h2 className="team-name">
                 <TeamName
                   city={stateTeam[0].team.city || null}
                   name={stateTeam[0].team.name || null}
                   abbreviation={stateTeam[0].team.abbreviation || null}
                 />
-              </h1>
+              </h2>
             ) : null}
           </div>
           <div className="simple-stats">

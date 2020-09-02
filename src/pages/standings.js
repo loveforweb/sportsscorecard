@@ -1,7 +1,6 @@
 import { API_STALE_TIMEOUT, GET_STANDINGS } from '../api/api-calls';
 import React, { useEffect, useReducer } from 'react';
 
-// import { standingsData } from '../mock-data/standings';
 import Container from 'react-bootstrap/Container';
 import LoadingIcon from '../components/LoadingIcon';
 import StandingsTable from '../components/StandingsTable';

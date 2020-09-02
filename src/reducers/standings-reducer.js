@@ -94,8 +94,38 @@ function standingsReducer(state, action) {
       return team;
     }
 
-    case 'TEAMS': {
-      return [...state];
+    case 'TEAM_NAMES': {
+      const filteredConference = (conf) => {
+        return action.payload.teams
+          .filter((team) => {
+            return team.conferenceRank.conferenceName === conf;
+          })
+          .sort((a, b) => {
+            const cityA = a.team.city.toLowerCase();
+            const cityB = b.team.city.toLowerCase();
+
+            if (cityA < cityB) {
+              return -1;
+            }
+            if (cityA > cityB) {
+              return 1;
+            }
+            return 0;
+          });
+      };
+
+      const teamNames = [
+        {
+          conference: 'AFC',
+          teams: filteredConference('AFC'),
+        },
+        {
+          conference: 'NFC',
+          teams: filteredConference('NFC'),
+        },
+      ];
+
+      return teamNames;
     }
 
     default:
