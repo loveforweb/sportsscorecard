@@ -12,7 +12,6 @@ const Schedule = React.lazy(() => import('./pages/Schedule/schedule'));
 const Home = React.lazy(() => import('./pages'));
 const Standings = React.lazy(() => import('./pages/standings'));
 const Stats = React.lazy(() => import('./pages/stats'));
-const Results = React.lazy(() => import('./pages/results'));
 
 function App() {
   return (
