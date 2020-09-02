@@ -7,7 +7,7 @@ import {
   GET_TEAM_FIXTURES,
   GET_VENUE,
 } from '../../api/api-calls';
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -43,6 +43,7 @@ const rankSup = (rank) => {
 
 const Team = ({ match, location }) => {
   const { abbr } = match.params;
+  const [stateTeam, dispatchTeam] = useReducer(standingsReducer, {});
   const [stateStandings, dispatchStandings] = useReducer(standingsReducer, {
     division: 'AFC North',
     teams: [],
@@ -97,6 +98,14 @@ const Team = ({ match, location }) => {
           teams: standingsData.teams,
         },
       });
+
+      dispatchTeam({
+        type: 'TEAM_INFO',
+        payload: {
+          id: abbr,
+          teams: standingsData.teams,
+        },
+      });
     }
   }, [standingsData, abbr]);
 
@@ -124,48 +133,45 @@ const Team = ({ match, location }) => {
     }
   }, [playersData, abbr]);
 
-  if (isLoadingStandings) {
-    return <LoadingIcon />;
-  }
-
-  if (errorStandings) {
-    return <div>Error loading Standing</div>;
-  }
-
-  if (stateStandings.teams.length === 0) {
-    return <div>No standings data</div>;
-  }
-
-  const teamData = stateStandings.teams.filter((item) => {
-    return item.team.abbreviation === abbr;
-  });
-
-  const { team, divisionRank, stats } = teamData[0];
-
   return (
     <div className="team-page">
       <div
         className="header-banner"
         style={{
-          backgroundColor: team.teamColoursHex[0],
+          backgroundColor:
+            stateTeam.length > 0 ? stateTeam[0].team.teamColoursHex[0] : null,
         }}
       >
         <Container>
-          <TeamBadge badge={team.officialLogoImageSrc} />
+          {stateTeam.length > 0 ? (
+            <TeamBadge badge={stateTeam[0].team.officialLogoImageSrc} />
+          ) : null}
+
           <div className="team-details">
-            <h1 className="team-name">
-              <TeamName
-                city={team.city}
-                name={team.name}
-                abbreviation={team.abbreviation}
-              />
-            </h1>
+            {errorStandings ? <div>Error loading Standings</div> : null}
+            {isLoadingStandings ? <LoadingIcon /> : null}
+            {stateTeam.length > 0 ? (
+              <h1 className="team-name">
+                <TeamName
+                  city={stateTeam[0].team.city || null}
+                  name={stateTeam[0].team.name || null}
+                  abbreviation={stateTeam[0].team.abbreviation || null}
+                />
+              </h1>
+            ) : null}
           </div>
           <div className="simple-stats">
-            {divisionRank.rank}
-            {rankSup(divisionRank.rank)} - {divisionRank.divisionName} |{' '}
-            {stats.standings.wins} - {stats.standings.losses} -{' '}
-            {stats.standings.ties}
+            {errorStandings ? <div>Error loading Standings</div> : null}
+            {stateTeam.length > 0 ? (
+              <>
+                {stateTeam[0].divisionRank.rank}
+                {rankSup(stateTeam[0].divisionRank.rank)} -{' '}
+                {stateTeam[0].divisionRank.divisionName} |{' '}
+                {stateTeam[0].stats.standings.wins} -{' '}
+                {stateTeam[0].stats.standings.losses} -{' '}
+                {stateTeam[0].stats.standings.ties}
+              </>
+            ) : null}
           </div>
         </Container>
       </div>
@@ -223,7 +229,7 @@ const Team = ({ match, location }) => {
             <Row>
               <Col xs={12}>
                 <h2>Division Standings</h2>
-                {stateStandings.teams.length ? (
+                {stateStandings.teams.length > 0 ? (
                   <StandingsTable {...stateStandings} teamId={abbr} />
                 ) : null}
               </Col>
@@ -233,12 +239,12 @@ const Team = ({ match, location }) => {
                 {errorVenue ? <div>Unable to load</div> : null}
                 {isLoadingVenue ? <LoadingIcon /> : null}
 
-                {venueData ? (
+                {venueData && stateTeam.length > 0 ? (
                   <>
                     <h2>Stadium</h2>
                     <StadiumMap
                       geoLocation={venueData.venues[0].venue.geoCoordinates}
-                      color={team.teamColoursHex[0]}
+                      color={stateTeam[0].team.teamColoursHex[0]}
                       stadiumName={`${venueData.venues[0].venue.name}, ${venueData.venues[0].venue.city}`}
                     />
                     <address>
@@ -257,7 +263,11 @@ const Team = ({ match, location }) => {
               </Col>
               <Col xs={12} md={6}>
                 <h2>Social Media</h2>
-                <SocialMedia socialAccounts={team.socialMediaAccounts} />
+                {stateTeam.length > 0 ? (
+                  <SocialMedia
+                    socialAccounts={stateTeam[0].team.socialMediaAccounts}
+                  />
+                ) : null}
               </Col>
             </Row>
           </Tab>
@@ -293,7 +303,11 @@ const Team = ({ match, location }) => {
             <Row>
               <Col xs={12}>
                 <h2>Stats</h2>
-                <TeamStats stats={stats} />
+                {errorStandings ? <div>Error loading Standings</div> : null}
+                {isLoadingStandings ? <LoadingIcon /> : null}
+                {stateTeam.length > 0 ? (
+                  <TeamStats stats={stateTeam[0].stats} />
+                ) : null}
               </Col>
             </Row>
           </Tab>

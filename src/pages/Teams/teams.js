@@ -1,10 +1,11 @@
+import './teams.scss';
+
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import { teamNames } from '../../mock-data/standings';
 import TeamCard from '../../components/TeamCard/TeamCard';
-import './teams.scss';
+import { teamNames } from '../../mock-data/standings';
 
 const Teams = () => {
   return (
@@ -12,12 +13,11 @@ const Teams = () => {
       <h1>Teams</h1>
       <Row>
         {teamNames.map((conf, i) => {
-          console.log(conf);
           return (
             <Col xs={12} md={6} className="conference-group" key={`${i}-conf`}>
               <div className="teams-heading">{conf.conference}</div>
-              {conf.teams.map((team) => {
-                return <TeamCard {...team} key={team.id} />;
+              {conf.teams.map((item) => {
+                return <TeamCard {...item} key={item.team.id} />;
               })}
             </Col>
           );

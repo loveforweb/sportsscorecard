@@ -80,15 +80,13 @@ function standingsReducer(state, action) {
         })
         .sort((a, b) => a.divisionRank.rank - b.divisionRank.rank);
 
-      const { team, stats, divisionRank } = teamData[0];
-
       return {
         division: 'AFC North',
         teams: filteredTeams,
       };
     }
 
-    case 'TEAM': {
+    case 'TEAM_INFO': {
       const team = action.payload.teams.filter((item) => {
         return item.team.abbreviation === action.payload.id;
       });
