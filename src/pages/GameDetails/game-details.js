@@ -3,6 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 import Container from 'react-bootstrap/Container';
 import GameDateTime from '../../components/GameDateTime';
 import GameHeader from '../../components/GameHeader';
+import GamePlayItem from '../../components/GamePlayItem';
 import LoadingIcon from '../../components/LoadingIcon';
 import Stadium from '../../components/Stadium';
 import data from '../../mock-data/box-score';
@@ -37,7 +38,29 @@ const GameDetails = () => {
           scores={data.scoring}
         />
       </header>
-      <Container>{/* <h2>Game details</h2> */}</Container>
+      <Container>
+        {data.scoring.quarters.map((quarter) => {
+          return (
+            <div>
+              <div>
+                {quarter.quarterNumber} | H: {quarter.homeScore} | A:{' '}
+                {quarter.awayScore}
+              </div>
+              <div>
+                {quarter.scoringPlays.map((play) => {
+                  return (
+                    <GamePlayItem
+                      {...play}
+                      teamHome={stateHomeTeam[0].abbreviation}
+                      teamAway={stateAwayTeam[0].abbreviation}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </Container>
     </>
   );
 };
