@@ -1,7 +1,7 @@
-import React from 'react';
 import './LoadingIcon.scss';
-import PropTypes from 'prop-types';
+
 import Container from 'react-bootstrap/Container';
+import React from 'react';
 
 const LoadingIcon = () => {
   return (
@@ -37,10 +37,6 @@ const LoadingIcon = () => {
       </div>
     </Container>
   );
-};
-
-LoadingIcon.propTypes = {
-  //
 };
 
 export default LoadingIcon;

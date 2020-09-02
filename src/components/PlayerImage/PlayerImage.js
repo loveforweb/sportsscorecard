@@ -16,7 +16,9 @@ const PlayerImage = ({ imageSrc, firstName, lastname }) => {
 };
 
 PlayerImage.propTypes = {
-  //
+  imageSrc: PropTypes.string,
+  firstName: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
 };
 
 export default PlayerImage;
