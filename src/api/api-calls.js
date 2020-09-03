@@ -1,6 +1,8 @@
 import axios from 'axios';
 const API_URL = 'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl';
-export const API_STALE_TIMEOUT = 3600000;
+export const API_STALE_TIMEOUT = 3600000; // 1 day
+
+const sportsIOKey = `${process.env.REACT_APP_SPORTS_IO_KEY}`;
 
 const access_token = btoa(
   `${process.env.REACT_APP_API_DEV_USERNAME}:${process.env.REACT_APP_API_DEV_PASSWORD}`
@@ -62,6 +64,23 @@ export const GET_GAME_DETAILS = async (q, params) => {
   const { data } = await axios.get(
     `${API_URL}/2019-regular/games/${params.id}/boxscore.json`,
     headers
+  );
+  return data;
+};
+
+// NEWS ARTICLES SPORTSDATA.IO
+export const GET_NEWS_ARTICLES = async (q, params) => {
+  const { data } = await axios.get(
+    `https://api.sportsdata.io/v3/nfl/scores/json/News?key=${sportsIOKey}`,
+    headers
+  );
+  return data;
+};
+
+// NEWS ARTICLES ESPN
+export const GET_NEWS_ARTICLES_ESPN = async (q, params) => {
+  const { data } = await axios.get(
+    `http://site.api.espn.com/apis/site/v2/sports/football/nfl/news`
   );
   return data;
 };

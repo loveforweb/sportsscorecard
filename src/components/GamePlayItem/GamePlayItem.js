@@ -77,7 +77,13 @@ const GamePlayItem = ({
 };
 
 GamePlayItem.propTypes = {
-  //
+  playDescription: PropTypes.string.isRequired,
+  scoreChange: PropTypes.number.isRequired,
+  homeScore: PropTypes.number.isRequired,
+  awayScore: PropTypes.number.isRequired,
+  team: PropTypes.shape({}).isRequired,
+  teamHome: PropTypes.shape({}).isRequired,
+  teamAway: PropTypes.shape({}).isRequired,
 };
 
 export default GamePlayItem;

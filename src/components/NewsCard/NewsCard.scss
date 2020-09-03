@@ -1,0 +1,23 @@
+.news-card {
+    width: 100%;
+    padding: 1.2rem;
+    height: 100%;
+    margin-bottom: 2rem;
+    background: var(--offBlack);
+
+    h2 {
+        font-size: 1.4rem;
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    img {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .news-image-credit,
+    .news-image-caption {
+        font-size: 1rem;
+    }
+}

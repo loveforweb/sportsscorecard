@@ -55,7 +55,10 @@ const GameHeader = ({ awayData, homeData, scores, venue }) => {
 };
 
 GameHeader.propTypes = {
-  //
+  awayData: PropTypes.shape({}).isRequired,
+  homeData: PropTypes.shape({}).isRequired,
+  scores: PropTypes.shape({}).isRequired,
+  venue: PropTypes.shape({}).isRequired,
 };
 
 export default GameHeader;
