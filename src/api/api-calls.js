@@ -17,7 +17,7 @@ const headers = {
 // FIXTURES BY WEEK
 export const GET_FIXTURES = async (q, params) => {
   const { data } = await axios.get(
-    `${API_URL}/2019-regular/week/${params.weekSelection}/games.json`,
+    `${API_URL}/${params.yearSelection}-regular/week/${params.weekSelection}/games.json`,
     headers
   );
   return data;

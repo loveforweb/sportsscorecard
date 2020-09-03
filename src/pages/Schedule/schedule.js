@@ -5,18 +5,20 @@ import React, { useEffect, useReducer, useState } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import FixtureCard from '../../components/FixtureCard/FixtureCard';
+import FixtureCard from '../../components/FixtureCard';
 import LoadingIcon from '../../components/LoadingIcon';
 import Row from 'react-bootstrap/Row';
-import WeeklyOption from '../../components/WeeklyOption/WeeklyOption';
+import WeeklyOption from '../../components/WeeklyOption';
+import YearlyOption from '../../components/YearlyOption';
 import fixturesReducer from '../../reducers/fixtures-reducer';
 import { useQuery } from 'react-query';
 
 const Schedule = () => {
   const [weekSelection, setWeekSelection] = useState(1);
+  const [yearSelection, setYearSelection] = useState('2020');
   const [state, dispatch] = useReducer(fixturesReducer, []);
   const { isLoading, data, error } = useQuery(
-    ['week', { weekSelection }],
+    ['week', { weekSelection, yearSelection }],
     GET_FIXTURES,
     {
       staleTime: API_STALE_TIMEOUT,
@@ -47,6 +49,9 @@ const Schedule = () => {
   const handleWeekSelect = (e) => {
     setWeekSelection(e.target.value);
   };
+  const handleYearSelect = (e) => {
+    setYearSelection(e.target.value);
+  };
 
   return (
     <Container>
@@ -56,6 +61,10 @@ const Schedule = () => {
         </Col>
         <Col xs={12}>
           <div className="filter-options">
+            <YearlyOption
+              onYearSelect={handleYearSelect}
+              selectedOption={yearSelection}
+            />
             <WeeklyOption
               onWeekSelect={handleWeekSelect}
               selectedOption={weekSelection}

@@ -75,7 +75,7 @@ function fixturesReducer(state, action) {
         };
       });
 
-      return [...state, ...finalData];
+      return [...finalData];
     }
 
     case 'TEAM_FIXTURE': {
