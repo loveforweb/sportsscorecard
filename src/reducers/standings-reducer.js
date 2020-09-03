@@ -63,7 +63,7 @@ function standingsReducer(state, action) {
         },
       ];
 
-      return standingsData;
+      return [...state, ...standingsData];
     }
 
     case 'CONF': {
@@ -81,6 +81,7 @@ function standingsReducer(state, action) {
         .sort((a, b) => a.divisionRank.rank - b.divisionRank.rank);
 
       return {
+        ...state,
         division: 'AFC North',
         teams: filteredTeams,
       };

@@ -1,0 +1,99 @@
+@import '../../styles/mixins';
+
+.game-play-item {
+    position: relative;
+    overflow: hidden;
+    background: #313131;
+    margin-bottom: 1.8rem;
+    border-style: solid;
+    border-width: .1rem;
+    border-top-width: .5rem;
+    display: flex;
+    flex-direction: row;
+
+    .game-play-item-grid {
+        display: grid;
+        padding: 1.2rem;
+        grid-template-columns: 1fr 7fr 4fr;
+        grid-template-rows: auto 1fr;
+        grid-column-gap: 1rem;
+        align-items: center;
+        grid-auto-flow: dense;
+        grid-row-gap: 1rem;
+        width: 100%;
+        z-index: 1;
+    }
+
+    &.is--home-score {
+        .home-score {
+            font-weight: 600;
+            border-bottom: .2rem solid var(--white);
+        }
+    }
+
+    &.is--away-score {
+        .away-score {
+            font-weight: 600;
+            border-bottom: .2rem solid var(--white);
+        }
+    }
+
+    .team-abbr {
+        font-size: 2rem;
+        display: inline-block;
+        padding: 0 .9rem;
+        text-align: center;
+        min-width: 5rem;
+    }
+
+    .team-badge {
+        position: absolute;
+        right: 0;
+        width: 24rem;
+        opacity: 0.08;
+        top: 50%;
+        transform: translateY(-50%)
+    }
+
+    .score-type {
+        font-size: 2.2rem;
+        font-weight: 600;
+    }
+
+    .play-description {
+        font-size: 1.6rem;
+        grid-column: 1 / -1;
+
+        .title {
+            font-weight: 600;
+        }
+    }
+
+    .score-total {
+        text-align: right;
+        font-size: 2rem;;
+    }
+}
+
+@include md {
+    .game-play-item {
+
+        .game-play-item-grid {
+            grid-template-columns: 1fr 9fr 2fr;
+            grid-row-gap: 2rem;
+        }
+
+        .team-abbr {
+            font-size: 3rem;
+        }
+
+        .score-type {
+            font-size: 3.2rem;
+        }
+    
+        .play-description {
+            font-size: 1.6rem;
+            grid-column: 2 / 3;
+        }
+    }
+}

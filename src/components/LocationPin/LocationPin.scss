@@ -2,21 +2,21 @@
     display: block;
     text-align: center;
     position: relative;
-    bottom: 90px;
+    bottom: 9rem;
     margin-left: 0;
     
     .pin-text {
         transform: translateX(-40%);
-        width: 150px;
-        border-radius: 5px;
-        padding: 6px;
+        width: 15rem;
+        border-radius: .5rem;
+        padding: .6rem;
         background: rgba(255, 255, 255, 0.8);
-        border: 1px solid;
+        border: .1rem solid;
     }
 
     .pin {
-        height: 40px;
-        width: 40px;
+        height: 4rem;
+        width: 4rem;
         margin: 0 auto;
 
         svg {

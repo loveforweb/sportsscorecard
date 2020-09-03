@@ -28,7 +28,11 @@ function App() {
             <Route exact path="/teams" component={Teams} />
             <Route exact path="/stats" component={Stats} />
             <Route exact path="/team/:abbr" component={Team} />
-            <Route exact path="/game-details" component={GameDetails} />
+            <Route
+              exact
+              path="/game-details/:gameDetails"
+              component={GameDetails}
+            />
           </Switch>
         </Suspense>
       </main>

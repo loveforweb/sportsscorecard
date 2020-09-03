@@ -2,6 +2,7 @@ import './GamePlayItem.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import TeamBadge from '../TeamBadge';
 
 const scoreType = (point) => {
   let type = '';
@@ -29,21 +30,47 @@ const scoreType = (point) => {
 const GamePlayItem = ({
   playDescription,
   scoreChange,
+  homeScore,
+  awayScore,
   team,
   teamHome,
   teamAway,
 }) => {
+  const awayTeamLogo = teamAway.officialLogoImageSrc;
+  const homeTeamLogo = teamHome.officialLogoImageSrc;
+  const awayTeamAbbr = teamAway.abbreviation;
+  const homeTeamAbbr = teamHome.abbreviation;
+  const awayTeamColour = teamAway.teamColoursHex[0];
+  const homeTeamColour = teamHome.teamColoursHex[0];
+  const isHomeTeam = team.abbreviation === teamHome.abbreviation;
+
   return (
-    <div className="component game-play-item">
-      <h3>{team.abbreviation === teamHome ? teamHome : teamAway}</h3>
-      <div
-        className={`is--${scoreType(scoreChange)
-          .toLowerCase()
-          .replace(/ /g, '-')}`}
-      >
-        {scoreType(scoreChange)}
-        <br />
-        Scoring Play: {playDescription}
+    <div
+      className={`component game-play-item ${
+        isHomeTeam ? 'is--home-score' : 'is--away-score'
+      }`}
+      style={{
+        borderColor: isHomeTeam ? homeTeamColour : awayTeamColour,
+      }}
+    >
+      <TeamBadge badge={isHomeTeam ? homeTeamLogo : awayTeamLogo} />
+      <div className="game-play-item-grid">
+        <div
+          className="team-abbr"
+          style={{
+            background: isHomeTeam ? homeTeamColour : awayTeamColour,
+          }}
+        >
+          {isHomeTeam ? homeTeamAbbr : awayTeamAbbr}
+        </div>
+        <div className="score-type">{scoreType(scoreChange)}</div>
+        <div className="play-description">
+          <span className="title">Scoring Play:</span> {playDescription}
+        </div>
+        <div className="score-total">
+          <span className="away-score">{awayScore}</span> -{' '}
+          <span className="home-score">{homeScore}</span>
+        </div>
       </div>
     </div>
   );

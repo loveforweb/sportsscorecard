@@ -1,0 +1,17 @@
+.game-details-page {
+    .quarter-section {
+        margin-bottom: 6rem;
+    }
+
+    .quarter-heading {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 400;
+    }
+
+    .no-score-panel {
+        padding: 1.2rem;
+        border: .1rem solid var(--scorpion);
+        border-top-width: .3rem;
+    }
+}

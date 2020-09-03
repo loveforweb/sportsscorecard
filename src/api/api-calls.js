@@ -56,3 +56,12 @@ export const GET_PLAYERS = async (q, params) => {
   );
   return data;
 };
+
+// GAME DETAILS
+export const GET_GAME_DETAILS = async (q, params) => {
+  const { data } = await axios.get(
+    `${API_URL}/2019-regular/games/${params.id}/boxscore.json`,
+    headers
+  );
+  return data;
+};

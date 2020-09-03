@@ -9,6 +9,10 @@ import TeamBadge from '../TeamBadge';
 import TeamName from '../TeamName';
 import TeamScore from '../TeamScore';
 
+const getFormattedDate = (date, format) => {
+  return new Date(date).toLocaleDateString('en-GB', format);
+};
+
 const FixtureCard = ({
   gameData,
   isFixture,
@@ -17,7 +21,11 @@ const FixtureCard = ({
   showTimeOnly,
   showDateAndTime,
 }) => {
-  const driveSummary = false;
+  const gameDate = gameData.schedule.startTime;
+  const urlYear = getFormattedDate(gameDate, { year: 'numeric' });
+  const urlMonth = getFormattedDate(gameDate, { month: '2-digit' });
+  const urlDay = getFormattedDate(gameDate, { day: '2-digit' });
+  const fullUrl = `${urlYear}${urlMonth}${urlDay}-${gameData.schedule.awayTeam.abbreviation}-${gameData.schedule.homeTeam.abbreviation}`;
 
   return (
     <div className={`component fixture-block`}>
@@ -121,7 +129,7 @@ const FixtureCard = ({
       {gameData.schedule.playedStatus === 'COMPLETED' ? (
         <div className="fixture-block-row">
           <p>
-            <Link to="/game-details">Read game details</Link>
+            <Link to={`/game-details/${fullUrl}`}>Read game details</Link>
           </p>
         </div>
       ) : null}

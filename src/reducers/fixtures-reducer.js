@@ -75,7 +75,7 @@ function fixturesReducer(state, action) {
         };
       });
 
-      return [...finalData];
+      return [...state, ...finalData];
     }
 
     case 'TEAM_FIXTURE': {
@@ -130,6 +130,7 @@ function fixturesReducer(state, action) {
       });
 
       return {
+        ...state,
         completedGames: completedGames,
         unplayedGames: unplayedGames,
       };

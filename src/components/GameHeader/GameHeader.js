@@ -7,9 +7,9 @@ import TeamBadge from '../TeamBadge';
 import TeamName from '../TeamName';
 import TeamScore from '../TeamScore';
 
-const GameHeader = ({ awayData, homeData, scores }) => {
+const GameHeader = ({ awayData, homeData, scores, venue }) => {
   const teamHeaderColours = {
-    background: `linear-gradient(45deg, ${awayData.teamColoursHex[0]} 50%, ${homeData.teamColoursHex[0]} 50%)`,
+    background: `linear-gradient(70deg, ${awayData.teamColoursHex[0]} 50%, ${homeData.teamColoursHex[0]} 50%)`,
   };
 
   return (
@@ -45,6 +45,9 @@ const GameHeader = ({ awayData, homeData, scores }) => {
               />
             </div>
           </div>
+        </div>
+        <div className="venue-ref">
+          Stadium: {venue.name}, {venue.city}
         </div>
       </Container>
     </div>

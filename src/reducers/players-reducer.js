@@ -34,6 +34,7 @@ function playersReducer(state, action) {
       });
 
       return {
+        ...state,
         offense: filterOffense,
         defense: filterDefense,
       };

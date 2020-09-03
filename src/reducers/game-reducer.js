@@ -8,7 +8,7 @@ function gameReducer(state, action) {
           return team.id === awayTeamId;
         }
       );
-      return awayTeamInfo;
+      return [...state, ...awayTeamInfo];
     }
 
     case 'HOME_TEAM': {
@@ -19,7 +19,7 @@ function gameReducer(state, action) {
           return team.id === homeTeamId;
         }
       );
-      return homeTeamInfo;
+      return [...state, ...homeTeamInfo];
     }
 
     default:
