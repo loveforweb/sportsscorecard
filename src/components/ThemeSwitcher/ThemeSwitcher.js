@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 const ThemeSwitcher = () => {
-  const [mode, setMode] = useState('light');
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mode, setMode] = useState('dark');
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const switchThemeHandler = () => {
     setMode((mode) => (mode === 'light' ? 'dark' : 'light'));
