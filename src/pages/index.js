@@ -7,6 +7,7 @@ import {
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import LoadingIcon from '../components/LoadingIcon';
+import MessagePanel from '../components/MessagePanel';
 import NewsCard from '../components/NewsCard/NewsCard';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
@@ -16,25 +17,11 @@ import { useQuery } from 'react-query';
 const Home = () => {
   const { isLoading, error, data } = useQuery(['news'], GET_NEWS_ARTICLES_ESPN);
 
-  if (error) {
-    return (
-      <Container>
-        <div>Error loading homepage</div>
-      </Container>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <Container>
-        <div>Error loading homepage</div>
-      </Container>
-    );
-  }
-
   return (
     <Container>
-      {error ? <div>Error loading homepage</div> : null}
+      {error ? (
+        <MessagePanel messageType="error">Error loading homepage</MessagePanel>
+      ) : null}
       {isLoading ? <LoadingIcon /> : null}
       <h2>Homepage</h2>
       <Row>

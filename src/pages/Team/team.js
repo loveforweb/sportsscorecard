@@ -14,6 +14,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import FixtureCard from '../../components/FixtureCard';
 import LoadingIcon from '../../components/LoadingIcon';
+import MessagePanel from '../../components/MessagePanel';
 import PlayerCard from '../../components/PlayerCard';
 import Row from 'react-bootstrap/Row';
 import SocialMedia from '../../components/SocialMedia';
@@ -150,7 +151,11 @@ const Team = ({ match, location }) => {
           ) : null}
 
           <div className="team-details">
-            {errorStandings ? <div>Error loading Standings</div> : null}
+            {errorStandings ? (
+              <MessagePanel messageType="error">
+                Error loading homstandingsepage
+              </MessagePanel>
+            ) : null}
             {isLoadingStandings ? <LoadingIcon /> : null}
             {stateTeam.length > 0 ? (
               <h2 className="team-name">
@@ -163,7 +168,11 @@ const Team = ({ match, location }) => {
             ) : null}
           </div>
           <div className="simple-stats">
-            {errorStandings ? <div>Error loading Standings</div> : null}
+            {errorStandings ? (
+              <MessagePanel messageType="error">
+                Error loading stats
+              </MessagePanel>
+            ) : null}
             {stateTeam.length > 0 ? (
               <>
                 {stateTeam[0].divisionRank.rank}
@@ -211,26 +220,30 @@ const Team = ({ match, location }) => {
                   <div>Unable to load last 3 results</div>
                 ) : null}
                 {isLoadingFixtures ? <LoadingIcon /> : null}
-                {stateFixtures.completedGames.length > 0
-                  ? stateFixtures.completedGames.map((fixture, i) => {
-                      if (i < 3) {
-                        return (
-                          <FixtureCard
-                            gameData={fixture}
-                            key={i}
-                            showAbbr
-                            showDateOnly
-                          />
-                        );
-                      }
-                      return false;
-                    })
-                  : 'No results just yet'}
+                {stateFixtures.completedGames.length > 0 ? (
+                  stateFixtures.completedGames.map((fixture, i) => {
+                    if (i < 3) {
+                      return (
+                        <FixtureCard
+                          gameData={fixture}
+                          key={i}
+                          showAbbr
+                          showDateOnly
+                        />
+                      );
+                    }
+                    return false;
+                  })
+                ) : (
+                  <MessagePanel messageType="default fixtures-message">
+                    No results just yet
+                  </MessagePanel>
+                )}
               </Col>
             </Row>
             <Row>
               <Col xs={12}>
-                <h2>Division Standings</h2>
+                <h2>Division Standings ({STANDINGS_YEAR})</h2>
                 {stateStandings.teams.length > 0 ? (
                   <StandingsTable {...stateStandings} teamId={abbr} />
                 ) : null}
@@ -305,7 +318,11 @@ const Team = ({ match, location }) => {
             <Row>
               <Col xs={12}>
                 <h2>Stats</h2>
-                {errorStandings ? <div>Error loading Standings</div> : null}
+                {errorStandings ? (
+                  <MessagePanel messageType="error">
+                    Error loading standings
+                  </MessagePanel>
+                ) : null}
                 {isLoadingStandings ? <LoadingIcon /> : null}
                 {stateTeam.length > 0 ? (
                   <TeamStats stats={stateTeam[0].stats} />

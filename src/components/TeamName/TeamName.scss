@@ -6,6 +6,7 @@
     text-align: center;
     flex: 1 1 auto;
 
+    .team-city,
     .team-nickname {
         display: none;
     }
@@ -13,6 +14,7 @@
 
 @include md {
     .team-name {
+        .team-city,
         .team-nickname {
             display: inline-block;
         }

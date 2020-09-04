@@ -3,6 +3,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import LoadingIcon from '../components/LoadingIcon';
+import MessagePanel from '../components/MessagePanel';
 import StandingsTable from '../components/StandingsTable';
 import YearlyOption from '../components/YearlyOption';
 import standingsReducer from '../reducers/standings-reducer';
@@ -34,22 +35,6 @@ const Standings = () => {
     setYearSelection(e.target.value);
   };
 
-  if (error) {
-    return (
-      <Container>
-        <div>Error loadings standings</div>
-      </Container>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <Container>
-        <LoadingIcon />
-      </Container>
-    );
-  }
-
   return (
     <Container>
       <h2>Standings</h2>
@@ -59,9 +44,16 @@ const Standings = () => {
           selectedOption={yearSelection}
         />
       </div>
+      {error ? (
+        <MessagePanel messageType="error">Error loading standings</MessagePanel>
+      ) : null}
+
+      {isLoading ? <LoadingIcon /> : null}
 
       {!data && !isLoading ? (
-        <>No standings data for {yearSelection} just yet</>
+        <MessagePanel messageType="default">
+          No standings data for {yearSelection} just yet
+        </MessagePanel>
       ) : null}
 
       {state.map((conf, i) => {

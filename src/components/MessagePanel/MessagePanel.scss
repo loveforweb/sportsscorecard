@@ -1,0 +1,15 @@
+.message-panel {
+    padding: 1.2rem;
+    border: .1rem solid var(--scorpion);
+    border-top-width: .3rem;
+
+    &.success {
+        border-color: green;
+    }
+
+    &.error {
+        border-color: red;
+    }
+}
+
+

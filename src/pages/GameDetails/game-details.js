@@ -7,42 +7,30 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import GameHeader from '../../components/GameHeader';
 import GamePlayItem from '../../components/GamePlayItem';
-import GameStats from '../../components/GameStats/GameStats';
+import GameStats from '../../components/GameStats';
 import LoadingIcon from '../../components/LoadingIcon';
+import MessagePanel from '../../components/MessagePanel';
+import QuarterHeading from '../../components/QuarterHeading';
+import QuarterSection from '../../components/QuarterSection';
 import Row from 'react-bootstrap/Row';
-import Stadium from '../../components/Stadium';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import data from '../../mock-data/box-score';
 import gameReducer from '../../reducers/game-reducer';
 import { useQuery } from 'react-query';
 import { withRouter } from 'react-router-dom';
-
-const rankSup = (rank) => {
-  switch (rank) {
-    case 1:
-      return 'st';
-    case 2:
-      return 'nd';
-    case 3:
-      return 'rd';
-    default:
-      return 'th';
-  }
-};
 
 const GameDetails = ({ match, location }) => {
   const [stateAwayTeam, dispatchAwayTeam] = useReducer(gameReducer, []);
   const [stateHomeTeam, dispatchHomeTeam] = useReducer(gameReducer, []);
   const { gameDetails } = match.params;
 
-  // const { isLoading, error, data } = useQuery(
-  //   ['gameDetails', { id: gameDetails }],
-  //   GET_GAME_DETAILS,
-  //   {
-  //     staleTime: API_STALE_TIMEOUT,
-  //   }
-  // );
+  const { isLoading, error, data } = useQuery(
+    ['gameDetails', { id: gameDetails }],
+    GET_GAME_DETAILS,
+    {
+      staleTime: API_STALE_TIMEOUT,
+    }
+  );
 
   useEffect(() => {
     if (data) {
@@ -61,12 +49,11 @@ const GameDetails = ({ match, location }) => {
   if (stateAwayTeam.length === 0 || stateHomeTeam.length === 0) {
     return <LoadingIcon />;
   }
-  console.log(data);
 
   return (
     <>
-      {/* {error ? <div>Unable to load game details</div> : null}
-      {isLoading ? <LoadingIcon /> : null} */}
+      {error ? <div>Unable to load game details</div> : null}
+      {isLoading ? <LoadingIcon /> : null}
       <div className="game-details-page">
         <header>
           <GameHeader
@@ -84,30 +71,25 @@ const GameDetails = ({ match, location }) => {
                 <Col>
                   {data.scoring.quarters.map((quarter) => {
                     return (
-                      <div
-                        className="quarter-section"
-                        key={quarter.quarterNumber}
-                      >
-                        <h3 className="quarter-heading">
-                          {quarter.quarterNumber}
-                          {rankSup(quarter.quarterNumber)} Quarter
-                        </h3>
-                        <div>
-                          {quarter.scoringPlays.length === 0 && (
-                            <div className="no-score-panel">No scores</div>
-                          )}
-                          {quarter.scoringPlays.map((play, i) => {
-                            return (
-                              <GamePlayItem
-                                key={`${i}-${play.quarterSecondsElapsed}`}
-                                {...play}
-                                teamHome={stateHomeTeam[0]}
-                                teamAway={stateAwayTeam[0]}
-                              />
-                            );
-                          })}
-                        </div>
-                      </div>
+                      <QuarterSection key={quarter.quarterNumber}>
+                        <QuarterHeading quarterNumber={quarter.quarterNumber} />
+                        {quarter.scoringPlays.length === 0 ? (
+                          <MessagePanel messageType="no-score">
+                            No scores
+                          </MessagePanel>
+                        ) : null}
+
+                        {quarter.scoringPlays.map((play, i) => {
+                          return (
+                            <GamePlayItem
+                              key={`${i}-${play.quarterSecondsElapsed}`}
+                              {...play}
+                              teamHome={stateHomeTeam[0]}
+                              teamAway={stateAwayTeam[0]}
+                            />
+                          );
+                        })}
+                      </QuarterSection>
                     );
                   })}
                 </Col>

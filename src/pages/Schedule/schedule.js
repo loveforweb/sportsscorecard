@@ -11,6 +11,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import FixtureCard from '../../components/FixtureCard';
 import LoadingIcon from '../../components/LoadingIcon';
+import MessagePanel from '../../components/MessagePanel';
 import Row from 'react-bootstrap/Row';
 import WeeklyOption from '../../components/WeeklyOption';
 import YearlyOption from '../../components/YearlyOption';
@@ -47,18 +48,6 @@ const Schedule = () => {
     }
   }, [data]);
 
-  if (error) {
-    return <Container>Error</Container>;
-  }
-
-  if (isLoading) {
-    return (
-      <Container>
-        <LoadingIcon />
-      </Container>
-    );
-  }
-
   const handleWeekSelect = (e) => {
     setWeekSelection(e.target.value);
   };
@@ -71,7 +60,9 @@ const Schedule = () => {
     <Container>
       <Row>
         <Col xs={12}>
-          <h2>Schedule - Week {weekSelection}</h2>
+          <h2>
+            Schedule - Week {weekSelection} ({yearSelection})
+          </h2>
         </Col>
         <Col xs={12}>
           <div className="filter-options">
@@ -86,6 +77,9 @@ const Schedule = () => {
           </div>
         </Col>
       </Row>
+      {error ? (
+        <MessagePanel messageType="error">Error loading data</MessagePanel>
+      ) : null}
       {isLoading ? (
         <LoadingIcon />
       ) : !isLoading && !error && state ? (

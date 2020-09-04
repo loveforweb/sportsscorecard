@@ -10,6 +10,7 @@ import React, { useEffect, useReducer } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import LoadingIcon from '../../components/LoadingIcon';
+import MessagePanel from '../../components/MessagePanel';
 import Row from 'react-bootstrap/Row';
 import TeamCard from '../../components/TeamCard';
 import standingsReducer from '../../reducers/standings-reducer';
@@ -36,24 +37,13 @@ const Teams = () => {
     }
   }, [data]);
 
-  if (error) {
-    return (
-      <Container>
-        <div>Error loadings standings</div>
-      </Container>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <Container>
-        <LoadingIcon />
-      </Container>
-    );
-  }
   return (
     <Container>
       <h2>Teams</h2>
+      {error ? (
+        <MessagePanel messageType="error">Error loading homepage</MessagePanel>
+      ) : null}
+      {isLoading ? <LoadingIcon /> : null}
       <Row>
         {state.map((conf, i) => {
           return (
