@@ -6,6 +6,7 @@ import {
   GET_STANDINGS,
   GET_TEAM_FIXTURES,
   GET_VENUE,
+  STANDINGS_YEAR,
 } from '../../api/api-calls';
 import React, { useEffect, useReducer } from 'react';
 
@@ -62,7 +63,7 @@ const Team = ({ match, location }) => {
     isLoading: isLoadingStandings,
     data: standingsData,
     error: errorStandings,
-  } = useQuery('standings', GET_STANDINGS, {
+  } = useQuery(['standings', { year: STANDINGS_YEAR }], GET_STANDINGS, {
     staleTime: API_STALE_TIMEOUT,
   });
 
@@ -178,7 +179,7 @@ const Team = ({ match, location }) => {
       </div>
 
       <Container>
-        <Tabs defaultActiveKey="info" id="uncontrolled-tab-example">
+        <Tabs defaultActiveKey="info" id="team-tabs">
           <Tab eventKey="info" title="Info">
             <Row>
               <Col xs={12} md={6}>

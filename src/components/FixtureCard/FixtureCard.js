@@ -20,6 +20,9 @@ const FixtureCard = ({
   showDateOnly,
   showTimeOnly,
   showDateAndTime,
+  awayTeamStats,
+  homeTeamStats,
+  showStats,
 }) => {
   const gameDate = gameData.schedule.startTime;
   const urlYear = getFormattedDate(gameDate, { year: 'numeric' });
@@ -32,6 +35,16 @@ const FixtureCard = ({
       <div className="fixture-block-row">
         <div className="game-details">
           <div className="team team--away">
+            {showStats && awayTeamStats ? (
+              <div className="team-wlt-stat">
+                ({awayTeamStats.standings.wins} -{' '}
+                {awayTeamStats.standings.losses}
+                {awayTeamStats.standings.ties !== 0
+                  ? ` - ${awayTeamStats.standings.ties}`
+                  : ''}
+                )
+              </div>
+            ) : null}
             <div className="team-identity">
               <TeamBadge
                 badge={gameData.schedule.awayTeam.officialLogoImageSrc}
@@ -65,6 +78,16 @@ const FixtureCard = ({
                 showAbbrOnly={showAbbr || false}
               />
             </div>
+            {showStats && homeTeamStats ? (
+              <div className="team-wlt-stat">
+                ({homeTeamStats.standings.wins} -{' '}
+                {homeTeamStats.standings.losses}
+                {homeTeamStats.standings.ties !== 0
+                  ? ` - ${homeTeamStats.standings.ties}`
+                  : ''}
+                )
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -126,11 +149,21 @@ const FixtureCard = ({
           />
         </div>
       </div>
+      {gameData.schedule.broadcasters.length > 0 &&
+      gameData.schedule.playedStatus === 'UNPLAYED'
+        ? gameData.schedule.broadcasters.map((broadcaster, i) => {
+            return (
+              <div className="broadcaster" key={i}>
+                Live on: {broadcaster}
+              </div>
+            );
+          })
+        : null}
       {gameData.schedule.playedStatus === 'COMPLETED' ? (
         <div className="fixture-block-row">
-          <p>
-            <Link to={`/game-details/${fullUrl}`}>Read game details</Link>
-          </p>
+          <Link to={`/game-details/${fullUrl}`} className="read-more-link">
+            Read more
+          </Link>
         </div>
       ) : null}
     </div>
@@ -144,6 +177,9 @@ FixtureCard.propTypes = {
   showDateOnly: PropTypes.bool,
   showTimeOnly: PropTypes.bool,
   showDateAndTime: PropTypes.bool,
+  showStats: PropTypes.bool,
+  awayTeamStats: PropTypes.shape({}),
+  homeTeamStats: PropTypes.shape({}),
 };
 
 export default FixtureCard;

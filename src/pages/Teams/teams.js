@@ -1,21 +1,29 @@
 import './teams.scss';
 
-import { API_STALE_TIMEOUT, GET_STANDINGS } from '../../api/api-calls';
+import {
+  API_STALE_TIMEOUT,
+  GET_STANDINGS,
+  STANDINGS_YEAR,
+} from '../../api/api-calls';
 import React, { useEffect, useReducer } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import LoadingIcon from '../../components/LoadingIcon';
 import Row from 'react-bootstrap/Row';
-import TeamCard from '../../components/TeamCard/TeamCard';
+import TeamCard from '../../components/TeamCard';
 import standingsReducer from '../../reducers/standings-reducer';
 import { useQuery } from 'react-query';
 
 const Teams = () => {
   const [state, dispatch] = useReducer(standingsReducer, []);
-  const { isLoading, data, error } = useQuery('standings', GET_STANDINGS, {
-    staleTime: API_STALE_TIMEOUT,
-  });
+  const { isLoading, data, error } = useQuery(
+    ['standings', { year: STANDINGS_YEAR }],
+    GET_STANDINGS,
+    {
+      staleTime: API_STALE_TIMEOUT,
+    }
+  );
 
   useEffect(() => {
     if (data) {

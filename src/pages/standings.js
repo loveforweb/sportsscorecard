@@ -1,17 +1,23 @@
 import { API_STALE_TIMEOUT, GET_STANDINGS } from '../api/api-calls';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import LoadingIcon from '../components/LoadingIcon';
 import StandingsTable from '../components/StandingsTable';
+import YearlyOption from '../components/YearlyOption';
 import standingsReducer from '../reducers/standings-reducer';
 import { useQuery } from 'react-query';
 
 const Standings = () => {
   const [state, dispatch] = useReducer(standingsReducer, []);
-  const { isLoading, data, error } = useQuery('standings', GET_STANDINGS, {
-    staleTime: API_STALE_TIMEOUT,
-  });
+  const [yearSelection, setYearSelection] = useState(new Date().getFullYear());
+  const { isLoading, data, error } = useQuery(
+    ['standings', { year: yearSelection }],
+    GET_STANDINGS,
+    {
+      staleTime: API_STALE_TIMEOUT,
+    }
+  );
 
   useEffect(() => {
     if (data) {
@@ -23,6 +29,10 @@ const Standings = () => {
       });
     }
   }, [data]);
+
+  const handleYearSelect = (e) => {
+    setYearSelection(e.target.value);
+  };
 
   if (error) {
     return (
@@ -43,6 +53,17 @@ const Standings = () => {
   return (
     <Container>
       <h2>Standings</h2>
+      <div className="filter-options">
+        <YearlyOption
+          onYearSelect={handleYearSelect}
+          selectedOption={yearSelection}
+        />
+      </div>
+
+      {!data && !isLoading ? (
+        <>No standings data for {yearSelection} just yet</>
+      ) : null}
+
       {state.map((conf, i) => {
         return (
           <div className="conference-group" key={`${i}-conf`}>

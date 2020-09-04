@@ -37,7 +37,7 @@ const YearlyOption = ({ onYearSelect, selectedOption }) => {
 
 YearlyOption.propTypes = {
   onYearSelect: PropTypes.func.isRequired,
-  selectedOption: PropTypes.string.isRequired,
+  selectedOption: PropTypes.number.isRequired,
 };
 
 export default YearlyOption;

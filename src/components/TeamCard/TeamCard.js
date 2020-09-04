@@ -1,9 +1,10 @@
-import React from 'react';
 import './TeamCard.scss';
-import PropTypes from 'prop-types';
-import TeamName from '../TeamName';
-import TeamBadge from '../TeamBadge';
+
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import React from 'react';
+import TeamBadge from '../TeamBadge';
+import TeamName from '../TeamName';
 
 const TeamCard = ({ team }) => {
   return (
@@ -14,13 +15,12 @@ const TeamCard = ({ team }) => {
           id: team.id,
         },
       }}
+      className="component team-card"
+      style={{
+        backgroundColor: team.teamColoursHex[0],
+      }}
     >
-      <div
-        className="component team-card"
-        style={{
-          backgroundColor: team.teamColoursHex[0],
-        }}
-      >
+      <div className="team-card-wrapper">
         <TeamBadge badge={team.officialLogoImageSrc} />
         <TeamName
           city={team.city}
