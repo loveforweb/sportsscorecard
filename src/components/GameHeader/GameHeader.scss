@@ -2,6 +2,7 @@
 
 .game-header {
     margin-bottom: 2rem;
+    color: var(--white);
     
     .container {
         min-height: 14rem;
@@ -37,6 +38,10 @@
                 flex-direction: column-reverse;
             }
         }
+    }
+
+    .tema-city {
+        display: none;
     }
 
     .team-name {

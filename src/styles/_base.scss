@@ -2,11 +2,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap');
 
 :root {
+    --white: #ffffff;
+    --offBlack: #222222;
+}
+
+.dark {
+    --body: #2b2b2b;
+    --text-color: #ffffff;
+    --card-bg: #2b2b2b;
+
+
     --tundora: #424242;
     --scorpion: #585858;
     --midnight-blue: #001e62;
-    --white: #ffffff;
-    --offBlack: #222222;
+}
+
+.light {
+    --body: #ffffff;
+    --text-color: #2b2b2b;
+    --card-bg: #ffffff;
 }
 
 html {
@@ -23,8 +37,8 @@ body {
     font-family: 'Oswald', sans-serif;
     overflow: hidden;
     font-size: 1.6rem;
-    background: #2b2b2b;
-    color: #ffffff;
+    background: var(--body);
+    color: var(--text-color);
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -35,10 +49,10 @@ main {
 }
 
 a {
-    color: white;
+    color: var(--text-color);
 
     &:hover {
-        color: white;
+        color: var(--text-color);
     }
 }
 

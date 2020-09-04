@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
+import ThemeSwitcher from '../ThemeSwitcher';
 
 // import PropTypes from 'prop-types';
 
@@ -23,6 +24,7 @@ const Header = () => {
             <Navigation />
           </Col>
         </Row>
+        <ThemeSwitcher />
       </Container>
     </header>
   );

@@ -1,0 +1,25 @@
+.theme-switcher {
+    .switcher-button {
+        background: none;
+        border: none;
+        outline: none;
+
+        &.button-dark {
+            color: white;
+
+            .dark-icon {
+                display: none;
+            }
+        }
+
+        &.button-light {
+            color: black;
+
+            .light-icon {
+                display: none;
+            }
+        }
+
+        
+    }
+}
