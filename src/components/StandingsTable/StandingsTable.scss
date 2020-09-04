@@ -7,6 +7,7 @@ $sideHeadingWidth: 11rem;
     font-size: 1.8rem;
     background: #555555;
     border: .1rem solid var(--tundora);
+    color: var(--white);
 }
 
 .standings-table {
@@ -20,10 +21,11 @@ $sideHeadingWidth: 11rem;
       }
 
       &.highlight-row {
-        background: #222222;
+        background: var(--offBlack);
+        color: var(--white);
 
         .table-cell--sticky {
-          background: #222222;
+          background: var(--offBlack);
         }
       }
     }

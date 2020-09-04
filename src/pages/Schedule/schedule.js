@@ -49,10 +49,10 @@ const Schedule = () => {
   }, [data]);
 
   const handleWeekSelect = (e) => {
-    setWeekSelection(e.target.value);
+    setWeekSelection(parseInt(e.target.value, 10));
   };
   const handleYearSelect = (e) => {
-    setYearSelection(e.target.value);
+    setYearSelection(parseInt(e.target.value, 10));
     refetch();
   };
 

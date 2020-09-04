@@ -25,7 +25,7 @@ const Home = () => {
       {isLoading ? <LoadingIcon /> : null}
       <h2>Homepage</h2>
       <Row>
-        {data.articles.map((newsItem, i) => {
+        {data?.articles.map((newsItem, i) => {
           return (
             <Col xs={12} md={4} className="mb3" key={i}>
               <NewsCard {...newsItem} />

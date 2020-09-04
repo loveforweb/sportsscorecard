@@ -22,8 +22,8 @@ const PlayerCard = ({ playerDetails }) => {
         <div className="player-profile-image">
           <PlayerImage
             imageSrc={playerDetails.player.officialImageSrc}
-            firstname={playerDetails.player.firstName}
-            lastname={playerDetails.player.lastName}
+            firstName={playerDetails.player.firstName}
+            lastName={playerDetails.player.lastName}
           />
         </div>
         <div className="player-profile-quick-stats">

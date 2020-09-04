@@ -11,4 +11,12 @@
         font-size: 2rem;
         margin-bottom: 2rem;
     }
+
+    svg {
+        fill: var(--altBlack);
+
+        .dark & {
+            fill: var(--white)
+        }
+    }
 }

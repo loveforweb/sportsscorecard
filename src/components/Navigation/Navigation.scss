@@ -6,7 +6,7 @@
     top: -4.5rem;
     right: 1.5rem;
     background: none;
-    color: var(--white);
+    color: var(--text-color);
     border: none;
     font-size: 3.2rem;
     height: 4rem;
@@ -21,7 +21,7 @@
     overflow: hidden;
     transition: max-height 0.5s ease-in-out;
     position: absolute;
-    background: black;
+    background: var(--scorpion);
     width: 100%;
     left: 0;
     z-index: 1;
@@ -46,6 +46,7 @@
             text-decoration: none;
             position: relative;
             padding: .6rem 1.2rem;
+            color: var(--white);
 
             &:after {
                 width: 0;
@@ -89,6 +90,15 @@
         .navigation-list {
             flex-direction: row;
             justify-content: space-evenly;
+        }
+        .navigation-list-item {
+            a {
+                color: var(--text-color);
+
+                &:after {
+                    background: var(--text-color);
+                }
+            }
         }
     }
 }
