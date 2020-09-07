@@ -1,7 +1,6 @@
 import './ScrollToTop.scss';
 
-import React, { useEffect } from 'react';
-
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const ScrollToTop = () => {

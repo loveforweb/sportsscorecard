@@ -1,11 +1,6 @@
-import {
-  API_STALE_TIMEOUT,
-  GET_NEWS_ARTICLES,
-  GET_NEWS_ARTICLES_ESPN,
-} from '../api/api-calls';
-
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import { GET_NEWS_ARTICLES_ESPN } from '../api/api-calls';
 import LoadingIcon from '../components/LoadingIcon';
 import MessagePanel from '../components/MessagePanel';
 import NewsCard from '../components/NewsCard/NewsCard';

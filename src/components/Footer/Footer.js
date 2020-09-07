@@ -1,11 +1,9 @@
 import './Footer.scss';
 
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-// import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container';
+import React from 'react';
+import Row from 'react-bootstrap/Row';
 
 const Footer = () => {
   return (
@@ -34,9 +32,5 @@ const Footer = () => {
     </div>
   );
 };
-
-// Footer.propTypes = {
-//
-// };
 
 export default Footer;

@@ -50,7 +50,11 @@ const NewsCard = ({ images, description, links, headline, categories }) => {
 };
 
 NewsCard.propTypes = {
-  //
+  images: PropTypes.array.isRequired,
+  description: PropTypes.string.isRequired,
+  links: PropTypes.string.isRequired,
+  headline: PropTypes.string.isRequired,
+  categories: PropTypes.array.isRequired,
 };
 
 export default NewsCard;

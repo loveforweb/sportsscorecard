@@ -3,12 +3,9 @@ import './Header.scss';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
-import Navigation from '../Navigation/Navigation';
+import Navigation from '../Navigation';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
-import ThemeSwitcher from '../ThemeSwitcher';
-
-// import PropTypes from 'prop-types';
 
 const Header = () => {
   return (
@@ -23,17 +20,10 @@ const Header = () => {
           <Col md={8}>
             <Navigation />
           </Col>
-          {/* <Col md={1} className="d-flex align-items-center justify-content-end">
-            <ThemeSwitcher />
-          </Col> */}
         </Row>
       </Container>
     </header>
   );
 };
-
-// Header.propTypes = {
-//
-// };
 
 export default Header;

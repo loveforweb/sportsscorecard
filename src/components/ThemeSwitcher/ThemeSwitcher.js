@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 
 import { FaMoon } from 'react-icons/fa';
 import { FiSun } from 'react-icons/fi';
-import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 const ThemeSwitcher = () => {
@@ -57,10 +56,6 @@ const ThemeSwitcher = () => {
       </button>
     </div>
   );
-};
-
-ThemeSwitcher.propTypes = {
-  //
 };
 
 export default ThemeSwitcher;
