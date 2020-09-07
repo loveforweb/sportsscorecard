@@ -1,7 +1,20 @@
+@import '../styles/mixins';
+
 .filter-options {
     border-bottom: 0.1rem solid var(--border-outline-alt);
     padding-bottom: 1.2rem;
     margin-bottom: 3rem;
     display: flex;
     flex-direction: row;
+}
+
+    
+.tab-pane {
+    padding-top: 2rem;
+}
+
+@include md {
+    .tab-pane {
+        padding-top: 3rem;
+    }
 }

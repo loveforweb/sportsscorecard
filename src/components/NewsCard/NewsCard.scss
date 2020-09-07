@@ -1,23 +1,106 @@
+@import '../../styles/mixins';
+
 .news-card {
     width: 100%;
-    padding: 1.2rem;
-    height: 100%;
-    margin-bottom: 2rem;
-    background: var(--offBlack);
+    background: var(--card-bg);
+    border: 0.1rem solid var(--border-outline);
+    color: var(--text-color);
 
-    h2 {
+    .card-link {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        &:hover {
+            text-decoration: none;
+
+            .card-title {
+                text-decoration: underline;
+            }
+
+            .card-image {
+                img {
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+
+    .image-wrapper {
+        figure {
+            margin-bottom: 0;
+        }
+    }
+
+    .card-image {
+        position: relative;
+        overflow: hidden;
+        max-height: 19.6rem;
+
+        img {
+            width: 100%;
+            transform: scale(1);
+            transition: transform .5s ease-in-out;
+        }
+    }
+
+    .image-credit,
+    .image-caption {
+        font-size: 1.2rem;
+    }
+
+    .image-caption {
+        background: var(--border-outline-alt);
+        color: var(--white);
+        padding: .2rem .6rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .image-credit {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        background: var(--offBlack);
+        padding: 0 0.4rem 0.2rem;
+        display: block;
+        max-width: 21px;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: max-width .5s ease-in-out;
+
+        svg {
+            margin-right: .6rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-top: -.2rem;
+        }
+
+        &:hover {
+            max-width: 100%;
+        }
+    }
+
+    .card-content {
+        padding: 1.2rem;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
         font-size: 1.4rem;
         border-bottom: none;
         margin-bottom: 0;
     }
 
-    img {
-        width: 100%;
-        margin-bottom: 1rem;
+    .article-date {
+        margin-top: auto
     }
+}
 
-    .news-image-credit,
-    .news-image-caption {
-        font-size: 1rem;
+@include md {
+    .news-card {
+        height: 100%;
     }
 }

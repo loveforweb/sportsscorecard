@@ -13,6 +13,10 @@ const Navigation = () => {
     setIsOpen((isOpen) => !isOpen);
   };
 
+  const closeNav = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <button
@@ -28,12 +32,30 @@ const Navigation = () => {
         <nav className="component navigation" id="menu">
           <ul className="navigation-list">
             <li className="navigation-list-item">
-              <NavLink to="/schedule" activeClassName="selected">
+              <NavLink
+                exact={true}
+                to="/"
+                activeClassName="selected"
+                onClick={closeNav}
+              >
+                News
+              </NavLink>
+            </li>
+            <li className="navigation-list-item">
+              <NavLink
+                to="/schedule"
+                activeClassName="selected"
+                onClick={closeNav}
+              >
                 Schedule
               </NavLink>
             </li>
             <li className="navigation-list-item">
-              <NavLink to="/standings" activeClassName="selected">
+              <NavLink
+                to="/standings"
+                activeClassName="selected"
+                onClick={closeNav}
+              >
                 Standings
               </NavLink>
             </li>
@@ -41,6 +63,7 @@ const Navigation = () => {
               <NavLink
                 to="/teams"
                 activeClassName="selected"
+                onClick={closeNav}
                 isActive={(match, location) => {
                   if (location.pathname.includes('team')) {
                     return true;
@@ -52,11 +75,15 @@ const Navigation = () => {
                 Teams
               </NavLink>
             </li>
-            <li className="navigation-list-item">
-              <NavLink to="/stats" activeClassName="selected">
+            {/* <li className="navigation-list-item">
+              <NavLink
+                to="/stats"
+                activeClassName="selected"
+                onClick={closeNav}
+              >
                 Stats
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <ThemeSwitcher />

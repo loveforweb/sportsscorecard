@@ -11,7 +11,6 @@ import MessagePanel from '../components/MessagePanel';
 import NewsCard from '../components/NewsCard/NewsCard';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
-import data from '../mock-data/news-date-espn';
 import { useQuery } from 'react-query';
 
 const Home = () => {
@@ -23,7 +22,7 @@ const Home = () => {
         <MessagePanel messageType="error">Error loading homepage</MessagePanel>
       ) : null}
       {isLoading ? <LoadingIcon /> : null}
-      <h2>Homepage</h2>
+      <h2>News</h2>
       <Row>
         {data?.articles.map((newsItem, i) => {
           return (

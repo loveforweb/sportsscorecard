@@ -2,21 +2,25 @@ import React, { Suspense } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Footer from './components/Footer';
-import GameDetails from './pages/GameDetails/game-details';
 import Header from './components/Header';
-import LoadingIcon from './components/LoadingIcon/LoadingIcon';
-import Team from './pages/Team/team';
-import Teams from './pages/Teams/teams';
+import LoadingIcon from './components/LoadingIcon';
+import ScrollToTop from './components/ScrollToTop';
 
 const About = React.lazy(() => import('./pages/about'));
 const Schedule = React.lazy(() => import('./pages/Schedule/schedule'));
 const Home = React.lazy(() => import('./pages'));
 const Standings = React.lazy(() => import('./pages/standings'));
 const Stats = React.lazy(() => import('./pages/stats'));
+const Team = React.lazy(() => import('./pages/Team/team'));
+const Teams = React.lazy(() => import('./pages/Teams/teams'));
+const GameDetails = React.lazy(() =>
+  import('./pages/GameDetails/game-details')
+);
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Header />
       <main>
         <Suspense fallback={<LoadingIcon />}>

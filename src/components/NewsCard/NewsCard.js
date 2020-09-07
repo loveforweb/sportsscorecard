@@ -1,5 +1,6 @@
 import './NewsCard.scss';
 
+import { BsCardImage } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -7,31 +8,43 @@ const NewsCard = ({ images, description, links, headline, categories }) => {
   const item = categories.find((el) => el.createDate);
   return (
     <div className="component news-card">
-      {images[0]?.url ? <img src={images[0].url} alt={images[0].name} /> : null}
-      <h2>{headline}</h2>
-      <p>{description}</p>
-      <br></br>
-      {item?.createDate ? (
-        <time dateTime={item.createDate}>
-          {new Date(item.createDate).toLocaleDateString('en-GB')}
-        </time>
-      ) : null}
-      <br></br>
-      <a target="_blank" rel="noopener noreferrer" href={links.web.short.href}>
-        Read more
+      <a
+        className="card-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        href={links.web.short.href}
+      >
+        {images[0]?.url ? (
+          <div className="image-wrapper">
+            <figure>
+              <div className="card-image">
+                <img src={images[0].url} alt={images[0].name} />
+                {images[0]?.credit ? (
+                  <div className="image-credit">
+                    <BsCardImage />{' '}
+                    <span className="sr-only">Image Credit:</span>{' '}
+                    {images[0].credit}
+                  </div>
+                ) : null}
+              </div>
+              {images[0]?.caption ? (
+                <figcaption className="image-caption">
+                  Image Caption: {images[0].caption}
+                </figcaption>
+              ) : null}
+            </figure>
+          </div>
+        ) : null}
+        <div className="card-content">
+          <h2 className="card-title">{headline}</h2>
+          <p>{description}</p>
+          {item?.createDate ? (
+            <time dateTime={item.createDate} className="article-date">
+              {new Date(item.createDate).toLocaleDateString('en-GB')}
+            </time>
+          ) : null}
+        </div>
       </a>
-      <br></br>
-      <br></br>
-      {images[0]?.caption ? (
-        <div className="news-image-caption">
-          Image Caption: {images[0].caption}
-        </div>
-      ) : null}
-      {images[0]?.credit ? (
-        <div className="news-image-credit">
-          Image Credit: {images[0].credit}
-        </div>
-      ) : null}
     </div>
   );
 };

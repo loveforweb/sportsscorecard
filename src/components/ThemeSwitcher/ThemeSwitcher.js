@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 const ThemeSwitcher = () => {
-  const [mode, setMode] = useState('light');
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mode, setMode] = useState('dark');
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const switchThemeHandler = () => {
     localStorage.setItem('mode', mode === 'dark' ? 'light' : 'dark');
@@ -25,8 +25,8 @@ const ThemeSwitcher = () => {
       document.body.classList.add(storedMode);
       setMode(storedMode);
     } else {
-      document.body.classList.add('light');
-      setMode('light');
+      document.body.classList.add('dark');
+      setMode('dark');
     }
   }, []);
 

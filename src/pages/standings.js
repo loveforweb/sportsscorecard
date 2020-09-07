@@ -32,7 +32,7 @@ const Standings = () => {
   }, [data]);
 
   const handleYearSelect = (e) => {
-    setYearSelection(e.target.value);
+    setYearSelection(parseInt(e.target.value, 10));
   };
 
   return (
