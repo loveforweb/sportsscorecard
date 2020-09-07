@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import { MdMenu } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
+import ThemeSwitcher from '../ThemeSwitcher';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +59,7 @@ const Navigation = () => {
             </li>
           </ul>
         </nav>
+        <ThemeSwitcher />
       </div>
     </>
   );

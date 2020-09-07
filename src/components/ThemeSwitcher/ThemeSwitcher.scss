@@ -1,11 +1,14 @@
+@import '../../styles/mixins';
+
 .theme-switcher {
+    padding: 0 1.8rem 1.8rem;
     .switcher-button {
         background: none;
         border: none;
         outline: none;
 
         &.button-dark {
-            color: white;
+            color: var(--text-color);
 
             .dark-icon {
                 display: none;
@@ -13,13 +16,31 @@
         }
 
         &.button-light {
-            color: black;
+            color: var(--text-color);
 
             .light-icon {
                 display: none;
             }
         }
+    }
 
-        
+    .text-content {
+        margin-left: 1.2rem;
+    }
+}
+
+@include md {
+    .theme-switcher {
+        padding: 1.2rem;
+
+        .text-content {
+            display: none;
+        }
+
+        .switcher-button {
+            &.button-light {
+                color: var(--text-color);
+            }
+        }
     }
 }

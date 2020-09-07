@@ -97,6 +97,8 @@ const GameDetails = ({ match, location }) => {
             </Tab>
             <Tab eventKey="stats" title="Stats">
               <GameStats
+                homeTeamAbbr={stateHomeTeam[0].abbreviation}
+                awayTeamAbbr={stateAwayTeam[0].abbreviation}
                 homeTeam={data.stats.home.teamStats[0]}
                 awayTeam={data.stats.away.teamStats[0]}
               />

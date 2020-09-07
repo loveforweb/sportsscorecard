@@ -8,18 +8,33 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 const ThemeSwitcher = () => {
-  const [mode, setMode] = useState('dark');
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [mode, setMode] = useState('light');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const switchThemeHandler = () => {
-    setMode((mode) => (mode === 'light' ? 'dark' : 'light'));
+    localStorage.setItem('mode', mode === 'dark' ? 'light' : 'dark');
+    setMode((mode) => (mode === 'dark' ? 'light' : 'dark'));
     setIsDarkMode((isDarkMode) => !isDarkMode);
   };
 
   useEffect(() => {
-    document.body.classList.remove(isDarkMode ? 'light' : 'dark');
+    const storedMode = localStorage.getItem('mode');
+
+    if (storedMode) {
+      document.body.classList.remove('dark', 'light');
+      document.body.classList.add(storedMode);
+      setMode(storedMode);
+    } else {
+      document.body.classList.add('light');
+      setMode('light');
+    }
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.remove(mode === 'dark' ? 'light' : 'dark');
     document.body.classList.add(mode);
-  }, [isDarkMode, mode]);
+    setIsDarkMode(mode === 'dark' || false);
+  }, [mode]);
 
   return (
     <div className="component theme-switcher">
@@ -27,7 +42,7 @@ const ThemeSwitcher = () => {
         className={`switcher-button ${
           isDarkMode ? 'button-dark' : 'button-light'
         }`}
-        aria-label={`switch to ${isDarkMode ? 'light' : 'dark'} mode`}
+        aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
         onClick={switchThemeHandler}
       >
         <span className="dark-icon">
@@ -35,6 +50,9 @@ const ThemeSwitcher = () => {
         </span>
         <span className="light-icon">
           <FiSun />
+        </span>
+        <span className="text-content">
+          Switch to {isDarkMode ? 'light' : 'dark'} mode
         </span>
       </button>
     </div>

@@ -38,6 +38,7 @@
 
     &:hover {
         text-decoration: none;
+        color: var(--white);
         
         &:after {
             transform: scale(1);

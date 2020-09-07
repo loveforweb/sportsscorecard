@@ -3,16 +3,16 @@ import './GameStats.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const GameStats = ({ homeTeam, awayTeam }) => {
+const GameStats = ({ homeTeam, awayTeam, homeTeamAbbr, awayTeamAbbr }) => {
   return (
     <div className="component game-stats" role="table">
       <div role="row" className="stats-row stats-row--header">
         <div role="columnheader" className="stat-away">
-          LA
+          {awayTeamAbbr}
         </div>
         <div role="columnheader" className="stat-item"></div>
         <div role="columnheader" className="stat-home">
-          CAR
+          {homeTeamAbbr}
         </div>
       </div>
       <div role="row" className="stats-row">
@@ -110,6 +110,8 @@ const GameStats = ({ homeTeam, awayTeam }) => {
 GameStats.propTypes = {
   homeTeam: PropTypes.shape({}).isRequired,
   awayTeam: PropTypes.shape({}).isRequired,
+  awayTeamAbbr: PropTypes.string.isRequired,
+  homeTeamAbbr: PropTypes.string.isRequired,
 };
 
 export default GameStats;

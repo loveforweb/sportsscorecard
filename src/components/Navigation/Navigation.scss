@@ -80,10 +80,13 @@
         display: none;
     }
     .navigation-container {
-        display: block;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
         position: relative;
         max-height: none;
         background: none;
+        display: flex;
     }
 
     .navigation {

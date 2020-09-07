@@ -20,11 +20,13 @@ const Header = () => {
               <Link to="/">Sports Score Card</Link>
             </h1>
           </Col>
-          <Col md={{ span: 7, offset: 1 }}>
+          <Col md={8}>
             <Navigation />
           </Col>
+          {/* <Col md={1} className="d-flex align-items-center justify-content-end">
+            <ThemeSwitcher />
+          </Col> */}
         </Row>
-        <ThemeSwitcher />
       </Container>
     </header>
   );
