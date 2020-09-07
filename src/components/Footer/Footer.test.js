@@ -1,10 +1,14 @@
+import Footer from './Footer';
 import React from 'react';
 import renderWithRouter from '../../testUtils';
-import Footer from './Footer';
 
 describe('Footer', () => {
   test('renders Footer', () => {
     const { getByText } = renderWithRouter(<Footer />);
-    expect(getByText('Hello World')).toBeInTheDocument();
+    expect(
+      getByText(
+        'This site is not affiliated with the National Football League (NFL) or any of their sub-affiliates.'
+      )
+    ).toBeInTheDocument();
   });
 });
