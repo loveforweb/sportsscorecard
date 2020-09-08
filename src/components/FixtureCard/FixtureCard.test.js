@@ -98,5 +98,9 @@ describe('FixtureCard', () => {
     expect(queryByText('KO:')).not.toBeInTheDocument();
     expect(getByText('Soldier Field, Chicago, IL')).toBeInTheDocument();
     expect(getByText('Read more', { type: 'link' })).toBeInTheDocument();
+    expect(getByText('Read more').closest('a')).toHaveAttribute(
+      'href',
+      '/game-details/20190905-GB-CHI'
+    );
   });
 });

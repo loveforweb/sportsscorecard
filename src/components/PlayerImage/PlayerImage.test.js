@@ -1,10 +1,20 @@
+import PlayerImage from './PlayerImage';
 import React from 'react';
 import renderWithRouter from '../../testUtils';
-import PlayerImage from './PlayerImage';
+
+const firstName = 'Joe';
+const lastName = 'Bloggs';
+const imageSrc = 'image.jpg';
 
 describe('PlayerImage', () => {
   test('renders PlayerImage', () => {
-    const { getByText } = renderWithRouter(<PlayerImage />);
-    expect(getByText('Hello World')).toBeInTheDocument();
+    const { getByText, getByAltText } = renderWithRouter(
+      <PlayerImage
+        imageSrc={imageSrc}
+        firstName={firstName}
+        lastName={lastName}
+      />
+    );
+    expect(getByAltText(`${firstName} ${lastName}`)).toBeInTheDocument();
   });
 });

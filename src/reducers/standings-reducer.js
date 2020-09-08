@@ -71,6 +71,8 @@ function standingsReducer(state, action) {
         return item.team.abbreviation === action.payload.id;
       });
 
+      const division = teamData[0].divisionRank.divisionName;
+
       const filteredTeams = action.payload.teams
         .filter((item) => {
           return (
@@ -82,7 +84,7 @@ function standingsReducer(state, action) {
 
       return {
         ...state,
-        division: 'AFC North',
+        division,
         teams: filteredTeams,
       };
     }
