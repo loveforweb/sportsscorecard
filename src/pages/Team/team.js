@@ -129,7 +129,6 @@ const Team = ({ match, location }) => {
       dispatchPlayers({
         type: 'TEAM',
         payload: {
-          id: abbr,
           players: playersData.players,
         },
       });

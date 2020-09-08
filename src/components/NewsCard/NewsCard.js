@@ -18,7 +18,7 @@ const NewsCard = ({ images, description, links, headline, categories }) => {
           <div className="image-wrapper">
             <figure>
               <div className="card-image">
-                <img src={images[0].url} alt={images[0].name} />
+                <img src={images[0].url} alt={images[0].alt} />
                 {images[0]?.credit ? (
                   <div className="image-credit">
                     <BsCardImage />{' '}
@@ -52,7 +52,7 @@ const NewsCard = ({ images, description, links, headline, categories }) => {
 NewsCard.propTypes = {
   images: PropTypes.array.isRequired,
   description: PropTypes.string.isRequired,
-  links: PropTypes.string.isRequired,
+  links: PropTypes.object.isRequired,
   headline: PropTypes.string.isRequired,
   categories: PropTypes.array.isRequired,
 };

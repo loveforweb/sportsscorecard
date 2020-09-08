@@ -1,10 +1,14 @@
+import LocationPin from './LocationPin';
 import React from 'react';
 import renderWithRouter from '../../testUtils';
-import LocationPin from './LocationPin';
+const text = 'my pin location';
+const color = 'red';
 
 describe('LocationPin', () => {
   test('renders LocationPin', () => {
-    const { getByText } = renderWithRouter(<LocationPin />);
-    expect(getByText('Hello World')).toBeInTheDocument();
+    const { getByText } = renderWithRouter(
+      <LocationPin text={text} color={color} />
+    );
+    expect(getByText(text)).toBeInTheDocument();
   });
 });

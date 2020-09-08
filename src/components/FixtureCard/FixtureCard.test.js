@@ -4,7 +4,6 @@ import fixturesData from '../../mock-data/fixtures-data';
 import fixturesReducer from '../../reducers/fixtures-reducer';
 import renderWithRouter from '../../testUtils';
 import resultsData from '../../mock-data/results-data';
-import { screen } from '@testing-library/react';
 import standingsData from '../../mock-data/standings-data';
 
 const fixtureDispatch = {
@@ -52,8 +51,7 @@ describe('FixtureCard', () => {
   });
 
   test('renders FixtureCard as a fixture', () => {
-    const showTimeOnly =
-      gameFixtureData[0].games[0].schedule.playedStatus === 'UNPLAYED';
+    const showTimeOnly = true;
 
     const { getByText, queryByText } = renderWithRouter(
       <FixtureCard
@@ -66,8 +64,10 @@ describe('FixtureCard', () => {
       />
     );
     expect(getByText('Texans')).toBeInTheDocument();
+    expect(getByText('HOU')).toBeInTheDocument();
     expect(getByText('@')).toBeInTheDocument();
     expect(getByText('Chiefs')).toBeInTheDocument();
+    expect(getByText('KC')).toBeInTheDocument();
     expect(getByText('KO:')).toBeInTheDocument();
     expect(getByText('Arrowhead Stadium, Kansas City, MO')).toBeInTheDocument();
     expect(getByText('Live on: NBC')).toBeInTheDocument();
@@ -77,13 +77,11 @@ describe('FixtureCard', () => {
   });
 
   test('renders FixtureCard as a result', () => {
-    const showTimeOnly =
-      gameResultsData[0].games[0].schedule.playedStatus === 'UNPLAYED';
+    const showTimeOnly = false;
 
     const { getByText, queryByText } = renderWithRouter(
       <FixtureCard
         gameData={gameResultsData[0].games[0]}
-        isFixture
         showTimeOnly={showTimeOnly}
         awayTeamStats={awayTeamStats[0]?.stats}
         homeTeamStats={homeTeamStats[0]?.stats}
@@ -91,9 +89,11 @@ describe('FixtureCard', () => {
       />
     );
     expect(getByText('Packers')).toBeInTheDocument();
+    expect(getByText('GB')).toBeInTheDocument();
     expect(getByText('14')).toBeInTheDocument();
     expect(getByText('@')).toBeInTheDocument();
     expect(getByText('3')).toBeInTheDocument();
+    expect(getByText('CHI')).toBeInTheDocument();
     expect(getByText('Bears')).toBeInTheDocument();
     expect(queryByText('KO:')).not.toBeInTheDocument();
     expect(getByText('Soldier Field, Chicago, IL')).toBeInTheDocument();
