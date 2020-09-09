@@ -20,10 +20,15 @@ const YearlyOption = ({ onYearSelect, selectedOption }) => {
             onChange={onYearSelect}
             value={selectedOption}
             custom
+            data-testid="yearly-select"
           >
             {years.map((option) => {
               return (
-                <option value={option.year} key={option.id}>
+                <option
+                  data-testid="yearly-option"
+                  value={option.year}
+                  key={option.id}
+                >
                   {option.year}
                 </option>
               );

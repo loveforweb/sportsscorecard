@@ -10,7 +10,7 @@ const TeamCard = ({ team }) => {
   return (
     <Link
       to={{
-        pathname: `team/${team.abbreviation}`,
+        pathname: `/team/${team.abbreviation}`,
         state: {
           id: team.id,
         },

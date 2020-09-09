@@ -1,3 +1,5 @@
+import MessagePanel from '../MessagePanel';
+import QuarterHeading from '../QuarterHeading';
 import QuarterSection from './QuarterSection';
 import React from 'react';
 import renderWithRouter from '../../testUtils';
@@ -5,8 +7,12 @@ import renderWithRouter from '../../testUtils';
 describe('QuarterSection', () => {
   test('renders QuarterSection', () => {
     const { getByText } = renderWithRouter(
-      <QuarterSection>Hello World</QuarterSection>
+      <QuarterSection>
+        <QuarterHeading quarterNumber={1} />
+        <MessagePanel messageType="no-score">No scores</MessagePanel>
+      </QuarterSection>
     );
-    expect(getByText('Hello World')).toBeInTheDocument();
+    expect(getByText(/1st Quarter/)).toBeInTheDocument();
+    expect(getByText(/No scores/)).toBeInTheDocument();
   });
 });

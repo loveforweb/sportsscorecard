@@ -35,10 +35,15 @@ const WeeklyOption = ({ onWeekSelect, selectedOption }) => {
             onChange={onWeekSelect}
             value={selectedOption}
             custom
+            data-testid="weekly-select"
           >
             {numberOfWeek.map((option) => {
               return (
-                <option value={option.id} key={option.id}>
+                <option
+                  data-testid="weekly-option"
+                  value={option.id}
+                  key={option.id}
+                >
                   Week {option.week}
                 </option>
               );
