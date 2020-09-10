@@ -6,7 +6,7 @@ const message = 'This is a message';
 describe('MessagePanel', () => {
   test('renders MessagePanel', () => {
     const { getByText } = renderWithRouter(
-      <MessagePanel messageType="default">{message}</MessagePanel>
+      <MessagePanel messageType="default" message={message} />
     );
     expect(getByText(message)).toBeInTheDocument();
   });

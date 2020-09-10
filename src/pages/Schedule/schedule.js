@@ -78,7 +78,7 @@ const Schedule = () => {
         </Col>
       </Row>
       {error ? (
-        <MessagePanel messageType="error">Error loading data</MessagePanel>
+        <MessagePanel messageType="error" message="Error loading data" />
       ) : null}
       {isLoading ? (
         <LoadingIcon />

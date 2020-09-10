@@ -3,9 +3,9 @@ import './MessagePanel.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const MessagePanel = ({ children, messageType }) => {
+const MessagePanel = ({ message, messageType }) => {
   return (
-    <div className={`component message-panel ${messageType}`}>{children}</div>
+    <div className={`component message-panel ${messageType}`}>{message}</div>
   );
 };
 

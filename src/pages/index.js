@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <Container>
       {error ? (
-        <MessagePanel messageType="error">Error loading homepage</MessagePanel>
+        <MessagePanel messageType="error" message="Error loading homepage" />
       ) : null}
       {isLoading ? <LoadingIcon /> : null}
       <h2>News</h2>

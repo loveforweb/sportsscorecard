@@ -151,9 +151,10 @@ const Team = ({ match, location }) => {
 
           <div className="team-details">
             {errorStandings ? (
-              <MessagePanel messageType="error">
-                Error loading homstandingsepage
-              </MessagePanel>
+              <MessagePanel
+                messageType="error"
+                message="Error loading standings"
+              />
             ) : null}
             {isLoadingStandings ? <LoadingIcon /> : null}
             {stateTeam.length > 0 ? (
@@ -168,9 +169,7 @@ const Team = ({ match, location }) => {
           </div>
           <div className="simple-stats">
             {errorStandings ? (
-              <MessagePanel messageType="error">
-                Error loading stats
-              </MessagePanel>
+              <MessagePanel messageType="error" message="Error loading Stats" />
             ) : null}
             {stateTeam.length > 0 ? (
               <>
@@ -234,9 +233,10 @@ const Team = ({ match, location }) => {
                     return false;
                   })
                 ) : (
-                  <MessagePanel messageType="default fixtures-message">
-                    No results just yet
-                  </MessagePanel>
+                  <MessagePanel
+                    messageType="default fixtures-message"
+                    message="No results just yet"
+                  />
                 )}
               </Col>
             </Row>
@@ -318,9 +318,10 @@ const Team = ({ match, location }) => {
               <Col xs={12}>
                 <h2>Stats</h2>
                 {errorStandings ? (
-                  <MessagePanel messageType="error">
-                    Error loading standings
-                  </MessagePanel>
+                  <MessagePanel
+                    messageType="error"
+                    message="Error loading Standings"
+                  />
                 ) : null}
                 {isLoadingStandings ? <LoadingIcon /> : null}
                 {stateTeam.length > 0 ? (

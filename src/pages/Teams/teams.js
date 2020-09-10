@@ -41,7 +41,7 @@ const Teams = () => {
     <Container>
       <h2>Teams</h2>
       {error ? (
-        <MessagePanel messageType="error">Error loading homepage</MessagePanel>
+        <MessagePanel messageType="error" message="Error loading Homepage" />
       ) : null}
       {isLoading ? <LoadingIcon /> : null}
       <Row>

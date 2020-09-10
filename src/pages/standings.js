@@ -45,15 +45,16 @@ const Standings = () => {
         />
       </div>
       {error ? (
-        <MessagePanel messageType="error">Error loading standings</MessagePanel>
+        <MessagePanel messageType="error" message="Error loading standings" />
       ) : null}
 
       {isLoading ? <LoadingIcon /> : null}
 
       {!data && !isLoading ? (
-        <MessagePanel messageType="default">
-          No standings data for {yearSelection} just yet
-        </MessagePanel>
+        <MessagePanel
+          messageType="default"
+          message={`No standings data for ${yearSelection} just yet`}
+        />
       ) : null}
 
       {state.map((conf, i) => {

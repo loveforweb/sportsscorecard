@@ -74,9 +74,10 @@ const GameDetails = ({ match, location }) => {
                       <QuarterSection key={quarter.quarterNumber}>
                         <QuarterHeading quarterNumber={quarter.quarterNumber} />
                         {quarter.scoringPlays.length === 0 ? (
-                          <MessagePanel messageType="no-score">
-                            No scores
-                          </MessagePanel>
+                          <MessagePanel
+                            messageType="no-score"
+                            message="No scores"
+                          />
                         ) : null}
 
                         {quarter.scoringPlays.map((play, i) => {

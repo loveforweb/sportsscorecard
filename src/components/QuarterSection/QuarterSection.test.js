@@ -9,7 +9,7 @@ describe('QuarterSection', () => {
     const { getByText } = renderWithRouter(
       <QuarterSection>
         <QuarterHeading quarterNumber={1} />
-        <MessagePanel messageType="no-score">No scores</MessagePanel>
+        <MessagePanel messageType="no-score" message="no score" />
       </QuarterSection>
     );
     expect(getByText(/1st Quarter/)).toBeInTheDocument();
