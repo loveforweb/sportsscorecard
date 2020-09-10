@@ -39,7 +39,7 @@ const FixtureCard = ({
               <div className="team-wlt-stat">
                 ({awayTeamStats.standings.wins} -{' '}
                 {awayTeamStats.standings.losses}
-                {awayTeamStats.standings.ties !== 0
+                {awayTeamStats.standings?.ties
                   ? ` - ${awayTeamStats.standings.ties}`
                   : ''}
                 )
@@ -82,7 +82,7 @@ const FixtureCard = ({
               <div className="team-wlt-stat">
                 ({homeTeamStats.standings.wins} -{' '}
                 {homeTeamStats.standings.losses}
-                {homeTeamStats.standings.ties !== 0
+                {homeTeamStats.standings?.ties
                   ? ` - ${homeTeamStats.standings.ties}`
                   : ''}
                 )
@@ -96,50 +96,25 @@ const FixtureCard = ({
         <div className="game-ko-data">
           {showDateOnly ? (
             <GameDateTime
-              date={new Date(gameData.schedule.startTime).toLocaleDateString(
-                'en-GB',
-                {
-                  weekday: 'short',
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                }
-              )}
+              startTime={gameData.schedule.startTime}
+              showDate
               isFixture={isFixture}
             />
           ) : null}
 
           {showTimeOnly ? (
             <GameDateTime
-              time={new Date(gameData.schedule.startTime).toLocaleTimeString(
-                'en-GB',
-                {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                }
-              )}
+              startTime={gameData.schedule.startTime}
+              showTime
               isFixture={isFixture}
             />
           ) : null}
 
           {showDateAndTime ? (
             <GameDateTime
-              time={new Date(gameData.schedule.startTime).toLocaleTimeString(
-                'en-GB',
-                {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                }
-              )}
-              date={new Date(gameData.schedule.startTime).toLocaleDateString(
-                'en-GB',
-                {
-                  weekday: 'short',
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                }
-              )}
+              startTime={gameData.schedule.startTime}
+              showTime
+              showDate
               isFixture={isFixture}
             />
           ) : null}

@@ -50,7 +50,7 @@ const Standings = () => {
 
       {isLoading ? <LoadingIcon /> : null}
 
-      {!data && !isLoading ? (
+      {!data && !isLoading && !error ? (
         <MessagePanel
           messageType="default"
           message={`No standings data for ${yearSelection} just yet`}

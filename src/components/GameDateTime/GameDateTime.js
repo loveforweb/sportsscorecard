@@ -3,26 +3,47 @@ import './GameDateTime.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const GameDateTime = ({ time, date, isFixture }) => {
+const formatTime = (startTime) => {
+  return new Date(startTime).toLocaleTimeString('en-GB', {
+    timeZone: 'UTC',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+
+const formatDate = (startTime) => {
+  new Date(startTime).toLocaleDateString('en-GB', {
+    timeZone: 'UTC',
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+};
+
+const GameDateTime = ({ startTime, showDate, showTime, isFixture }) => {
   return (
     <div className="component game-date-time">
       <span className="game-time">
-        {time ? (
+        {showTime ? (
           <>
-            KO: <time dateTime={time}>{time} GMT</time>
+            KO: <time dateTime={startTime}>{formatTime(startTime)} GMT</time>
           </>
         ) : null}
-        {time && date && ` - `}
+        {showTime && showDate && ` - `}
         {!isFixture ? 'Played: ' : null}
-        {date ? <time dateTime={date}>{date}</time> : null}
+        {showDate ? (
+          <time dateTime={startTime}>{formatDate(startTime)}</time>
+        ) : null}
       </span>
     </div>
   );
 };
 
 GameDateTime.propTypes = {
-  time: PropTypes.string,
-  date: PropTypes.string,
+  startTime: PropTypes.string.isRequired,
+  showDate: PropTypes.bool,
+  showTime: PropTypes.bool,
   isFixture: PropTypes.bool,
 };
 

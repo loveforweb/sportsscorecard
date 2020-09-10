@@ -92,7 +92,7 @@ const StandingsTable = ({ division, teams, teamId }) => {
                 {stats.standings.losses}
               </div>
               <div className="table-cell" role="cell">
-                {stats.standings.ties}
+                {stats.standings?.ties ? stats.standings.ties : 0}
               </div>
               <div className="table-cell table-cell-strong" role="cell">
                 {stats.standings.winPct}

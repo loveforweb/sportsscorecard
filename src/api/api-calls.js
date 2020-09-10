@@ -15,8 +15,9 @@ const headers = {
   },
 };
 
-const standingsStatsParams =
-  'W,L,T,PF,PA,PtDiff,winPct,firstDownsTotal,firstDownsRush,firstDownsPass,firstDownsPenalty,thirdDowns,thirdDownsAtt,fourthDowns,fourthDownsAtt,offenseYds,offensePlays,offenseAvgYds,rushYards,rushAttempts,rushAverage,passGrossYards,passCompletions,passAttempts,passInt,passAvg,sacks,fgMade,fgAtt,totalTD,rushTD,passTD,prTD,intTD';
+// const standingsStatsParams = '?stats=W,L,T,PF,PA,PtDiff,winPct,firstDownsTotal,firstDownsRush,firstDownsPass,firstDownsPenalty,thirdDowns,thirdDownsAtt,fourthDowns,fourthDownsAtt,offenseYds,offensePlays,offenseAvgYds,rushYards,rushAttempts,rushAverage,passGrossYards,passCompletions,passAttempts,passInt,passAvg,sacks,fgMade,fgAtt,totalTD,rushTD,passTD,prTD,intTD';
+
+const standingsStatsParams = '';
 
 // FIXTURES BY WEEK
 export const GET_FIXTURES = async (q, params) => {
@@ -48,7 +49,7 @@ export const GET_VENUE = async (q, params) => {
 // STANDINGS
 export const GET_STANDINGS = async (q, params) => {
   const { data } = await axios.get(
-    `${API_URL}/${params.year}-regular/standings.json?stats=${standingsStatsParams}`,
+    `${API_URL}/${params.year}-regular/standings.json${standingsStatsParams}`,
     headers
   );
   return data;

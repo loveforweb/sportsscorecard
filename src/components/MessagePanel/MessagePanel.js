@@ -11,7 +11,7 @@ const MessagePanel = ({ message, messageType }) => {
 
 MessagePanel.propTypes = {
   messageType: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  message: PropTypes.string.isRequired,
 };
 
 export default MessagePanel;
