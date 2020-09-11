@@ -1,7 +1,7 @@
 import './game-details.scss';
 
 import { API_STALE_TIMEOUT, GET_GAME_DETAILS } from '../../api/api-calls';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -22,6 +22,10 @@ import { withRouter } from 'react-router-dom';
 const GameDetails = ({ match, location }) => {
   const [stateAwayTeam, dispatchAwayTeam] = useReducer(gameReducer, []);
   const [stateHomeTeam, dispatchHomeTeam] = useReducer(gameReducer, []);
+  const [apiError, setApiError] = useState({
+    hasError: false,
+    message: '',
+  });
   const { gameDetails } = match.params;
 
   const { isLoading, error, data } = useQuery(
@@ -33,6 +37,11 @@ const GameDetails = ({ match, location }) => {
   );
 
   useEffect(() => {
+    if (data?.status === 400) {
+      setApiError({ hasError: true, message: data.status });
+      return;
+    }
+
     if (data) {
       dispatchAwayTeam({
         type: 'AWAY_TEAM',
@@ -46,14 +55,26 @@ const GameDetails = ({ match, location }) => {
     }
   }, [data]);
 
+  if (error || apiError.hasError) {
+    return (
+      <Container>
+        <MessagePanel
+          messageType="error"
+          message={`Unable to load data. Error: ${apiError.message}`}
+        />
+      </Container>
+    );
+  }
+
   if (stateAwayTeam.length === 0 || stateHomeTeam.length === 0) {
     return <LoadingIcon />;
   }
 
+  if (isLoading) {
+    return <LoadingIcon />;
+  }
   return (
     <>
-      {error ? <div>Unable to load game details</div> : null}
-      {isLoading ? <LoadingIcon /> : null}
       <div className="game-details-page">
         <header>
           <GameHeader

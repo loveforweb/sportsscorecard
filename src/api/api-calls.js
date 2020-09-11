@@ -1,7 +1,8 @@
 import axios from 'axios';
 const API_URL = 'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl';
+// const API_URL = 'https://api.mysportsfeeds.com/v2.1/pull/nfl';
 export const API_STALE_TIMEOUT = 3600000; // 1 day
-export const STANDINGS_YEAR = 2019;
+export const STANDINGS_YEAR = 2020;
 
 const sportsIOKey = `${process.env.REACT_APP_SPORTS_IO_KEY}`;
 
@@ -40,7 +41,7 @@ export const GET_TEAM_FIXTURES = async (q, params) => {
 // VENUES
 export const GET_VENUE = async (q, params) => {
   const { data } = await axios.get(
-    `${API_URL}/2019-regular/venues.json?team=${params.team}`,
+    `${API_URL}/2020-regular/venues.json?team=${params.team}`,
     headers
   );
   return data;
@@ -66,11 +67,22 @@ export const GET_PLAYERS = async (q, params) => {
 
 // GAME DETAILS
 export const GET_GAME_DETAILS = async (q, params) => {
-  const { data } = await axios.get(
-    `${API_URL}/2019-regular/games/${params.id}/boxscore.json`,
-    headers
-  );
-  return data;
+  // const { data } = await axios.get(
+  //   `${API_URL}/2020-regular/games/${params.id}/boxscore.json`,
+  //   headers
+  // );
+  // return data;
+
+  try {
+    const response = await axios.get(
+      `${API_URL}/2020-regular/games/${params.id}/boxscore.json`,
+      headers
+    );
+
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
 };
 
 // NEWS ARTICLES SPORTSDATA.IO
@@ -86,6 +98,15 @@ export const GET_NEWS_ARTICLES = async (q, params) => {
 export const GET_NEWS_ARTICLES_ESPN = async (q, params) => {
   const { data } = await axios.get(
     `http://site.api.espn.com/apis/site/v2/sports/football/nfl/news`
+  );
+  return data;
+};
+
+// GAME LINEUP
+export const GET_GAME_LINEUP = async (q, params) => {
+  const { data } = await axios.get(
+    `${API_URL}/2020-regular/games/${params.id}/lineup.json`,
+    headers
   );
   return data;
 };

@@ -12,7 +12,7 @@ const formatTime = (startTime) => {
 };
 
 const formatDate = (startTime) => {
-  new Date(startTime).toLocaleDateString('en-GB', {
+  return new Date(startTime).toLocaleDateString('en-GB', {
     timeZone: 'UTC',
     weekday: 'short',
     year: 'numeric',

@@ -3,7 +3,7 @@
     border: 0.1rem solid var(--tundora);
     margin-bottom: 3rem;
     min-height: 18rem;
-    
+    position: relative;
 
     .player-name {
         margin-bottom: 1rem;
@@ -11,6 +11,8 @@
         font-size: 2rem;
         border-bottom: 0.1rem solid var(--tundora);
         display: flex;
+        position: relative;
+        z-index: 1;
     }
 
     .player-number {
@@ -30,9 +32,10 @@
         }
     }
 
-
     .player-details {
         display: flex;
+        position: relative;
+        z-index: 1;
     }
 
     .player-profile-image {
@@ -49,6 +52,15 @@
         .player-stat {
             width: 50%;
         }
+    }
+
+    .team-badge {
+        position: absolute;
+        right: 0;
+        width: 24rem;
+        opacity: 0.08;
+        top: 50%;
+        transform: translateY(-50%)
     }
 
 }

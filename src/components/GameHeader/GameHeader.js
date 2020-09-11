@@ -1,13 +1,21 @@
 import './GameHeader.scss';
 
 import Container from 'react-bootstrap/Container';
+import GameDateTime from '../GameDateTime';
 import PropTypes from 'prop-types';
 import React from 'react';
 import TeamBadge from '../TeamBadge';
 import TeamName from '../TeamName';
 import TeamScore from '../TeamScore';
 
-const GameHeader = ({ awayData, homeData, scores, venue }) => {
+const GameHeader = ({
+  awayData,
+  homeData,
+  scores,
+  venue,
+  toBePlayed,
+  startTime,
+}) => {
   const teamHeaderColours = {
     background: `linear-gradient(70deg, ${awayData.teamColoursHex[0]} 50%, ${homeData.teamColoursHex[0]} 50%)`,
   };
@@ -25,15 +33,17 @@ const GameHeader = ({ awayData, homeData, scores, venue }) => {
                 abbreviation={awayData.abbreviation}
               />
             </div>
-            {scores.homeScoreTotal ? (
+            {scores?.homeScoreTotal ? (
               <TeamScore scoreTotal={scores.awayScoreTotal} />
             ) : null}
           </div>
 
-          <div className="game-splitter">@</div>
+          <div className={`game-splitter ${toBePlayed ? '' : 'is--final'}`}>
+            {toBePlayed ? '@' : 'FINAL'}
+          </div>
 
           <div className="team team--home">
-            {scores.homeScoreTotal ? (
+            {scores?.homeScoreTotal ? (
               <TeamScore scoreTotal={scores.homeScoreTotal} />
             ) : null}
             <div className="team-identity">
@@ -47,6 +57,9 @@ const GameHeader = ({ awayData, homeData, scores, venue }) => {
           </div>
         </div>
         <div className="venue-ref">
+          {toBePlayed && startTime ? (
+            <GameDateTime startTime={startTime} isFixture showTime showDate />
+          ) : null}
           Stadium: {venue.name}, {venue.city}
         </div>
       </Container>
@@ -57,8 +70,10 @@ const GameHeader = ({ awayData, homeData, scores, venue }) => {
 GameHeader.propTypes = {
   awayData: PropTypes.shape({}).isRequired,
   homeData: PropTypes.shape({}).isRequired,
-  scores: PropTypes.shape({}).isRequired,
+  scores: PropTypes.shape({}),
   venue: PropTypes.shape({}).isRequired,
+  startTime: PropTypes.string,
+  isFixture: PropTypes.bool,
 };
 
 export default GameHeader;

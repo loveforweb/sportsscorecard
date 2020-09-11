@@ -72,13 +72,13 @@ const GameStats = ({ homeTeam, awayTeam, homeTeamAbbr, awayTeamAbbr }) => {
       </div>
       <div role="row" className="stats-row">
         <div role="cell" className="stat-away">
-          {awayTeam.interceptions.interceptions}
+          {homeTeam.interceptions.interceptions}
         </div>
         <div role="cell" className="stat-item">
           INTERCEPTIONS THROWN
         </div>
         <div role="cell" className="stat-home">
-          {homeTeam.interceptions.interceptions}
+          {awayTeam.interceptions.interceptions}
         </div>
       </div>
       <div role="row" className="stats-row">

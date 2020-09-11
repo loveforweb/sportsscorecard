@@ -4,10 +4,12 @@ import PlayerImage from '../PlayerImage';
 import PlayerStat from '../PlayerStat';
 import PropTypes from 'prop-types';
 import React from 'react';
+import TeamBadge from '../TeamBadge';
 
-const PlayerCard = ({ playerDetails }) => {
+const PlayerCard = ({ playerDetails, teamBadge }) => {
   return (
     <div className="component player-card">
+      {teamBadge ? <TeamBadge badge={teamBadge} /> : null}
       <div className="player-name">
         <div className="player-number">
           <PlayerStat

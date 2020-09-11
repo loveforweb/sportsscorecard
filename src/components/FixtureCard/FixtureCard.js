@@ -29,6 +29,7 @@ const FixtureCard = ({
   const urlMonth = getFormattedDate(gameDate, { month: '2-digit' });
   const urlDay = getFormattedDate(gameDate, { day: '2-digit' });
   const fullUrl = `${urlYear}${urlMonth}${urlDay}-${gameData.schedule.awayTeam.abbreviation}-${gameData.schedule.homeTeam.abbreviation}`;
+  const gameComplete = gameData.schedule.playedStatus === 'COMPLETED';
 
   return (
     <div className={`component fixture-block`}>
@@ -61,7 +62,9 @@ const FixtureCard = ({
             ) : null}
           </div>
 
-          <div className="game-splitter">@</div>
+          <div className={`game-splitter ${gameComplete ? 'is--final' : ''}`}>
+            {gameComplete ? 'FINAL' : '@'}
+          </div>
 
           <div className="team team--home">
             {gameData.score.homeScoreTotal ? (
@@ -134,10 +137,18 @@ const FixtureCard = ({
             );
           })
         : null}
-      {gameData.schedule.playedStatus === 'COMPLETED' ? (
+      {gameComplete ? (
         <div className="fixture-block-row">
           <Link to={`/game-details/${fullUrl}`} className="read-more-link">
             Read more
+          </Link>
+        </div>
+      ) : null}
+
+      {gameData.schedule.playedStatus === 'UNPLAYED' ? (
+        <div className="fixture-block-row">
+          <Link to={`/game-lineup/${fullUrl}`} className="read-more-link">
+            View Lineup
           </Link>
         </div>
       ) : null}

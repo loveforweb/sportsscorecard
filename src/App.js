@@ -16,6 +16,7 @@ const Teams = React.lazy(() => import('./pages/Teams/teams'));
 const GameDetails = React.lazy(() =>
   import('./pages/GameDetails/game-details')
 );
+const GameLineup = React.lazy(() => import('./pages/GameLineup/game-lineup'));
 
 function App() {
   return (
@@ -36,6 +37,11 @@ function App() {
               exact
               path="/game-details/:gameDetails"
               component={GameDetails}
+            />
+            <Route
+              exact
+              path="/game-lineup/:gameLineup"
+              component={GameLineup}
             />
           </Switch>
         </Suspense>

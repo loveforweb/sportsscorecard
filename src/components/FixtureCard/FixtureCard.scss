@@ -69,6 +69,13 @@
         display: flex;
         align-items: baseline;
         height: 100%;
+
+        &.is--final {
+            font-size: 1rem;
+            margin: 0;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
     .game-ko-data {

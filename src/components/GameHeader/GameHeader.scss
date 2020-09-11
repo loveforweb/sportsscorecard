@@ -3,6 +3,7 @@
 .game-header {
     margin-bottom: 2rem;
     color: var(--white);
+    padding: 2rem 0;
     
     .container {
         min-height: 14rem;
@@ -58,6 +59,12 @@
         margin: 0 1.2rem;
         font-size: 2rem;
         font-weight: 500;
+
+        &.is--final {
+            margin: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
     }
 
     .team-identity {

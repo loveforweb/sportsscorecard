@@ -295,7 +295,10 @@ const Team = ({ match, location }) => {
               {statePlayers.offense?.map((details) => {
                 return (
                   <Col xs={12} md={6} lg={4} key={details.player.id}>
-                    <PlayerCard playerDetails={details} />
+                    <PlayerCard
+                      playerDetails={details}
+                      teamBadge={stateTeam[0].team.officialLogoImageSrc}
+                    />
                   </Col>
                 );
               })}
@@ -307,7 +310,10 @@ const Team = ({ match, location }) => {
               {statePlayers.defense?.map((details) => {
                 return (
                   <Col xs={12} md={6} lg={4} key={details.player.id}>
-                    <PlayerCard playerDetails={details} />
+                    <PlayerCard
+                      playerDetails={details}
+                      teamBadge={stateTeam[0].team.officialLogoImageSrc}
+                    />
                   </Col>
                 );
               })}
