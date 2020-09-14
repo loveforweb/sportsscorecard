@@ -25,6 +25,7 @@ const GameDetails = ({ match, location }) => {
   const [apiError, setApiError] = useState({
     hasError: false,
     message: '',
+    errorCode: '',
   });
   const { gameDetails } = match.params;
 
@@ -37,8 +38,12 @@ const GameDetails = ({ match, location }) => {
   );
 
   useEffect(() => {
-    if (data?.status === 400) {
-      setApiError({ hasError: true, message: data.status });
+    if (data && data.status) {
+      setApiError({
+        hasError: true,
+        errorCode: data.status,
+        message: 'Unable to load Game Details',
+      });
       return;
     }
 
@@ -60,7 +65,11 @@ const GameDetails = ({ match, location }) => {
       <Container>
         <MessagePanel
           messageType="error"
-          message={`Unable to load data. Error: ${apiError.message}`}
+          message={`${
+            apiError.hasError
+              ? `Error: ${apiError.message}. ErrorCode: ${apiError.errorCode}`
+              : 'No data'
+          }`}
         />
       </Container>
     );

@@ -1,6 +1,6 @@
 import axios from 'axios';
-const API_URL = 'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl';
-// const API_URL = 'https://api.mysportsfeeds.com/v2.1/pull/nfl';
+// const API_URL = 'https://scrambled-api.mysportsfeeds.com/v2.1/pull/nfl';
+const API_URL = 'https://api.mysportsfeeds.com/v2.1/pull/nfl';
 export const API_STALE_TIMEOUT = 3600000; // 1 day
 export const STANDINGS_YEAR = 2020;
 
@@ -37,7 +37,19 @@ export const GET_FIXTURES = async (q, params) => {
 export const GET_TEAM_FIXTURES = async (q, params) => {
   try {
     const { data } = await axios.get(
-      `${API_URL}/2020-regular/games.json?team=${params.team}&limit=3`,
+      `${API_URL}/2020-regular/games.json?team=${params.team}&limit=3&status=unplayed`,
+      headers
+    );
+    return data;
+  } catch (error) {
+    return error.response;
+  }
+};
+// RESULTS FOR TEAM WITH LIMIT
+export const GET_TEAM_RESULTS = async (q, params) => {
+  try {
+    const { data } = await axios.get(
+      `${API_URL}/2020-regular/games.json?team=${params.team}&limit=3&status=final`,
       headers
     );
     return data;

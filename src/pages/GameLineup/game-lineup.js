@@ -5,7 +5,7 @@ import {
   GET_GAME_DETAILS,
   GET_GAME_LINEUP,
 } from '../../api/api-calls';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -22,6 +22,11 @@ import { useQuery } from 'react-query';
 import { withRouter } from 'react-router-dom';
 
 const GameLineup = ({ match, location }) => {
+  const [apiError, setApiError] = useState({
+    hasError: false,
+    message: '',
+    errorCode: '',
+  });
   const [stateAwayTeam, dispatchAwayTeam] = useReducer(gameReducer, []);
   const [stateHomeTeam, dispatchHomeTeam] = useReducer(gameReducer, []);
   const [stateHomePlayers, dispatchHomePlayers] = useReducer(
@@ -51,6 +56,14 @@ const GameLineup = ({ match, location }) => {
   );
 
   useEffect(() => {
+    if (data && data.status) {
+      setApiError({
+        hasError: true,
+        errorCode: data.status,
+        message: 'Unable to load Game Lineup data',
+      });
+      return;
+    }
     if (data) {
       dispatchAwayTeam({
         type: 'AWAY_TEAM',
@@ -94,9 +107,18 @@ const GameLineup = ({ match, location }) => {
     }
   }, [stateAwayTeam, data]);
 
-  if (error || errorGD) {
+  if (error || errorGD || apiError.hasError) {
     return (
-      <MessagePanel messageType="error" message="Unable to load game details" />
+      <Container>
+        <MessagePanel
+          messageType="error"
+          message={`${
+            apiError.hasError
+              ? `Error ${apiError.message}. Error Code: ${apiError.errorCode}`
+              : 'Unable to load game details'
+          }`}
+        />
+      </Container>
     );
   }
 

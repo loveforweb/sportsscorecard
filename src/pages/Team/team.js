@@ -5,6 +5,7 @@ import {
   GET_PLAYERS,
   GET_STANDINGS,
   GET_TEAM_FIXTURES,
+  GET_TEAM_RESULTS,
   GET_VENUE,
   STANDINGS_YEAR,
 } from '../../api/api-calls';
@@ -51,10 +52,8 @@ const Team = ({ match, location }) => {
     division: 'AFC North',
     teams: [],
   });
-  const [stateFixtures, dispatchFixtures] = useReducer(fixturesReducer, {
-    completedGames: [],
-    unplayedGames: [],
-  });
+  const [stateFixtures, dispatchFixtures] = useReducer(fixturesReducer, []);
+  const [stateResults, dispatchResults] = useReducer(fixturesReducer, []);
   const [statePlayers, dispatchPlayers] = useReducer(playersReducer, {
     offense: [],
     defense: [],
@@ -77,6 +76,14 @@ const Team = ({ match, location }) => {
   });
 
   const {
+    isLoading: isLoadingResults,
+    data: resultsData,
+    error: errorResults,
+  } = useQuery(['results', { team: abbr }], GET_TEAM_RESULTS, {
+    staleTime: API_STALE_TIMEOUT,
+  });
+
+  const {
     isLoading: isLoadingVenue,
     data: venueData,
     error: errorVenue,
@@ -93,7 +100,7 @@ const Team = ({ match, location }) => {
   });
 
   useEffect(() => {
-    if (standingsData) {
+    if (standingsData && standingsData.teams.length) {
       dispatchStandings({
         type: 'CONF',
         payload: {
@@ -125,6 +132,18 @@ const Team = ({ match, location }) => {
   }, [fixturesData, abbr]);
 
   useEffect(() => {
+    if (resultsData) {
+      dispatchResults({
+        type: 'TEAM_FIXTURE',
+        payload: {
+          id: abbr,
+          fixtures: resultsData,
+        },
+      });
+    }
+  }, [resultsData, abbr]);
+
+  useEffect(() => {
     if (playersData) {
       dispatchPlayers({
         type: 'TEAM',
@@ -146,7 +165,7 @@ const Team = ({ match, location }) => {
       >
         <Container>
           {stateTeam.length > 0 ? (
-            <TeamBadge badge={stateTeam[0].team.officialLogoImageSrc} />
+            <TeamBadge badge={stateTeam[0]?.team.officialLogoImageSrc} />
           ) : null}
 
           <div className="team-details">
@@ -195,8 +214,8 @@ const Team = ({ match, location }) => {
                   <div>Unable to load upcoming fixtures</div>
                 ) : null}
                 {isLoadingFixtures ? <LoadingIcon /> : null}
-                {stateFixtures.unplayedGames.length > 0
-                  ? stateFixtures.unplayedGames.map((fixture, i) => {
+                {stateFixtures.length > 0
+                  ? stateFixtures.map((fixture, i) => {
                       if (i < 3) {
                         return (
                           <FixtureCard
@@ -210,29 +229,36 @@ const Team = ({ match, location }) => {
                       }
                       return false;
                     })
-                  : 'No Upcoming Games'}
+                  : null}
+
+                {stateFixtures.length === 0 && !isLoadingFixtures && (
+                  <MessagePanel
+                    messageType="default fixtures-message"
+                    message="No upcoming games"
+                  />
+                )}
               </Col>
               <Col xs={12} md={6}>
                 <h2>Last 3 Results</h2>
-                {errorFixtures ? (
-                  <div>Unable to load last 3 results</div>
-                ) : null}
-                {isLoadingFixtures ? <LoadingIcon /> : null}
-                {stateFixtures.completedGames.length > 0 ? (
-                  stateFixtures.completedGames.map((fixture, i) => {
-                    if (i < 3) {
-                      return (
-                        <FixtureCard
-                          gameData={fixture}
-                          key={i}
-                          showAbbr
-                          showDateOnly
-                        />
-                      );
-                    }
-                    return false;
-                  })
-                ) : (
+                {errorResults ? <div>Unable to load last 3 results</div> : null}
+                {isLoadingResults ? <LoadingIcon /> : null}
+                {stateResults.length > 0
+                  ? stateResults.map((fixture, i) => {
+                      if (i < 3) {
+                        return (
+                          <FixtureCard
+                            gameData={fixture}
+                            key={i}
+                            showAbbr
+                            showDateOnly
+                          />
+                        );
+                      }
+                      return false;
+                    })
+                  : null}
+
+                {stateResults.length === 0 && !isLoadingResults && (
                   <MessagePanel
                     messageType="default fixtures-message"
                     message="No results just yet"
@@ -297,7 +323,7 @@ const Team = ({ match, location }) => {
                   <Col xs={12} md={6} lg={4} key={details.player.id}>
                     <PlayerCard
                       playerDetails={details}
-                      teamBadge={stateTeam[0].team.officialLogoImageSrc}
+                      teamBadge={stateTeam[0]?.team.officialLogoImageSrc}
                     />
                   </Col>
                 );
@@ -312,7 +338,7 @@ const Team = ({ match, location }) => {
                   <Col xs={12} md={6} lg={4} key={details.player.id}>
                     <PlayerCard
                       playerDetails={details}
-                      teamBadge={stateTeam[0].team.officialLogoImageSrc}
+                      teamBadge={stateTeam[0]?.team.officialLogoImageSrc}
                     />
                   </Col>
                 );

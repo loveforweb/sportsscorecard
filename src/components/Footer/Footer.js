@@ -4,6 +4,8 @@ import React, { useContext } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import MySportFeedLogoBlack from '../../assets/images/full_football_black.png';
+import MySportFeedLogoWhite from '../../assets/images/full_football_white.png';
 import Row from 'react-bootstrap/Row';
 import { ThemeContext } from '../../themeStore';
 
@@ -14,7 +16,7 @@ const Footer = () => {
       <Container>
         <Row>
           <Col>
-            <div class="affiliate-item">
+            <div className="affiliate-item">
               Data provided by{' '}
               <a
                 href="https://www.mysportsfeeds.com"
@@ -24,9 +26,11 @@ const Footer = () => {
                 <span className="sr-only">MySportsFeeds.com</span>
                 <div className="image-wrapper">
                   <img
-                    src={`./assets/images/full_football_${
-                      theme === 'dark' ? 'black' : 'white'
-                    }.png`}
+                    src={
+                      theme === 'dark'
+                        ? MySportFeedLogoBlack
+                        : MySportFeedLogoWhite
+                    }
                     alt="MySportsFeeds.com logo"
                   />
                 </div>

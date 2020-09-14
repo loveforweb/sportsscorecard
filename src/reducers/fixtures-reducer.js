@@ -121,19 +121,7 @@ function fixturesReducer(state, action) {
         };
       });
 
-      const completedGames = filteredGame.filter((item) => {
-        return item.schedule.playedStatus === 'COMPLETED';
-      });
-
-      const unplayedGames = filteredGame.filter((item) => {
-        return item.schedule.playedStatus === 'UNPLAYED';
-      });
-
-      return {
-        ...state,
-        completedGames: completedGames,
-        unplayedGames: unplayedGames,
-      };
+      return [...state, ...filteredGame];
     }
 
     default:
