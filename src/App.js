@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import LoadingIcon from './components/LoadingIcon';
 import ScrollToTop from './components/ScrollToTop';
+import { ThemeStore } from './themeStore';
 
 const About = React.lazy(() => import('./pages/about'));
 const Schedule = React.lazy(() => import('./pages/Schedule/schedule'));
@@ -20,34 +21,36 @@ const GameLineup = React.lazy(() => import('./pages/GameLineup/game-lineup'));
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Header />
-      <main>
-        <Suspense fallback={<LoadingIcon />}>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/Schedule" component={Schedule} />
-            <Route exact path="/standings" component={Standings} />
-            <Route exact path="/teams" component={Teams} />
-            <Route exact path="/stats" component={Stats} />
-            <Route exact path="/team/:abbr" component={Team} />
-            <Route
-              exact
-              path="/game-details/:gameDetails"
-              component={GameDetails}
-            />
-            <Route
-              exact
-              path="/game-lineup/:gameLineup"
-              component={GameLineup}
-            />
-          </Switch>
-        </Suspense>
-      </main>
-      <Footer />
-    </Router>
+    <ThemeStore>
+      <Router>
+        <ScrollToTop />
+        <Header />
+        <main>
+          <Suspense fallback={<LoadingIcon />}>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/Schedule" component={Schedule} />
+              <Route exact path="/standings" component={Standings} />
+              <Route exact path="/teams" component={Teams} />
+              <Route exact path="/stats" component={Stats} />
+              <Route exact path="/team/:abbr" component={Team} />
+              <Route
+                exact
+                path="/game-details/:gameDetails"
+                component={GameDetails}
+              />
+              <Route
+                exact
+                path="/game-lineup/:gameLineup"
+                component={GameLineup}
+              />
+            </Switch>
+          </Suspense>
+        </main>
+        <Footer />
+      </Router>
+    </ThemeStore>
   );
 }
 

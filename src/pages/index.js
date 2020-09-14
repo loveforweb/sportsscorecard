@@ -17,16 +17,20 @@ const Home = () => {
         <MessagePanel messageType="error" message="Error loading homepage" />
       ) : null}
       {isLoading ? <LoadingIcon /> : null}
-      <h2>News</h2>
-      <Row>
-        {data?.articles.map((newsItem, i) => {
-          return (
-            <Col xs={12} md={4} className="mb3" key={i}>
-              <NewsCard {...newsItem} />
-            </Col>
-          );
-        })}
-      </Row>
+      {data?.articles.length ? (
+        <>
+          <h2>News</h2>
+          <Row>
+            {data?.articles.map((newsItem, i) => {
+              return (
+                <Col xs={12} md={4} className="mb3" key={i}>
+                  <NewsCard {...newsItem} />
+                </Col>
+              );
+            })}
+          </Row>
+        </>
+      ) : null}
     </Container>
   );
 };

@@ -1,27 +1,38 @@
 import './Footer.scss';
 
+import React, { useContext } from 'react';
+
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import React from 'react';
 import Row from 'react-bootstrap/Row';
+import { ThemeContext } from '../../themeStore';
 
 const Footer = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <div className="component footer">
       <Container>
         <Row>
           <Col>
-            <p>
-              Data retrieved from{' '}
+            <div class="affiliate-item">
+              Data provided by{' '}
               <a
                 href="https://www.mysportsfeeds.com"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                MySportsFeeds.com
+                <span className="sr-only">MySportsFeeds.com</span>
+                <div className="image-wrapper">
+                  <img
+                    src={`./assets/images/full_football_${
+                      theme === 'dark' ? 'black' : 'white'
+                    }.png`}
+                    alt="MySportsFeeds.com logo"
+                  />
+                </div>
               </a>
               .
-            </p>
+            </div>
             <p>
               This site is not affiliated with the National Football League
               (NFL) or any of their sub-affiliates.

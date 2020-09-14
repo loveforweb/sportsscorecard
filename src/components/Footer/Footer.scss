@@ -2,4 +2,22 @@
     padding: 3rem 0;
     margin-top: 2rem;
     border-top: 1px solid grey;
+
+    a {
+        display: block;
+    }
+
+    .affiliate-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        font-size: 1.4rem;
+
+        .image-wrapper {
+            margin-left: 1.2rem;
+            img {
+                width: 15rem;
+            }
+        }
+    }
 }

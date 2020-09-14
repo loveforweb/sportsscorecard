@@ -44,18 +44,25 @@ const Teams = () => {
         <MessagePanel messageType="error" message="Error loading Homepage" />
       ) : null}
       {isLoading ? <LoadingIcon /> : null}
-      <Row>
-        {state.map((conf, i) => {
-          return (
-            <Col xs={12} md={6} className="conference-group" key={`${i}-conf`}>
-              <h3 className="teams-heading">{conf.conference}</h3>
-              {conf.teams.map((item) => {
-                return <TeamCard {...item} key={item.team.id} />;
-              })}
-            </Col>
-          );
-        })}
-      </Row>
+      {state.length > 0 ? (
+        <Row>
+          {state.map((conf, i) => {
+            return (
+              <Col
+                xs={12}
+                md={6}
+                className="conference-group"
+                key={`${i}-conf`}
+              >
+                <h3 className="teams-heading">{conf.conference}</h3>
+                {conf.teams.map((item) => {
+                  return <TeamCard {...item} key={item.team.id} />;
+                })}
+              </Col>
+            );
+          })}
+        </Row>
+      ) : null}
     </Container>
   );
 };

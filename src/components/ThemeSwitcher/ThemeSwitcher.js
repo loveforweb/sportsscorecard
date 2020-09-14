@@ -1,39 +1,40 @@
 import './ThemeSwitcher.scss';
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { FaMoon } from 'react-icons/fa';
 import { FiSun } from 'react-icons/fi';
+import { ThemeContext } from '../../themeStore';
 import { useEffect } from 'react';
 
 const ThemeSwitcher = () => {
-  const [mode, setMode] = useState('dark');
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const { theme, switchTheme } = useContext(ThemeContext);
 
   const switchThemeHandler = () => {
-    localStorage.setItem('mode', mode === 'dark' ? 'light' : 'dark');
-    setMode((mode) => (mode === 'dark' ? 'light' : 'dark'));
+    localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark');
+    switchTheme((theme) => (theme === 'dark' ? 'light' : 'dark'));
     setIsDarkMode((isDarkMode) => !isDarkMode);
   };
 
   useEffect(() => {
-    const storedMode = localStorage.getItem('mode');
+    const storedTheme = localStorage.getItem('theme');
 
-    if (storedMode) {
+    if (storedTheme) {
       document.body.classList.remove('dark', 'light');
-      document.body.classList.add(storedMode);
-      setMode(storedMode);
+      document.body.classList.add(storedTheme);
+      switchTheme(storedTheme);
     } else {
       document.body.classList.add('dark');
-      setMode('dark');
+      switchTheme('dark');
     }
-  }, []);
+  }, [switchTheme]);
 
   useEffect(() => {
-    document.body.classList.remove(mode === 'dark' ? 'light' : 'dark');
-    document.body.classList.add(mode);
-    setIsDarkMode(mode === 'dark' || false);
-  }, [mode]);
+    document.body.classList.remove(theme === 'dark' ? 'light' : 'dark');
+    document.body.classList.add(theme);
+    setIsDarkMode(theme === 'dark' || false);
+  }, [theme]);
 
   return (
     <div className="component theme-switcher">

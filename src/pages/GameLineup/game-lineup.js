@@ -94,10 +94,6 @@ const GameLineup = ({ match, location }) => {
     }
   }, [stateAwayTeam, data]);
 
-  if (stateAwayTeam.length === 0 || stateHomeTeam.length === 0) {
-    return <LoadingIcon />;
-  }
-
   if (error || errorGD) {
     return (
       <MessagePanel messageType="error" message="Unable to load game details" />
@@ -105,6 +101,10 @@ const GameLineup = ({ match, location }) => {
   }
 
   if (isLoading || isLoadingGD) {
+    return <LoadingIcon />;
+  }
+
+  if (stateAwayTeam.length === 0 || stateHomeTeam.length === 0) {
     return <LoadingIcon />;
   }
 
